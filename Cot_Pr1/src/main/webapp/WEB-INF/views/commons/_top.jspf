@@ -1,0 +1,33 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+	
+	<!-- 맨위 Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top topnav" role="navigation">
+        <div class="container topnav">
+          <a class="navbar-brand topnav" href="/">Gyu's Page</a>
+            
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    	<li><a href="/home/mainview">Home</a>
+						<c:if test="${empty sessionScope.userId}">
+						<li><a href="/users/login/form">로그인</a>
+						<li><a href="/users/form">회원가입</a>
+						</c:if>
+						<c:if test="${not empty sessionScope.userId}">
+						<li><a href="/users/logout">로그아웃</a>
+						<li><a href="/users/myinfo">내 정보</a>
+						</c:if>
+						<li><a href="/board/list">Web게시판</a>						
+						<li><a href="/fboard/list">자유게시판</a>
+						<li><a href="/gallery/list">사진 갤러리</a>
+						<c:if test="${sessionScope.userId == 'admin'}">
+						<li><a href="#">관리자 페이지</a>
+						</c:if>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+    

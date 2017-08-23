@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+		 http://www.springframework.org/schema/jdbc  http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+	<context:property-placeholder location="classpath*:application-properties.xml"/>
+	
+	<context:annotation-config />
+
+ 	 <bean id="dataSource"
+		class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
+			<property name="driverClass" value="com.mysql.jdbc.Driver"></property>
+			<property name="url" value="jdbc:mysql://localhost:3306/cot_pr1"></property>
+			<property name="username" value="root"></property>
+			<property name="password" value="123321"></property>
+    </bean>    
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <property name="configLocation" value="classpath:mybatis-config.xml" />
+    </bean>
+    
+    <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg index="0" ref="sqlSessionFactory"></constructor-arg>
+    </bean>
+   
+    <bean id="UserDao" class="net.cot_pr1.dao.UserDao"
+		p:sqlSession-ref="sqlSession"
+		p:dataSource-ref="dataSource" />
+		<!-- 	
+	<bean id="boardDao" class="net.qna.dao.board.MybatisBoardDao"
+		p:sqlSession-ref="sqlSession"
+		p:dataSource-ref="dataSource" />
+	<bean id="replyDao" class="net.qna.dao.board.MyReplyDao"
+		p:sqlSession-ref="sqlSession"
+		p:dataSource-ref="dataSource" />
+	<bean id="galleryDao" class="net.qna.dao.gallery.MyGalleryDao"
+		p:sqlSession-ref="sqlSession"
+		p:dataSource-ref="dataSource" />
+	<bean id="fboardDao" class="net.qna.dao.fboard.FMyBoardDao"
+		p:sqlSession-ref="sqlSession"
+		p:dataSource-ref="dataSource" />
+	<bean id="freplyDao" class="net.qna.dao.fboard.FMyReplyDao"
+		p:sqlSession-ref="sqlSession"
+		p:dataSource-ref="dataSource" />
+-->
+
+	<!-- 파일업로드를 위한 디렉토리 설정 -->
+	<!-- String uploadPath = new String("업로드 경로") -->
+	<bean id="uploadPath" class="java.lang.String">
+		<!-- 파일업로드 디렉토리 -->
+		<constructor-arg value="C:\javalec\workspace\Cot_Pr1\src\main\webapp\resources\uploads" />
+	</bean>
+	<bean id="uploadPath2" class="java.lang.String">
+		<!-- 파일업로드 디렉토리 -->
+		<constructor-arg value="C:\javalec\workspace\Cot_Pr1\src\main\webapp\resources\profile" />
+	</bean>
+
+</beans>
