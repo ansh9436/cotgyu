@@ -334,7 +334,7 @@
     	var tempFile,
     		sUploadURL;
     	
-    	sUploadURL= '/board/multiplePhotoUpload'; 	//upload URL
+    	sUploadURL= '/webboard/multiplePhotoUpload'; 	//upload URL
     	
     	//파일을 하나씩 보내고, 결과를 받음.
     	for(var j=0, k=0; j < nImageInfoCnt; j++) {
@@ -478,7 +478,7 @@
  	 */
  	function callFileUploader (){
  		oFileUploader = new jindo.FileUploader(jindo.$("uploadInputBox"),{
- 			sUrl  : '/board/photoUpload', //파일업로드시 동작되는 컨트롤러 url
+ 			sUrl  : '/webboard/photoUpload', //파일업로드시 동작되는 컨트롤러 url
  			sCallback : '/resources/Editors/photo_uploader/popup/callback.html',
 
  	    	sFiletype : "*.jpg;*.png;*.bmp;*.gif",						//허용할 파일의 형식. ex) "*", "*.*", "*.jpg", 구분자(;)	

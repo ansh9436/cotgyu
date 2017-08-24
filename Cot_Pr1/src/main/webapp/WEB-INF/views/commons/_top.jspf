@@ -9,7 +9,7 @@
             
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
-                    	<li><a href="/home/mainview">Home</a>
+                    	<li><a href="/">Home</a>
 						<c:if test="${empty sessionScope.userId}">
 						<li><a href="/users/login/form">로그인</a>
 						<li><a href="/users/form">회원가입</a>
@@ -18,7 +18,7 @@
 						<li><a href="/users/logout">로그아웃</a>
 						<li><a href="/users/myinfo">내 정보</a>
 						</c:if>
-						<li><a href="/board/list">Web게시판</a>						
+						<li><a href="/webboard/list">Web게시판</a>						
 						<li><a href="/fboard/list">자유게시판</a>
 						<li><a href="/gallery/list">사진 갤러리</a>
 						<c:if test="${sessionScope.userId == 'admin'}">

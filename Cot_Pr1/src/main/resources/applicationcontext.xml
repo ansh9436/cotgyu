@@ -29,13 +29,15 @@
     <bean id="UserDao" class="net.cot_pr1.dao.UserDao"
 		p:sqlSession-ref="sqlSession"
 		p:dataSource-ref="dataSource" />
-		<!-- 	
-	<bean id="boardDao" class="net.qna.dao.board.MybatisBoardDao"
+			
+	<bean id="webBoardDao" class="net.cot_pr1.dao.WebBoardDao"
 		p:sqlSession-ref="sqlSession"
 		p:dataSource-ref="dataSource" />
-	<bean id="replyDao" class="net.qna.dao.board.MyReplyDao"
+	 
+	<bean id="webReplyDao" class="net.cot_pr1.dao.WebReplyDao"
 		p:sqlSession-ref="sqlSession"
 		p:dataSource-ref="dataSource" />
+		<!-- 
 	<bean id="galleryDao" class="net.qna.dao.gallery.MyGalleryDao"
 		p:sqlSession-ref="sqlSession"
 		p:dataSource-ref="dataSource" />

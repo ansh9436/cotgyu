@@ -7,11 +7,11 @@
                     <ul class="list-inline">
                         <li class="footer-menu-divider">&sdot;</li>
                         <li>
-                            <a href="/home/mainview#about">Home</a>
+                            <a href="/">Home</a>
                         </li>
                         <li class="footer-menu-divider">&sdot;</li>
                         <li>
-                            <a href="/home/mainview#services">Contents</a>
+                            <a href="/#services">Contents</a>
                         </li>
                        
                     </ul>

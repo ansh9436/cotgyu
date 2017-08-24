@@ -6,9 +6,11 @@
 
   <mappers>
     <mapper resource="net/cot_pr1/mapper/UserMapper.xml"/>
+    <mapper resource="net/cot_pr1/mapper/WebBoardMapper.xml"/>
+    <mapper resource="net/cot_pr1/mapper/WebReplyMapper.xml"/>
+   
+   
     <!--  
-    <mapper resource="net/cot_pr1/dao/BoardMapper.xml"/>
-    <mapper resource="net/cot_pr1/dao/ReplyMapper.xml"/>
     <mapper resource="net/cot_pr1/dao/GalleryMapper.xml"/>
     <mapper resource="net/cot_pr1/dao/FBoardMapper.xml"/>
     <mapper resource="net/cot_pr1/dao/FReplyMapper.xml"/>

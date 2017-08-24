@@ -157,10 +157,7 @@
 
             <div class="row">
                 <div class="col-lg-6">
-                    <h3>최순규</h3>
-                    <h4>1993.03.03</h4>
-                    <h4>단국대학교 컴퓨터과학과</h4>
-                    <h4>v123v123s@gmail.ocm</h4>
+                    
                 </div>
                 <div class="col-lg-6">
                     <ul class="list-inline banner-social-buttons">
