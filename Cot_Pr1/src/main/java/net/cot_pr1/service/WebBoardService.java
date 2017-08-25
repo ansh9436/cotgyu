@@ -45,9 +45,6 @@ public class WebBoardService {
 		return webboardDao.findByWriter(bnum);
 	}
 
-	public String findByprofile(String userId) throws Exception{
-		return userDao.findByprofile(userId);
-	}
 
 	public Object read(int bnum) throws Exception{
 		return webboardDao.read(bnum);

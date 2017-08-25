@@ -3,12 +3,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>SLiPP :: Web게시판</title>
+<title>SLiPP :: 자유 게시판</title>
 <%@ include file="../commons/_header.jspf"%>
 <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
 <script type="text/javascript">
@@ -23,7 +22,7 @@
 	function listReply() {
 		$.ajax({
 			type : "get",
-			url : "${path}/webreply/list.do?bnum=${dto.bnum}",
+			url : "${path}/freereply/list.do?bnum=${dto.bnum}",
 			success : function(result) {
 				// responseText가 result에 저장됨.
 				$("#listReply").html(result);
@@ -37,7 +36,7 @@
 		$.ajax({
 			type : "get",
 			//contentType: "application/json", ==> 생략가능(RestController이기때문에 가능)
-			url : "${path}/webreply/listJson.do?bnum=${dto.bnum}",
+			url : "${path}/freereply/listJson.do?bnum=${dto.bnum}",
 			success : function(result) {
 				console.log(result);
 				var output = "<table>";
@@ -60,7 +59,6 @@
 <body>
 	<%@ include file="../commons/_top.jspf"%>
 	<br><br>
-	
 	<div class="boardView">
 	<table border="1" width="73%" style= "background-color: white">
 	<h3>${dto.title}</h3>
@@ -70,7 +68,7 @@
 			&nbsp;<img src="/resources/profile/${profileimg}" width="50" height="40">${dto.writer}
 			</div>
 			<div style="float: right; display: inline;" >
-			작성일자 : <fmt:formatDate value="${dto.date}" pattern="yyyy-MM-dd a HH:mm" /> &emsp; 조회수 : ${dto.hit}
+			태그: ${dto.tag} &emsp;작성일자 : <fmt:formatDate value="${dto.date}" pattern="yyyy-MM-dd a HH:mm" /> &emsp; 조회수 : ${dto.hit}
 			</div>
 		</td>
 	</tr>
@@ -90,7 +88,7 @@
 				<button type="button" class="btn btn-default" onClick="location.href='updatedetail/${dto.bnum}'">수정</button>
 				<button type="button" class="btn btn-default" onClick="location.href='delete?bnum=${dto.bnum}'">삭제</button>
 			</c:if>
-			<button type="button" class="btn btn-default" onClick="location.href='/webboard/list'">목록</button>		
+			<button type="button" class="btn btn-default" onClick="location.href='/freeboard/list'">목록</button>		
 	</div>
 	
 	<br><br>
@@ -100,7 +98,7 @@
 		<div id="listReply">
 		</div>
 		
-	<form name="form2" method="post" action="/webreply/insert.do" method="${method}">
+	<form name="form2" method="post" action="/freereply/insert.do" method="${method}">
 		<div style="width: 15%;">
 			<br>
 			<!-- **로그인 한 회원에게만 댓글 작성폼이 보이게 처리 -->
@@ -119,5 +117,6 @@
 <br><br><br><br><br><br><br><br><br>
 	<%@ include file="../commons/_foot.jspf"%>
 	</div>
+	
 </body>
 </html>

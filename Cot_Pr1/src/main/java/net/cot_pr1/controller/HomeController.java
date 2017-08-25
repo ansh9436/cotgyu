@@ -9,7 +9,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import net.cot_pr1.dao.FreeBoardDao;
 import net.cot_pr1.dao.WebBoardDao;
+import net.cot_pr1.domain.FreeBoard;
 import net.cot_pr1.domain.WebBoard;
 
 
@@ -20,8 +22,8 @@ public class HomeController {
 	@Autowired
 	private WebBoardDao boardDao;
 	
-//	@Autowired
-//	private FMyBoardDao fboardDao;
+	@Autowired
+	private FreeBoardDao freeboardDao;
 //	@Autowired
 //	MyGalleryDao galleryDao;
 
@@ -30,13 +32,13 @@ public class HomeController {
 		
 		
 		List<WebBoard> poplist = boardDao.popboard();
-		//List<FBoard> popFlist = fboardDao.popboard();
+		List<FreeBoard> popFlist = freeboardDao.popboard();
 	//	List<gallery> popImglist = galleryDao.poplist();
 		//µ¥ÀÌÅÍ¸¦ ¸Ê¿¡ ÀúÀå
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		map.put("poplist", poplist);
-	//	map.put("popFlist", popFlist);
+		map.put("popFlist", popFlist);
 	//	map.put("popImglist",popImglist);
 		
 		//¸ðµ¨°ú ºä

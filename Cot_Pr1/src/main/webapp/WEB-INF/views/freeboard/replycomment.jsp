@@ -9,18 +9,19 @@
 </head>
 <body>
 	<br>
-	댓글 수정
-	<form name="form3" method="post" action="/webreply/update" method="${method}">
-		<textarea name="replytext" id="replytext" rows="5" cols="82">${vo.replytext}</textarea>
-		
+	코멘트
+	<form name="form4" method="post" action="/freereply/comment" method="${method}">
+		<textarea name="replytext" id="replytext" rows="5" cols="82" ></textarea>
+		<input type="hidden" name="regroup" id="regroup" value="${vo.regroup}"> 
+		<input type="hidden" name="restep" id="restep" value="${vo.restep}">
+		<input type="hidden" name="reindent" id="reindent" value="${vo.reindent}">
 		<input type="hidden" name="bnum" id="bnum" value="${vo.bnum}"> 
 		<input type="hidden" name="rnum" id="rnum" value="${vo.rnum}">
-	
-		<div>
+		<br>
+		
 			<button type="submit" class="btn btn-default">작성</button>
-			<button type="button" class="btn btn-default" onClick="location.href='/webboard/view?bnum=${vo.bnum}'">취소</button>
-		</div>
+			<button type="button" class="btn btn-default" onClick="location.href='/freeboard/view?bnum=${vo.bnum}'">취소</button>
+		
 	</form>
-	
 </body>
 </html>

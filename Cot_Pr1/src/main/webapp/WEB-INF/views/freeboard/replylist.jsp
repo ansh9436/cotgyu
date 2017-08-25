@@ -12,7 +12,7 @@
 function showReplyModify(rnum) {
 	$.ajax({
 		type : "get",
-		url : "${path}/webreply/detail/" + rnum,
+		url : "${path}/freereply/detail/" + rnum,
 		success : function(result) {
 			$("#modifyReply").html(result);
 			// 태그.css("속성", "값")
@@ -24,7 +24,7 @@ function showReplyModify(rnum) {
 function showReplyComment(rnum) {
 	$.ajax({
 		type : "get",
-		url : "${path}/webreply/commentwrite/" + rnum,
+		url : "${path}/freereply/commentwrite/" + rnum,
 		success : function(result) {
 			$("#ReplyComment").html(result);
 			// 태그.css("속성", "값")
@@ -34,10 +34,9 @@ function showReplyComment(rnum) {
 }
 
 	</script>
-<style></style>
 </head>
 <body>
-    <div style="width:700px;" >
+   <div style="width:700px;" >
         <c:forEach var="row" items="${list}">
        		<!-- 댓글 indent에 따라 div창 밀기  -->
             <div style= "margin-left: <c:out value="${30*row.reindent}"/>px;">
@@ -51,7 +50,7 @@ function showReplyComment(rnum) {
                 ${row.replytext}
               	<c:if test="${sessionScope.userId != null}">
                 <c:if test="${sessionScope.userId == row.replyer}">
-                    <button type="button" class="btn btn-default" onClick="location.href='/webreply/delete?rnum=${row.rnum}&bnum=${row.bnum}'">삭제 </button>
+                    <button type="button" class="btn btn-default" onClick="location.href='/freereply/delete?rnum=${row.rnum}&bnum=${row.bnum}'">삭제 </button>
                     <input type="button" class="btn btn-default" id="btnModify" value="수정" onclick="showReplyModify('${row.rnum}')"> 
                 </c:if>
 					<input type="button" class="btn btn-default" id="btnComment" value="댓글" onclick="showReplyComment('${row.rnum}')">

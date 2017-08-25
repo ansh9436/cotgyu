@@ -9,7 +9,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Gyu's Page</title>
 <script>
-    // **원하는 페이지로 이동시 검색조건, 키워드 값을 유지하기 위해 
+    // **원하는 페이지로 이동시 검색조건, 키워드 값을 유지
     function list(page){
         location.href="${path}/board/list?curPage="+page+"&searchOption-${map.searchOption}"+"&keyword=${map.keyword}";
     }
@@ -49,7 +49,7 @@
         <!-- /.container -->
     </div>
     <!-- /.intro-header -->
-  <!-- Page Content -->
+  <!-- Page Content 인기게시판 표시-->
 
 	<a  name="services"></a>
     <div class="content-section-a">
@@ -59,8 +59,7 @@
                     <hr class="section-heading-spacer">
                     <div class="clearfix"></div>
                     <h2 class="section-heading">웹 관련 정보를 공유해요!</h2><br>
-                    <p class="lead">자신이 공부한 내용을 올려 사람들과 공유해볼까요?</p>
-                    
+                    <p class="lead">자신이 공부한 내용을 올려 사람들과 공유해볼까요?</p>               
                 </div>
                 <div class="col-lg-5 col-lg-offset-2 col-sm-6">
                   	인기 게시물
@@ -74,11 +73,9 @@
 				                    </c:if>	
 								</a></td></tr>
 					</c:forEach>
-					</table>
-					
+					</table>			
                 </div>
             </div>
-	
         </div>
         <!-- /.container -->
 
@@ -86,12 +83,9 @@
     <!-- /.content-section-a -->
 
     <div class="content-section-b">
-
         <div class="container">
-
             <div class="row">
-                <div class="col-lg-5 col-lg-offset-1 col-sm-push-6  col-sm-6" >
-                                
+                <div class="col-lg-5 col-lg-offset-1 col-sm-push-6  col-sm-6" >             
                     <hr class="section-heading-spacer">
                     <div class="clearfix"></div>
                     <h2 class="section-heading">사진을 올려주세요!</h2><br>
@@ -132,7 +126,7 @@
                     <table border="2" align="center" style= "background-color: white" width="100%" >
 					<c:forEach var="row2" items="${map.popFlist}">
 					<tr>
-					<td height="30">&nbsp;<a href="${path}/fboard/view?bnum=${row2.bnum}">${row2.title}
+					<td height="30">&nbsp;<a href="${path}/freeboard/view?bnum=${row2.bnum}">${row2.title}
 								<!-- ** 댓글이 있으면 게시글 이름 옆에 출력하기 -->
 				                    <c:if test="${row2.recnt > 0}">
 				                    <span style="color: red;">(${row2.recnt})

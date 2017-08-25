@@ -41,13 +41,14 @@
 	<bean id="galleryDao" class="net.qna.dao.gallery.MyGalleryDao"
 		p:sqlSession-ref="sqlSession"
 		p:dataSource-ref="dataSource" />
-	<bean id="fboardDao" class="net.qna.dao.fboard.FMyBoardDao"
+		-->
+	<bean id="freeboardDao" class="net.cot_pr1.dao.FreeBoardDao"
 		p:sqlSession-ref="sqlSession"
 		p:dataSource-ref="dataSource" />
-	<bean id="freplyDao" class="net.qna.dao.fboard.FMyReplyDao"
+	<bean id="freereplyDao" class="net.cot_pr1.dao.FreeReplyDao"
 		p:sqlSession-ref="sqlSession"
 		p:dataSource-ref="dataSource" />
--->
+
 
 	<!-- 파일업로드를 위한 디렉토리 설정 -->
 	<!-- String uploadPath = new String("업로드 경로") -->

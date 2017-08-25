@@ -36,4 +36,8 @@ public class UserService {
 		return userDao.checkId(vo);
 	}
 
+	public String findByprofile(String userId) {	
+		return userDao.findByprofile(userId);
+	}
+
 }

@@ -12,9 +12,10 @@
    
     <!--  
     <mapper resource="net/cot_pr1/dao/GalleryMapper.xml"/>
-    <mapper resource="net/cot_pr1/dao/FBoardMapper.xml"/>
-    <mapper resource="net/cot_pr1/dao/FReplyMapper.xml"/>
     -->
+    <mapper resource="net/cot_pr1/mapper/FreeBoardMapper.xml"/>
+    <mapper resource="net/cot_pr1/mapper/FreeReplyMapper.xml"/>
+
   </mappers>
 	
 </configuration>

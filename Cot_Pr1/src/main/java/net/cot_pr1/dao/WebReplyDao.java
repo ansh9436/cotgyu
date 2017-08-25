@@ -58,6 +58,5 @@ public class WebReplyDao {
 	}
 	public void create_setgroup(WebReply vo) {
 		sqlSession.update("WebReplyMapper.create_setgroup", vo);
-		
 	}
 }

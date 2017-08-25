@@ -19,7 +19,7 @@
 						<li><a href="/users/myinfo">내 정보</a>
 						</c:if>
 						<li><a href="/webboard/list">Web게시판</a>						
-						<li><a href="/fboard/list">자유게시판</a>
+						<li><a href="/freeboard/list">자유게시판</a>
 						<li><a href="/gallery/list">사진 갤러리</a>
 						<c:if test="${sessionScope.userId == 'admin'}">
 						<li><a href="#">관리자 페이지</a>

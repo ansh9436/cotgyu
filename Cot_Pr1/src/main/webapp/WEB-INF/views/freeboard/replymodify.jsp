@@ -10,17 +10,16 @@
 <body>
 	<br>
 	댓글 수정
-	<form name="form3" method="post" action="/webreply/update" method="${method}">
-		<textarea name="replytext" id="replytext" rows="5" cols="82">${vo.replytext}</textarea>
+	<form name="form3" method="post" action="/freereply/update" method="${method}">
+		<textarea name="replytext" id="replytext" rows="5" cols="82" >${vo.replytext}</textarea>
 		
 		<input type="hidden" name="bnum" id="bnum" value="${vo.bnum}"> 
 		<input type="hidden" name="rnum" id="rnum" value="${vo.rnum}">
 	
 		<div>
 			<button type="submit" class="btn btn-default">작성</button>
-			<button type="button" class="btn btn-default" onClick="location.href='/webboard/view?bnum=${vo.bnum}'">취소</button>
+			<button type="button"  class="btn btn-default" onClick="location.href='/freeboard/view?bnum=${vo.bnum}'">취소</button>
 		</div>
 	</form>
-	
 </body>
 </html>

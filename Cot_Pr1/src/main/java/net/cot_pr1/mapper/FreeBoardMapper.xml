@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+ <mapper namespace="FreeBoardMapper">
+ 
+ 	<insert id="insert">
+        INSERT INTO free_board ( bnum, title, content, writer,tag) VALUES (#{bnum},#{title},#{content},#{writer},#{tag})
+    </insert>
+    
+     <select id="view" resultType="net.cot_pr1.domain.FreeBoard">
+        SELECT * FROM free_board 
+        WHERE bnum = #{bnum}
+    </select>
+ 
+ 	<update id="uphit">
+        UPDATE free_board SET hit = hit + 1 
+        WHERE bnum = #{bnum}
+    </update>
+    
+    <update id="updateArticle">
+        UPDATE free_board SET
+            title = #{title},
+            content = #{content},
+            tag=#{tag}
+        WHERE bnum = #{bnum}
+    </update>
+    
+    <!-- 06. 게시글 삭제처리 -->
+    <delete id="delete">
+        DELETE FROM free_board
+        WHERE bnum = #{bnum}
+    </delete>
+ 	
+ 	<select id="viewlist" resultType="net.cot_pr1.domain.FreeBoard">	
+ 	
+	 	SELECT bnum, title, content, writer, date, hit,tag,
+	 	<!-- ** 댓글숫자표시 -->
+        (SELECT COUNT(*) FROM free_reply WHERE bnum= b.bnum) AS recnt
+	 	FROM free_BOARD b
+	 	
+		<!-- WHERE절을 include 태그로 삽입 -->
+   		<include refid="search"></include>
+		ORDER BY bnum desc, date desc LIMIT ${start}, 20;
+		 	
+	</select>
+	
+	<select id="countboard" resultType="int">
+		SELECT COUNT(*) FROM free_board
+		<!-- where절을 include 태그로 삽입 -->
+		<include refid="search"></include>
+	</select>
+	
+	<select id="popboard" resultType="net.cot_pr1.domain.FreeBoard">
+		SELECT bnum, title, content, writer, date, hit,
+	 	<!-- ** 댓글숫자표시 -->
+        (SELECT COUNT(*) FROM free_reply WHERE bnum= f.bnum) AS recnt from free_board f order by hit desc limit 5;
+	</select>
+	
+	<select id="modifyview" resultType="net.cot_pr1.domain.FreeBoard">
+        SELECT bnum, title, content, writer, date, hit , tag FROM free_board
+        WHERE bnum = #{bnum}
+    </select>
+    
+    
+    <!-- 프로필가져오기위한  -->
+	<select id="findByWriter" resultType="string">
+ 		select writer from  free_board where bnum= #{bnum}
+ 	</select>
+ 	
+ <!-- sql code 조각 -->
+<!-- 반복되는 sql의 일부를 sql태그를 이용하여 따로 빼둘수 있다. -->
+<sql id="search">
+    <choose>
+        <!-- 검색옵션이 전체 검색일 경우 -->
+        <when test="searchOption == 'all'">
+            WHERE writer like '%${keyword}%'
+            OR content like '%${keyword}%'
+            OR title like '%${keyword}%'
+        </when>
+        <!-- 전체 검색이 아닐 경우 -->
+        <otherwise>
+            WHERE ${searchOption} like '%${keyword}%'
+        </otherwise>
+    </choose>
+</sql>
+ 
+ <!-- 페이징 sql -->
+<sql id="pagingHeader">
+    SELECT * FROM (
+        SELECT ROWNUM AS rn, A.* FROM (
+</sql>
+<sql id="pagingFooter">
+        ) A
+    ) WHERE rn BETWEEN #{start} AND #{end}
+</sql>
+
+ </mapper>
