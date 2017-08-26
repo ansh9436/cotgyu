@@ -37,11 +37,11 @@
 	<bean id="webReplyDao" class="net.cot_pr1.dao.WebReplyDao"
 		p:sqlSession-ref="sqlSession"
 		p:dataSource-ref="dataSource" />
-		<!-- 
-	<bean id="galleryDao" class="net.qna.dao.gallery.MyGalleryDao"
+		
+	<bean id="galleryDao" class="net.cot_pr1.dao.GalleryDao"
 		p:sqlSession-ref="sqlSession"
 		p:dataSource-ref="dataSource" />
-		-->
+
 	<bean id="freeboardDao" class="net.cot_pr1.dao.FreeBoardDao"
 		p:sqlSession-ref="sqlSession"
 		p:dataSource-ref="dataSource" />
@@ -54,11 +54,11 @@
 	<!-- String uploadPath = new String("업로드 경로") -->
 	<bean id="uploadPath" class="java.lang.String">
 		<!-- 파일업로드 디렉토리 -->
-		<constructor-arg value="C:\javalec\workspace\Cot_Pr1\src\main\webapp\resources\uploads" />
+		<constructor-arg value="C:\Users\SK\git\Cot_pr1\Cot_Pr1\src\main\webapp\resources\uploads" />
 	</bean>
 	<bean id="uploadPath2" class="java.lang.String">
 		<!-- 파일업로드 디렉토리 -->
-		<constructor-arg value="C:\javalec\workspace\Cot_Pr1\src\main\webapp\resources\profile" />
+		<constructor-arg value="C:\Users\SK\git\Cot_pr1\Cot_Pr1\src\main\webapp\resources\profile" />
 	</bean>
 
 </beans>

@@ -96,4 +96,9 @@ public class WebBoardDao {
 		return sqlSession.selectOne("WebBoardMapper.findBywriter",bnum);
 	}
 	
+	public List<WebBoard> recentboard() {
+		Map<String, String> map = new HashMap<String, String>();
+		
+		return sqlSession.selectList("WebBoardMapper.recentboard", map);
+	}
 }

@@ -20,38 +20,70 @@
 <body>
 	<%@ include file="./commons/_top.jspf" %>
 
-	 <!-- Header 맨앞 사진,문구/ 페북등 버튼  -->
-    <a name="about"></a>
-    <div class="intro-header">
+    <!-- /.intro-header -->
+  <!-- Page Content 인기게시판 표시-->
+
+	<a  name="services"></a>
+	<!-- /.content-section-d -->
+     <div class="content-section-b">
         <div class="container">
             <div class="row">
-                <div class="col-lg-12">
-                    <div class="intro-message">
-                        <h1>WelCome</h1>
-                        <h3>Gyu's Page</h3>
-                        <hr class="intro-divider">
-                        <ul class="list-inline intro-social-buttons">
-                            <li>
-                                <a hrsef="https://www.facebook.com/profile.php?id=100002282055147" class="btn btn-default btn-lg"><i class="fa fa-facebook fa-fw"></i> <span class="network-name">FaceBook</span></a>
-                            </li>
-                            <li>
-                                <a href="https://github.com/cotgyu" class="btn btn-default btn-lg"><i class="fa fa-github fa-fw"></i> <span class="network-name">Github</span></a>
-                            </li>
-                            <li>
-                                <a href="https://cotmulgyu.blogspot.kr" class="btn btn-default btn-lg"><i class="fa fa-linkedin fa-fw"></i> <span class="network-name">Blog</span></a>
-                            </li>
-                        </ul>
-                    </div>
+                <div class="col-lg-5 col-lg-offset-1 col-sm-push-6  col-sm-6" >             
+                    <hr class="section-heading-spacer">
+                    <div class="clearfix"></div>
+                    <h2 class="section-heading">최신 게시물</h2><br>
+                    
+                    <p class="lead">최신 글입니다.</p>
+                </div>
+                <div class="col-lg-5 col-sm-pull-6 col-sm-6">
+               	최신 글
+                 <table border="2" align="center" style= "background-color: white" width="100%" >
+					<c:forEach var="row3" items="${map.recentlist}">
+					<tr>
+					<td height="30">&nbsp;
+					<c:choose>
+					
+					<c:when test="${row3.boardtag == 'web'}">
+					<a href="${path}/webboard/view?bnum=${row3.bnum}">${row3.title}
+					</c:when>
+					
+					<c:when test="${row3.boardtag == 'free'}">
+					<a href="${path}/freeboard/view?bnum=${row3.bnum}">${row3.title}
+					</c:when>
+					
+					<c:when test="${row3.boardtag == 'gallery'}">
+					<a href="/gallery/list">${row3.title}
+					</c:when>
+					
+					</c:choose>
+					</a>&emsp;<fmt:formatDate value="${row3.date}" pattern="yyyy-MM-dd a HH:mm" />
+					<!-- 글 게시판 종류 출력 -->&emsp;
+					<c:choose>
+					<c:when test="${row3.boardtag == 'web'}">
+					<a href="/webboard/list" style="color: blue;">Web게시판</a>
+					</c:when>	
+					<c:when test="${row3.boardtag == 'free'}">
+					<a href="/freeboard/list" style="color: blue;">자유게시판</a>
+					</c:when>
+					<c:when test="${row3.boardtag == 'gallery'}">
+					<a href="/gallery/list" style="color: blue;">사진갤러리</a>
+					</c:when>
+					</c:choose>
+					</td></tr>
+					</c:forEach>
+						</table>
+						
+                             
                 </div>
             </div>
 
         </div>
         <!-- /.container -->
-    </div>
-    <!-- /.intro-header -->
-  <!-- Page Content 인기게시판 표시-->
 
-	<a  name="services"></a>
+    </div>
+    <!-- /.content-section-d -->
+	
+	
     <div class="content-section-a">
 	<div class="container">
             <div class="row">
@@ -66,12 +98,12 @@
 					<table border="2" align="center" width="100%" style= "background-color: white">					
 					<c:forEach var="row" items="${map.poplist}">
 					<tr>					
-					<td height="30">&nbsp;<a href="${path}/board/view?bnum=${row.bnum}">${row.title}
+					<td height="30">&nbsp;<a href="${path}/webboard/view?bnum=${row.bnum}">${row.title}
 								<!-- ** 댓글이 있으면 게시글 이름 옆에 출력하기 -->
 				                    <c:if test="${row.recnt > 0}">
 				                    <span style="color: red;">(${row.recnt})</span>
 				                    </c:if>	
-								</a></td></tr>
+								</a>&emsp;<fmt:formatDate value="${row.date}" pattern="yyyy-MM-dd a HH:mm" /></td></tr>
 					</c:forEach>
 					</table>			
                 </div>
@@ -132,7 +164,7 @@
 				                    <span style="color: red;">(${row2.recnt})
 				                    </span>
 				                    </c:if>	
-								</a></td></tr>
+								</a>&emsp;<fmt:formatDate value="${row2.date}" pattern="yyyy-MM-dd a HH:mm" /></td></tr>
 					</c:forEach>
 						</table>
                 </div>
@@ -142,37 +174,7 @@
         <!-- /.container -->
 
     </div>
-    <!-- /.content-section-a -->
-
-	<a  name="contact"></a>
-    <div class="banner">
-
-        <div class="container">
-
-            <div class="row">
-                <div class="col-lg-6">
-                    
-                </div>
-                <div class="col-lg-6">
-                    <ul class="list-inline banner-social-buttons">
-                        <li>
-                            <a href="https://www.facebook.co.kr" class="btn btn-default btn-lg"><i class="fa fa-facebook fa-fw"></i> <span class="network-name">facebook</span></a>
-                        </li>
-                        <li>
-                            <a href="https://github.com/IronSummitMedia/startbootstrap" class="btn btn-default btn-lg"><i class="fa fa-github fa-fw"></i> <span class="network-name">Github</span></a>
-                        </li>
-                        <li>
-                            <a href="https://cotmulgyu.blogspot.kr/" class="btn btn-default btn-lg"><i class="fa fa-linkedin fa-fw"></i> <span class="network-name">Blog</span></a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-        </div>
-        <!-- /.container -->
-
-    </div>
-    <!-- /.banner -->
+    
 
  	<%@ include file="../views/commons/_foot.jspf"%>
 

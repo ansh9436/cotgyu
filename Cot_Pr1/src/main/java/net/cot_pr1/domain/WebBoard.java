@@ -11,7 +11,14 @@ public class WebBoard {
 	private int hit;
 	private String userName;
 	private int recnt; //댓글 수
+	private String boardtag; //최신글 구분을 위한 글 종류 
 	
+	public String getBoardtag() {
+		return boardtag;
+	}
+	public void setBoardtag(String boardtag) {
+		this.boardtag = boardtag;
+	}
 	public int getBnum() {
 		return bnum;
 	}
@@ -66,7 +73,7 @@ public class WebBoard {
 	@Override
 	public String toString() {
 		return "WebBoard [bnum=" + bnum + ", title=" + title + ", content=" + content + ", writer=" + writer + ", date="
-				+ date + ", hit=" + hit + ", userName=" + userName + ", recnt=" + recnt + " ]";
+				+ date + ", hit=" + hit + ", userName=" + userName + ", recnt=" + recnt + ", boardtag="+ boardtag+ "]";
 	}
 	
 	

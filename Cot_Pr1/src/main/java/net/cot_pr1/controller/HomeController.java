@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import net.cot_pr1.dao.FreeBoardDao;
+import net.cot_pr1.dao.GalleryDao;
 import net.cot_pr1.dao.WebBoardDao;
 import net.cot_pr1.domain.FreeBoard;
+import net.cot_pr1.domain.Gallery;
 import net.cot_pr1.domain.WebBoard;
 
 
@@ -21,11 +23,11 @@ import net.cot_pr1.domain.WebBoard;
 public class HomeController {
 	@Autowired
 	private WebBoardDao boardDao;
-	
 	@Autowired
 	private FreeBoardDao freeboardDao;
-//	@Autowired
-//	MyGalleryDao galleryDao;
+	@Autowired
+	private GalleryDao galleryDao;
+
 
 	@RequestMapping("/")
 	public ModelAndView list() throws Exception{
@@ -33,14 +35,15 @@ public class HomeController {
 		
 		List<WebBoard> poplist = boardDao.popboard();
 		List<FreeBoard> popFlist = freeboardDao.popboard();
-	//	List<gallery> popImglist = galleryDao.poplist();
+		List<Gallery> popImglist = galleryDao.poplist();
+		List<WebBoard> recentlist = boardDao.recentboard(); //최신 글 목록
 		//데이터를 맵에 저장
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		map.put("poplist", poplist);
 		map.put("popFlist", popFlist);
-	//	map.put("popImglist",popImglist);
-		
+		map.put("popImglist",popImglist);
+		map.put("recentlist", recentlist);
 		//모델과 뷰
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("map", map); // 맵에 저장된 데이터를 mav에 저장

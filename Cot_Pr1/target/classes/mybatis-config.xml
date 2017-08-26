@@ -9,10 +9,9 @@
     <mapper resource="net/cot_pr1/mapper/WebBoardMapper.xml"/>
     <mapper resource="net/cot_pr1/mapper/WebReplyMapper.xml"/>
    
-   
-    <!--  
-    <mapper resource="net/cot_pr1/dao/GalleryMapper.xml"/>
-    -->
+ 
+    <mapper resource="net/cot_pr1/mapper/GalleryMapper.xml"/>
+  
     <mapper resource="net/cot_pr1/mapper/FreeBoardMapper.xml"/>
     <mapper resource="net/cot_pr1/mapper/FreeReplyMapper.xml"/>
 
