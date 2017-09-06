@@ -115,6 +115,7 @@ public class WebBoardController {
         mav.addObject("dto", webboardService.read(bnum));
         return mav;
     }
+	
 	//글 수정창으로 연결     
     @RequestMapping(value="/updatedetail/{bnum}", method=RequestMethod.GET)
     public ModelAndView boardDetail(@PathVariable("bnum") Integer bnum, ModelAndView mav) throws Exception{

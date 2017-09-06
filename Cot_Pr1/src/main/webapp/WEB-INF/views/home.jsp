@@ -18,8 +18,9 @@
 <%@ include file="./commons/_header.jspf" %>
 </head>
 <body>
-	<%@ include file="./commons/_top.jspf" %>
 
+	<%@ include file="./commons/_top.jspf" %>
+<div class="center">
     <!-- /.intro-header -->
   <!-- Page Content 인기게시판 표시-->
 
@@ -117,13 +118,13 @@
     <div class="content-section-b">
         <div class="container">
             <div class="row">
-                <div class="col-lg-5 col-lg-offset-1 col-sm-push-6  col-sm-6" >             
+                <div class="col-lg-5 col-lg-offset-1 col-sm-push-6  col-sm-9" >             
                     <hr class="section-heading-spacer">
                     <div class="clearfix"></div>
                     <h2 class="section-heading">사진을 올려주세요!</h2><br>
                     <p class="lead">자신의 관심분야 사진을 공유해볼까요?</p>
                 </div>
-                <div class="col-lg-6 col-sm-pull-7 col-sm-20">
+                <div class="col-lg-6 col-sm-pull-7 col-sm-18">
                 &emsp;&emsp;&emsp;&nbsp;인기게시물
                 <ul>
 					<c:forEach items="${map.popImglist}" var="map">						
@@ -177,7 +178,7 @@
     
 
  	<%@ include file="../views/commons/_foot.jspf"%>
-
+</div>
 
 </body>
 </html>

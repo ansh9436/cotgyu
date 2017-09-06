@@ -19,7 +19,7 @@
  	
  	<update id="update">
  		update users set
- 		password = #{password}, name = #{name}, email = #{email}, profileimg = #{profileimg} where userId = #{userId}
+ 		password = #{password}, name = #{name}, email = #{email} where userId = #{userId}
  	</update>
  	
  	<update id="imgupdate">

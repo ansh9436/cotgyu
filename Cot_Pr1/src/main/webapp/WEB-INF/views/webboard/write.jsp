@@ -52,8 +52,10 @@
 </head>
 <body>
 	<%@ include file="../commons/_top.jspf"%>
-	<br>
+
 	<div class="studyboard_write">
+	<h3>Web게시판</h3>
+	<br>
 	<h3>게시글 작성</h3>
 	<form id="frm" method="post" action="/webboard/insert" enctype="multipart/form-data" method="${method}">
 		<table width="59.8%" align="center">

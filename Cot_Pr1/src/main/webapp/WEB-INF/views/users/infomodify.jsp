@@ -20,16 +20,8 @@
 					<h3>정보 수정</h3>
 				</div>
 				
-				<c:choose>
-				<c:when test="${empty user.userId}">
-				<c:set var="method" value="post" />
-				</c:when>
-				<c:otherwise>
-				<c:set var="method" value="put" />
-				</c:otherwise>
-				</c:choose>
 				
-				<form:form modelAttribute="user" cssClass="form-horizontal" action="/users" method="${method}">
+				<form:form modelAttribute="user" cssClass="form-horizontal" action="/users" method="post">
 					<div class="control-group">
 						<label class="control-label" for="userId">사용자 아이디</label>
 						<div class="controls">
@@ -75,5 +67,7 @@
 			</div>
 		</div>
 	</div>
+		<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+	<%@ include file="../commons/_foot.jspf"%>
 </body>
 </html>

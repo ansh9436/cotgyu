@@ -43,7 +43,7 @@ public class UserController {
 	@Resource(name="uploadPath2")
 	String uploadPath2;
 
-	@Inject
+	@Autowired
 	UserService userService;
 	
 	@RequestMapping("/form")
@@ -208,7 +208,17 @@ public class UserController {
 	   out.print("1");
 	  }
 	 }
-
+//security Å×½ºÆ®
+	 @RequestMapping("/loginpage")
+	 public String loginPage(){
+	  return "/users/sslogin";
+	 }
+	  
+	 @RequestMapping("/j_spring_security_check")
+	 public String j_spring_security_check(){
+	  return "/users/myinfo";
+	 }
+	  
 	
 }
 

@@ -37,18 +37,18 @@ function showReplyComment(rnum) {
 <style></style>
 </head>
 <body>
-    <div style="width:700px;" >
+    <div style="width:73%" >
         <c:forEach var="row" items="${list}">
        		<!-- 댓글 indent에 따라 div창 밀기  -->
-            <div style= "margin-left: <c:out value="${30*row.reindent}"/>px;">
+            <div style= "margin-left: <c:out value="${30*row.reindent}"/>px; border:1px solid; background-color:white">
              <c:forEach var="i" begin="1" end="${row.reindent}" step="1">
              	
         	 </c:forEach>
         	  	<input type="image" src="\resources\images\re.png" width="40" height="18" >
-                ${row.replyer} <fmt:formatDate value="${row.date}" pattern="yyyy-MM-dd a HH:mm" />
+                ${row.replyer} &emsp; <fmt:formatDate value="${row.date}" pattern="yyyy-MM-dd a HH:mm" />
                 <br>
          		&emsp;
-                ${row.replytext}
+                ${row.replytext}<br>
               	<c:if test="${sessionScope.userId != null}">
                 <c:if test="${sessionScope.userId == row.replyer}">
                     <button type="button" class="btn btn-default" onClick="location.href='/webreply/delete?rnum=${row.rnum}&bnum=${row.bnum}'">삭제 </button>

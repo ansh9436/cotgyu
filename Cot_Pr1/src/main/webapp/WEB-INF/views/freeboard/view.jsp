@@ -58,9 +58,10 @@
 </head>
 <body>
 	<%@ include file="../commons/_top.jspf"%>
-	<br><br>
-	<div class="boardView">
-	<table border="1" width="73%" style= "background-color: white">
+	<div class="boardpadding">
+	<h3>자유게시판</h3>
+	<br>
+	<table border="1" width="73%"  style= "background-color: white">
 	<h3>${dto.title}</h3>
 	<tr>
 		<td>
@@ -93,7 +94,7 @@
 	
 	<br><br>
 	
-	<div class="replyView">
+	<div class="boardpadding">
 		<!-- **댓글 목록 출력할 위치 -->
 		<div id="listReply">
 		</div>
@@ -103,6 +104,7 @@
 			<br>
 			<!-- **로그인 한 회원에게만 댓글 작성폼이 보이게 처리 -->
 			<c:if test="${sessionScope.userId != null}">
+				${sessionScope.userId}
 				<textarea rows="5" cols="82" name="replytext" placeholder="댓글을 작성해주세요"></textarea>
 				<input type="hidden" name="bnum" value="${dto.bnum}">
 				<br>

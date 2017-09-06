@@ -43,29 +43,31 @@
 </head>
 <body>
 	<%@ include file="../commons/_top.jspf"%>
-	<br><br>
+
 <div class="boardView">
+	<h3>자유게시판</h3>
+	<br>
+	<h3>게시물 수정</h3>
 	<form id="frm" method="post" action="/freeboard/update" enctype="multipart/form-data">
-		<table width="100%">
 		<input type="hidden" name="bnum" value="${vo.bnum}">
+		<table width="58.9%" align="center">
 			<tr>
-				<td>태그</td>
-			
-				<select name="tag" id="tag">     
+				<td>태그</td>	
+				<td><select name="tag" id="tag">     
 	            <option value="잡담">잡담</option>
 	            <option value="일상">일상</option>
-	            <option value="Help!">Help!</option></select>
+	            <option value="Help!">Help!</option></select></td>
 	           
 			</tr>
 			<tr>
 				<td>제목</td>
-				<td><input name="title" id="title" size="80" value="${vo.title}">
+				<td><input name="title" id="title" size="136" value="${vo.title}">
 	            </td>
 			</tr>
 			
 			<tr>
 				<td>내용</td>
-				<td><textarea name="content" id="content" rows="10" cols="30" style="width: 766px; height: 412px;" >${vo.content}</textarea></td>
+				<td style=background-color:white;><textarea name="content" id="content" style="width: 1100px; height: 600px;" >${vo.content}</textarea></td>
 			</tr>
 			<tr>
 				<td colspan="2">

@@ -9,7 +9,8 @@
 </head>
 <body>
 	<br>
-	코멘트
+	<코멘트><br>
+	${sessionScope.userId}
 	<form name="form4" method="post" action="/freereply/comment" method="${method}">
 		<textarea name="replytext" id="replytext" rows="5" cols="82" ></textarea>
 		<input type="hidden" name="regroup" id="regroup" value="${vo.regroup}"> 

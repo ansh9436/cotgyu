@@ -53,6 +53,7 @@ public class WebReplyController {
     @RequestMapping("list.do")
     public ModelAndView list(@RequestParam int bnum, ModelAndView mav){
         List<WebReply> list = webReplyService.list(bnum);
+        
         // 뷰이름 지정
         mav.setViewName("webboard/replylist");	
         // 뷰에 전달할 데이터 지정

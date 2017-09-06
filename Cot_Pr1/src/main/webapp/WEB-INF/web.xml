@@ -8,7 +8,10 @@
 	<!-- The definition of the Root Spring Container shared by all Servlets and Filters -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>classpath:/applicationcontext.xml</param-value>
+		<param-value>
+		classpath:/applicationcontext.xml
+		classpath:/security-context.xml
+		</param-value>
 	</context-param>
 	
 	<!-- Creates the Spring Container shared by all Servlets and Filters -->
@@ -41,8 +44,16 @@
 		<filter-name>hiddenHttpMethodFilter</filter-name>
 		<servlet-name>cot_pr1</servlet-name>
 	</filter-mapping>
-
-
+	
+		<!-- spring-security filter -->
+	<filter>
+	 <filter-name>springSecurityFilterChain</filter-name>
+	 <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+	</filter>
+	<filter-mapping>
+	 <filter-name>springSecurityFilterChain</filter-name>
+	 <url-pattern>/*</url-pattern>
+	</filter-mapping> 
 
 	<!-- Processes application requests -->
 	<servlet>

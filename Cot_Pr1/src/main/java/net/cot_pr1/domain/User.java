@@ -79,7 +79,7 @@ public class User {
 	}
 	
 	public boolean matchPassword(Authenticate authenticate){
-		if(this.password ==null){
+		if(this.password == null){
 			return false;
 		}
 		return authenticate.matchPassword(this.password);

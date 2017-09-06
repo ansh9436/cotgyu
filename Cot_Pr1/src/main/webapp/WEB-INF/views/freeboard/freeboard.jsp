@@ -37,7 +37,7 @@ background: #F3F3F3;
 	<br>
 	<div class="popboard">
 	<table border="2" align="center" width="58%" height="30" style= "background-color: white">
-	<h3>인기게시판</h3>	
+	<h3>[자유]인기게시판</h3>	
 	<c:forEach var="row2" items="${map.poplist}">
 	<td width="300" height="40">&nbsp;<a href="${path}/freeboard/view?bnum=${row2.bnum}">${row2.title}
 				<!-- ** 댓글이 있으면 게시글 이름 옆에 출력하기 -->
