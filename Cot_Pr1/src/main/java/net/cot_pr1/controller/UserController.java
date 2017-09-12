@@ -119,7 +119,6 @@ public class UserController {
 	        mav.setViewName("redirect:/");
 	        return mav;
 
-		
 		}
 	
 	

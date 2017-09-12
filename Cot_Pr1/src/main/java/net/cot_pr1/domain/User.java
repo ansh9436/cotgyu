@@ -84,6 +84,7 @@ public class User {
 		}
 		return authenticate.matchPassword(this.password);
 	}
+	
 	public boolean matchUserId(String inputuserId) {
 		if(inputuserId == null){
 			return false;

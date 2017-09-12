@@ -3,6 +3,9 @@
  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
  <mapper namespace="UserMapper">
+ 	<select id="findname" resultType="net.cot_pr1.security.User_s">
+ 		select * from user_s where username= #{username}
+ 	</select>
  
  	<select id="findByID" resultType="net.cot_pr1.domain.User">
  		select * from users where userId= #{userId}

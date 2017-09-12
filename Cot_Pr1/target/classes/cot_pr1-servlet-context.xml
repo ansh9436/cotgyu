@@ -4,13 +4,21 @@
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:security="http://www.springframework.org/schema/security"
+
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
+		">
 	<context:component-scan base-package="net.cot_pr1"/>
 	<bean class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping"/>
 	<mvc:annotation-driven/>
 	
+	<!--  security 추가  -->
+	<security:global-method-security secured-annotations="enabled" pre-post-annotations="enabled" />
+
+
 	<!--  <mvc:resources location="images" mapping="/images/" />-->
 	<mvc:resources location="uploads" mapping="/uploasds/**" />
 	<mvc:resources location="/editors/" mapping="/editors/**" />	
@@ -36,4 +44,5 @@
 		p:basename="message"
 		p:defaultEncoding="UTF-8"
 	/>
+
 </beans>
