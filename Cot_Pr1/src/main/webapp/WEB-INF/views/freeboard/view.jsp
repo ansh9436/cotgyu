@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>SLiPP :: 자유 게시판</title>
+<title>Cot :: 자유 게시판</title>
 <%@ include file="../commons/_header.jspf"%>
 <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
 <script type="text/javascript">
@@ -58,6 +58,7 @@
 </head>
 <body>
 	<%@ include file="../commons/_top.jspf"%>
+	<div class="center">
 	<div class="boardpadding">
 	<h3>자유게시판</h3>
 	<br>
@@ -116,9 +117,9 @@
 	
 	</div>
 	<div>
-<br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br>
 	<%@ include file="../commons/_foot.jspf"%>
 	</div>
-	
+	</div>
 </body>
 </html>

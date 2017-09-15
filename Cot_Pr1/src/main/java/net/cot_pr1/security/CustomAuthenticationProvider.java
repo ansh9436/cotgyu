@@ -16,11 +16,17 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
+import net.cot_pr1.domain.User;
+import net.cot_pr1.service.UserService;
+
 @Component
 public class CustomAuthenticationProvider implements AuthenticationProvider {
 	private static final Logger logger = LoggerFactory.getLogger(CustomAuthenticationProvider.class);
+//	@Autowired
+//	User_sService user_sService;
 	@Autowired
-	User_sService user_sService;
+	UserService userService;
+	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 	@Autowired
@@ -30,11 +36,17 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 		String username = authentication.getName();
 		String password = (String) authentication.getCredentials();
-		User_s user;
+		//User_s user;
+		User user;
 		Collection<? extends GrantedAuthority> authorities;
 		try {
-			user = user_sService.loadUserByUsername(username);
-		//테스트	String hashedPassword = passwordEncoder.encodePassword(password, saltSource.getSalt(user));
+			user = userService.loadUserByUsername(username);
+			if(user ==null){
+				//여기서 걸리는데...음   메세지만 따른거 뜨게하면될듯
+				throw new BadCredentialsException("아이디가 없습니다.");
+			}
+			//암호화는 다시 찾아서 할것
+			//String hashedPassword = passwordEncoder.encodePassword(password, saltSource.getSalt(user));
 			String hashedPassword = password;
 			logger.info(
 					"username : " + username + " / password : " + password + " / hash password : " + hashedPassword);
@@ -49,6 +61,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 			logger.info(e.toString());
 			throw new BadCredentialsException(e.getMessage());
 		} catch (Exception e) {
+			//여기서 에러 걸림..ㅠ
 			logger.info(e.toString());
 			throw new RuntimeException(e.getMessage());
 		}

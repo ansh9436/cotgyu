@@ -29,6 +29,7 @@ public class SigninFailureHandler extends SimpleUrlAuthenticationFailureHandler 
 		String accept = request.getHeader("accept");
 		String error = "true";
 		String message = "로그인실패하였습니다.";
+		System.out.println(message);
 		if (StringUtils.indexOf(accept, "html") > -1) {
 			String redirectUrl = request.getParameter(this.targetUrlParameter);
 			if (redirectUrl != null) {

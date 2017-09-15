@@ -6,13 +6,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Gyu's Page :: 내 정보</title>
+<title>Cot :: 내 정보</title>
 
 <%@ include file="../commons/_header.jspf" %>
 </head>
 <body>
 	<%@ include file="../commons/_top.jspf" %>
-	
+	<div class="center">
 	<div class="container">
 		<div class="row">
 			<div class="span12">
@@ -88,5 +88,6 @@
 	</div>
 	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 	<%@ include file="../commons/_foot.jspf"%>
+	</div>
 </body>
 </html>

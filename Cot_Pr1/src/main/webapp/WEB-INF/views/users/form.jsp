@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>SLiPP :: 회원가입</title>
+<title>Cot :: 회원가입</title>
 <%@ include file="../commons/_header.jspf" %>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.0.min.js"></script>
 
@@ -46,10 +46,8 @@ function join(){
 	  
 	  var frm = document.companyForm; 
 	  
-	  if(!chkVal('userId','아이디'))
-		  return false;
-	  if($("#idChk").val() == 'N')
-		  {alert('ID체크를 해주세요.');
+	  if($("#idChk").val() == 'N'){
+		  alert('ID체크를 해주세요.');
 	  return;
 	  }else{
 			 $("#form1").submit(); 
@@ -65,7 +63,7 @@ function join(){
 </head>
 <body>
 	<%@ include file="../commons/_top.jspf" %>
-	
+	<div class="center">
 	<div class="container">
 		<div class="row">
 			<div class="span12">
@@ -83,9 +81,9 @@ function join(){
 				</c:otherwise>
 				</c:choose>
 				
-				<form:form  modelAttribute="user" cssClass="form-horizontal" action="/users/create" method="${method}">
+				<form:form id="form1" modelAttribute="user" cssClass="form-horizontal" action="/users/create" method="${method}">
 					<div class="control-group">
-						<label class="control-label" for="userId">사용자 아이디</label>
+						<label class="control-label" for="userId">사용자 아이디[4~12문자로 입력해주세요.]</label>
 						
 						<input type="hidden" id="idChk" value="N" />	
 						<div class="controls">				
@@ -95,7 +93,7 @@ function join(){
 						</div>
 					</div>
 					<div class="control-group">
-						<label class="control-label" for="password">비밀번호</label>
+						<label class="control-label" for="password">비밀번호[4~12문자로 입력해주세요.]</label>
 						<div class="controls">
 							<form:password path="password" />
 							<br>
@@ -111,7 +109,7 @@ function join(){
 						</div>
 					</div>
 					<div class="control-group">
-						<label class="control-label" for="email">이메일</label>
+						<label class="control-label" for="email">이메일[이메일 형식으로 입력해주세요.]</label>
 						<div class="controls">
 							<form:input path="email"/>
 							<br>
@@ -120,7 +118,7 @@ function join(){
 					</div>
 					<div class="control-group">
 						<div class="controls">
-							<button type="submit" class="btn btn-default">회원가입</button>
+							<button type="button" class="btn btn-default" onclick="javascript:join();">회원가입</button>
 						
 						</div>
 					</div>				
@@ -130,5 +128,6 @@ function join(){
 	</div>
 		<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 	<%@ include file="../commons/_foot.jspf"%>
+	</div>
 </body>
 </html>

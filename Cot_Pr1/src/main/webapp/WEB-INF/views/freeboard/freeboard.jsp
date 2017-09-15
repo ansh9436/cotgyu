@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Gyu's Page :: 자유 게시판</title>
+<title>Cot :: 자유 게시판</title>
 
 <%@ include file="../commons/_header.jspf"%>
 <script>
@@ -35,11 +35,12 @@ background: #F3F3F3;
 <body>
 	<%@ include file="../commons/_top.jspf"%>
 	<br>
+	<div class="center">
 	<div class="popboard">
-	<table border="2" align="center" width="58%" height="30" style= "background-color: white">
+	<table border="2"  width="75%"  height="30" style= "background-color: white">
 	<h3>[자유]인기게시판</h3>	
-	<c:forEach var="row2" items="${map.poplist}">
-	<td width="300" height="40">&nbsp;<a href="${path}/freeboard/view?bnum=${row2.bnum}">${row2.title}
+	<c:forEach var="row2" items="${map.poplist}" varStatus="status">
+	<td width="300" height="40">&nbsp;<a href="${path}/freeboard/view?bnum=${row2.bnum}">${status.count}.&nbsp;&nbsp;${row2.title}
 				<!-- ** 댓글이 있으면 게시글 이름 옆에 출력하기 -->
                     <c:if test="${row2.recnt > 0}">
                     <span style="color: red;">(${row2.recnt})
@@ -70,8 +71,8 @@ background: #F3F3F3;
 	<button type="button" class="btn btn-default" onClick="location.href='write'">글쓰기</button>
 	</c:if>
 	</div>
-	
-	<table border="2" width="58%" align="center"  align="center" style= "background-color: white">
+	<div class="boardpadding">
+	<table border="2" width="75%"  style= "background-color: white">
 		<tr height="40" align="center">
 			<td width="30">번호</td>
 			<td width="30">태그</td>
@@ -147,7 +148,9 @@ background: #F3F3F3;
             </td>
         </tr>
 	</table>
+	</div>
 	<br><br><br><br><br><br><br><br><br>
 	<%@ include file="../commons/_foot.jspf"%>
+	</div>
 </body>
 </html>

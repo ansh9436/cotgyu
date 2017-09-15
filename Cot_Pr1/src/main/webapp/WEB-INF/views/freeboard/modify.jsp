@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>SLiPP :: Web게시판</title>
+<title>Cot :: Web게시판</title>
 <script type="text/javascript" src="/resources/Editors/js/HuskyEZCreator.js" charset="utf-8"></script> 
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.0.min.js"></script>
 
@@ -43,16 +43,16 @@
 </head>
 <body>
 	<%@ include file="../commons/_top.jspf"%>
-
+<div class="center">
 <div class="boardView">
 	<h3>자유게시판</h3>
 	<br>
 	<h3>게시물 수정</h3>
 	<form id="frm" method="post" action="/freeboard/update" enctype="multipart/form-data">
 		<input type="hidden" name="bnum" value="${vo.bnum}">
-		<table width="58.9%" align="center">
+		<table width="60%">
 			<tr>
-				<td>태그</td>	
+				<td width="3%">태그</td>	
 				<td><select name="tag" id="tag">     
 	            <option value="잡담">잡담</option>
 	            <option value="일상">일상</option>
@@ -76,6 +76,9 @@
 			</tr>
 		</table>
 	</form>
+	</div>
+	<br><br><br><br><br><br><br><br><br>
+	<%@ include file="../commons/_foot.jspf"%>
 </div>
 </body>
 </html>

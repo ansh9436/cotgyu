@@ -15,6 +15,10 @@ import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.authentication.encoding.PasswordEncoder;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -46,6 +50,9 @@ public class UserController {
 	@Autowired
 	UserService userService;
 	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+	
 	@RequestMapping("/form")
 	public String createform(Model model){
 		model.addAttribute("user", new User());
@@ -67,7 +74,7 @@ public class UserController {
 		}		
 		userService.create(user);
 		log.debug("Database: {}", userService.findByID(user.getUserId()));
-		return "redirect:/";
+		return "users/joinok";
 	}
 	//내정보- 세션으로 아이디 가져와서 정보 불러오기 
 	@RequestMapping("/myinfo")
@@ -208,17 +215,17 @@ public class UserController {
 	  }
 	 }
 //security 테스트
-	 @RequestMapping("/loginpage")
-	 public String loginPage(){
-	  return "/users/sslogin";
-	 }
-	  
-	 @RequestMapping("/j_spring_security_check")
-	 public String j_spring_security_check(){
-	  return "/users/myinfo";
-	 }
-	  
-	
+	 @PreAuthorize("authenticated")
+		@RequestMapping(value = "/mypage", method = RequestMethod.GET)
+		public String mypage(Model model,HttpSession session) {
+			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+			if(auth.getName() ==null){
+				return "redirect:/users/form";
+			}
+			//model.addAttribute("user_name", auth.getName());
+			session.setAttribute("userId", auth.getName()); //세션 추가 !
+			return "redirect:/";
+		}
 }
 
 

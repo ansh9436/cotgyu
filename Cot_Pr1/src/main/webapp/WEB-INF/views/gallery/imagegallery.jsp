@@ -53,7 +53,7 @@ background: #F3F3F3;
 
 </style>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Gyu's Page :: 사진 갤러리</title>
+<title>Cot :: 사진 갤러리</title>
 
 <%@ include file="../commons/_header.jspf"%>
 <script>
@@ -96,8 +96,10 @@ function list(page){
 	    }
 </script>
 </head>
+
 <body>
 	<%@ include file="../commons/_top.jspf"%>
+	<div class="center"> 
 	<br><br>
 <div class="ImageGallery-writebutton">
 	<h3>사진을 등록해주세요!!</h3>
@@ -178,6 +180,7 @@ function list(page){
       <div>
     <br><br><br><br><br><br><br><br><br>
 	<%@ include file="../commons/_foot.jspf"%>
+	</div>
 	</div>
 </body>
 </html>

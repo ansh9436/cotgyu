@@ -20,7 +20,7 @@
 		
 			authentication-success-handler-ref="signinSuccessHandler"
 			authentication-failure-handler-ref="signinFailureHandler"
-			default-target-url="/mypage" 
+			default-target-url="/users/mypage" 
 			always-use-default-target="false" />
 			
 		<logout invalidate-session="true" logout-success-url="/signin"
@@ -39,7 +39,12 @@
 
 	<beans:bean id="customAuthenticationProvider" class="net.cot_pr1.security.CustomAuthenticationProvider" />
 
+	<beans:bean id="userService" class="net.cot_pr1.service.UserService" />
+<!--  전버전 서비스 
 	<beans:bean id="user_sService" class="net.cot_pr1.security.User_sService" />
+	-->
+	<beans:bean id="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
+
 	<beans:bean id="encoder" class="org.springframework.security.authentication.encoding.ShaPasswordEncoder" />
 	<beans:bean id="saltSource" class="org.springframework.security.authentication.dao.ReflectionSaltSource">
 		<beans:property name="userPropertyToUse" value="username" />

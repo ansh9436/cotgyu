@@ -15,7 +15,7 @@ import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 import org.springframework.stereotype.Repository;
 
 import net.cot_pr1.domain.User;
-import net.cot_pr1.security.User_s;
+
 
 	@Repository
 	public class UserDao {
@@ -37,8 +37,8 @@ import net.cot_pr1.security.User_s;
 		return sqlSession.selectOne("UserMapper.findByID",userId);
 	}
 	//시큐리티 테스트
-	public User_s findname(String username){
-		return sqlSession.selectOne("UserMapper.findname",username);
+	public User findname(String username){
+		return sqlSession.selectOne("UserMapper.findByID",username);
 	}
 
 	public void create(User user) {

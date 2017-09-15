@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>SLiPP :: 사진 갤러리</title>
+<title>Cot :: 사진 갤러리</title>
 
 <%@ include file="../commons/_header.jspf"%>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.0.min.js"></script>
@@ -31,6 +31,7 @@ $("#save").click(function(){
 <body>
 	<%@ include file="../commons/_top.jspf"%>
 <br>
+<div class="center">
 <div class="ImageGallery-writebutton">
 <h3>이미지 등록</h3>
 <br><br>
@@ -45,6 +46,9 @@ $("#save").click(function(){
     </form>
     
    
+ </div>
+ <br><br><br><br><br><br><br><br><br>
+	<%@ include file="../commons/_foot.jspf"%>
  </div>
 </body>
 </html>

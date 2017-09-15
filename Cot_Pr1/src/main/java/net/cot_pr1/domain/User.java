@@ -1,6 +1,8 @@
 package net.cot_pr1.domain;
 
+import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -9,8 +11,12 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
-public class User { 
+import net.cot_pr1.security.Role;
+
+public class User implements UserDetails { 
 	@NotEmpty @Size(min=4, max=12)
 	private String userId;
 	@NotEmpty @Size(min=4, max=12)
@@ -22,6 +28,13 @@ public class User {
 	
 	private String profileimg;
 	private Date joindate;
+	//이부분 찾아보기 
+	private List<Role> authorities;
+	private boolean accountNonExpired = true;
+	private boolean accountNonLocked = true;
+	private boolean credentialsNonExpired = true;
+	private boolean enabled = true;
+	
 	public User(){
 		
 	}
@@ -59,6 +72,7 @@ public class User {
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
+	@Override
 	public String getPassword() {
 		return password;
 	}
@@ -142,5 +156,58 @@ public class User {
 		return true;
 	}
 
+	
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		return this.authorities;
+	}
+
+	public void setAuthorities(List<Role> authorities) {
+		this.authorities = authorities;
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		return this.accountNonExpired;
+	}
+
+	public void setAccountNonExpired(boolean accountNonExpired) {
+		this.accountNonExpired = accountNonExpired;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		return this.accountNonLocked;
+	}
+
+	public void setAccountNonLocked(boolean accountNonLocked) {
+		this.accountNonLocked = accountNonLocked;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return this.credentialsNonExpired;
+	}
+
+	public void setCredentialsNonExpired(boolean credentialsNonExpired) {
+		this.credentialsNonExpired = credentialsNonExpired;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return this.enabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
+//코드가 더러워짐 ㅠㅠ 유저 디테일때문에 유저네임을 설정했음..ㅠㅠ
+	@Override
+	public String getUsername() {
+		return userId;
+	}
+	public void setUsername(String username) {
+		this.userId = username;
+	}
 	
 }

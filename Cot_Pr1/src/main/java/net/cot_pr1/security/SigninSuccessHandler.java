@@ -19,6 +19,7 @@ public class SigninSuccessHandler extends SavedRequestAwareAuthenticationSuccess
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication auth)
 			throws IOException, ServletException {
+		System.out.println("로그인 성공");
 		String accept = request.getHeader("accept");
 		if (StringUtils.indexOf(accept, "html") > -1) {
 			super.onAuthenticationSuccess(request, response, auth);

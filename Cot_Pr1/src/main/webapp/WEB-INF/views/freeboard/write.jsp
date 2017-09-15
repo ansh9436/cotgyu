@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>SLiPP :: 자유게시판</title>
+<title>Cot :: 자유게시판</title>
 <script type="text/javascript" src="/resources/Editors/js/HuskyEZCreator.js" charset="utf-8"></script> 
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.0.min.js"></script>
 
@@ -53,12 +53,13 @@
 </head>
 <body>
 	<%@ include file="../commons/_top.jspf"%>
+	<div class="center">
 	<div class="studyboard_write">
 	<h3>자유게시판</h3>
 	<br>
 	<h3>게시글 작성</h3>
 	<form id="frm" method="post" action="/freeboard/insert" enctype="multipart/form-data">
-		<table width="59.8%" align="center">
+		<table width="59.8%">
 			<tr>
 				<td width="3%">제목</td>
 				<td>
@@ -84,5 +85,6 @@
 </div>
 <br><br><br><br><br><br><br><br><br>
 	<%@ include file="../commons/_foot.jspf"%>
+	</div>
 </body>
 </html>
