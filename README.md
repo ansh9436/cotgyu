@@ -1,7 +1,9 @@
 # Cot_pr1
 
 
-springframework 4.0.5
+springframework 4.2.1 RELEASE 
+
+spring security 3.1.0 RELEASE 
 
 mybatis 3.2.6
 
