@@ -183,6 +183,7 @@ public class UserController {
 		return "redirect:/";
 	}
 	
+	
 	@RequestMapping("/logout")
 	public String logout(HttpSession session){
 		session.removeAttribute("userId");
@@ -215,14 +216,37 @@ public class UserController {
 	  }
 	 }
 //security 테스트
+	 
+	 //실패했을때?? 
+	@RequestMapping(value = "/signin", method = RequestMethod.GET)
+	public ModelAndView signin(@RequestParam(value = "error", required = false) String error, Model model) {
+	//	model.addAttribute("error", error);
+		
+		
+		System.out.println(error);
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("error", error);
+		mav.setViewName("redirect:/");
+		return mav;
+	}
+
+	
+	 
 	 @PreAuthorize("authenticated")
 		@RequestMapping(value = "/mypage", method = RequestMethod.GET)
 		public String mypage(Model model,HttpSession session) {
 			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+			/*
 			if(auth.getName() ==null){
 				return "redirect:/users/form";
 			}
-			//model.addAttribute("user_name", auth.getName());
+			*/
+			
+			//유저 프로필 가져와서 세션에 적용하기 
+			String userId = auth.getName(); 
+			String userimg = userService.findByprofile(userId);	
+
+			session.setAttribute("userimg", userimg);
 			session.setAttribute("userId", auth.getName()); //세션 추가 !
 			return "redirect:/";
 		}

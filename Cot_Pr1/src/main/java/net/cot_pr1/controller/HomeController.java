@@ -36,10 +36,7 @@ public class HomeController {
 
 	@RequestMapping("/")
 	public ModelAndView Home(HttpSession session) throws Exception{
-// 로그인화면에서 프로필.. 여기서 해주면 안됨...	
-//		String userId = (String) session.getAttribute("userId");
-//		User loginuser = userDao.findByID(userId);	
-//		map.put("loginuser", loginuser);
+
 		List<WebBoard> poplist = boardDao.popboard();
 		List<FreeBoard> popFlist = freeboardDao.popboard();
 		List<Gallery> popImglist = galleryDao.poplist();

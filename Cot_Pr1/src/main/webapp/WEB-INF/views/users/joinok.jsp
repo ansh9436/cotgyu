@@ -14,7 +14,8 @@
 	<%@ include file="../commons/_top.jspf" %>
 	<div class="center">
 	<br><br><br>
-	환영합니다! 로그인을 해주세요!
+	
+	<h3>환영합니다! 로그인을 해주세요!</h3>
 	
 	<a href="/">Home</a>
 	</div>
