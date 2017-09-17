@@ -61,7 +61,7 @@
 	<%@ include file="../commons/_top.jspf"%>	
 	<div class="center">
 	<div class="boardpadding">
-	<h3>Web게시판</h3>
+	<h3>WEB게시판</h3>
 	<br>
 	<table border="1" width="73%" style= "background-color: white">
 	<h3>${dto.title}</h3>

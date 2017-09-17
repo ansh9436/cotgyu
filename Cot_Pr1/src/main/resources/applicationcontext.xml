@@ -53,7 +53,22 @@
 	<bean id="freereplyDao" class="net.cot_pr1.dao.FreeReplyDao"
 		p:sqlSession-ref="sqlSession"
 		p:dataSource-ref="dataSource" />
-
+		
+	<bean id="noticeDao" class="net.cot_pr1.dao.NoticeDao"
+		p:sqlSession-ref="sqlSession"
+		p:dataSource-ref="dataSource" />
+		
+	<bean id="noticereplyDao" class="net.cot_pr1.dao.NoticeReplyDao"
+		p:sqlSession-ref="sqlSession"
+		p:dataSource-ref="dataSource" />
+	
+	<bean id="qnaDao" class="net.cot_pr1.dao.QnADao"
+		p:sqlSession-ref="sqlSession"
+		p:dataSource-ref="dataSource" />
+		
+	<bean id="qnareplyDao" class="net.cot_pr1.dao.QnAReplyDao"
+		p:sqlSession-ref="sqlSession"
+		p:dataSource-ref="dataSource" />
 
 	<!-- 파일업로드를 위한 디렉토리 설정 -->
 	<!-- String uploadPath = new String("업로드 경로") -->

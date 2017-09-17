@@ -69,9 +69,7 @@
 						<c:if test="${sessionScope.userId == 'admin'}">
 						<li><a href="/admin">관리자 페이지</a>
 						</c:if>
-						<c:if test="${not empty sessionScope.userId}">
-						<li><a href="#">${sessionScope.userId}</a>
-						</c:if>
+						
 						
                 </ul>
             </div>
@@ -102,26 +100,26 @@
 	</c:if>
 	<c:if test="${not empty sessionScope.userId}">
 <!-- 로그인한 창에서 프로필사진 가져오기...9/15 홈컨트롤러에서 가져오면 다른 페이지에선 작동안함 top을불러올때 가져와야하는데...ㅠㅠ-->
-		<img src="/resources/profile/${sessionScope.userimg}" width="100" height="100"><br>
-	
-		<a href="/users/myinfo">${sessionScope.userId}</a><br>
-		<a href="/users/logout">로그아웃</a>
+		<div align="center">
+		<img src="/resources/profile/${sessionScope.userimg}" width="130" height="130"><br>
+		<a href="/users/myinfo" style="color:#A4A4A4; font-size:1.7em">${sessionScope.userId}</a><br>
+		
+		</div>
 	</c:if>
 	</div>
 	<br><br><br>
 	<nav class="navbar-default sidebar" role="navigation">
 	 <div class="sidebar-nav navbar-collapse" style="background-color:#FBF5F5">
 	<ul class="nav" id="side-menu" style="width:106%">
-	<li><a href="#">공지사항</a></li>
+	<li><a href="/notice/list">공지사항</a></li>
 	<li><a href="/webboard/list">WEB게시판</a></li>
 	<li><a href="/freeboard/list">자유게시판</a></li>
 	<li><a href="/gallery/list">사진 갤러리</a></li>
-	<li><a href="#">문의 게시판</a></li>
+	<li><a href="/qna/list">질문 게시판</a></li>
 	<!-- 메시지 종류 뜨게 하는거???  
 	${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message}
 	<c:remove scope="session" var="SPRING_SECURITY_LAST_EXCEPTION" />
 	-->
-	<li>${error.error}, ${error}</li>
 	</ul>
 	</div>
 	</nav>

@@ -81,7 +81,13 @@
 		UNION
 		(SELECT bnum as bnum, title as title, date as date, boardtag as boardtag from free_board)
 		UNION
+		(SELECT bnum as bnum, title as title, date as date, boardtag as boardtag from qna)
+		UNION
+		(SELECT bnum as bnum, title as title, date as date, boardtag as boardtag from notice)
+		UNION
 		(SELECT imgid as bnum, imgname as title, imgdate as date, boardtag as boardtag from gallery)
+		
+		
 		 order by date desc limit 5;
 	</select>
 	

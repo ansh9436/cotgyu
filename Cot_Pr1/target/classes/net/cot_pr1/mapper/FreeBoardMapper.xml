@@ -37,7 +37,7 @@
 	 	SELECT bnum, title, content, writer, date, hit,tag,
 	 	<!-- ** 댓글숫자표시 -->
         (SELECT COUNT(*) FROM free_reply WHERE bnum= b.bnum) AS recnt
-	 	FROM free_BOARD b
+	 	FROM free_board b
 	 	
 		<!-- WHERE절을 include 태그로 삽입 -->
    		<include refid="search"></include>

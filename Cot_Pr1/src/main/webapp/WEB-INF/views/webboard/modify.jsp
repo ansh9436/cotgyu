@@ -46,7 +46,7 @@
 	<%@ include file="../commons/_top.jspf"%>
 <div class="center">
 	<div class="boardView">
-	<h3>Web게시판</h3>
+	<h3>WEB게시판</h3>
 	<br>
 	<h3>게시물 수정</h3>
 	<form id="frm" method="post" action="/webboard/update" enctype="multipart/form-data">

@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Cot :: Web게시판</title>
+<title>Cot :: WEB게시판</title>
 
 <%@ include file="../commons/_header.jspf"%>
 <script>
@@ -28,12 +28,7 @@
 		}
     
 </script>
-<style>
-body{
-background: #F3F3F3;
-}
 
-</style>
 </head>
 <body>
 	<%@ include file="../commons/_top.jspf"%>
@@ -41,7 +36,7 @@ background: #F3F3F3;
 	<div class="center">
 	<div class="popboard">
 	<table border="2" width="75%" height="30" style= "background-color: white">
-	<h3>[Web]인기게시판</h3>
+	<h3>[WEB]인기게시판</h3>
 	<c:forEach var="row2" items="${map.poplist}" varStatus="status">
 	<td width="300" height="40">&nbsp;<a href="${path}/webboard/view?bnum=${row2.bnum}">${status.count}.&nbsp;&nbsp;${row2.title}
 				<!-- ** 댓글이 있으면 게시글 이름 옆에 출력하기 -->

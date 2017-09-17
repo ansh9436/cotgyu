@@ -34,7 +34,7 @@
                     <div class="clearfix"></div>
                     <h2 class="section-heading">최신 게시물</h2><br>
                     
-                    <p class="lead">최신 글입니다.</p>
+                    
                 </div>
                 <div class="col-lg-5 col-sm-pull-6 col-sm-6">
                	최신 글
@@ -56,6 +56,14 @@
 					<a href="/gallery/list">${row3.title}
 					</c:when>
 					
+					<c:when test="${row3.boardtag == 'notice'}">
+					<a href="/notice/list">${row3.title}
+					</c:when>
+					
+					<c:when test="${row3.boardtag == 'qna'}">
+					<a href="/qna/list">${row3.title}
+					</c:when>
+					
 					</c:choose>
 					</a>&emsp;<fmt:formatDate value="${row3.date}" pattern="yyyy-MM-dd a HH:mm" />
 					<!-- 글 게시판 종류 출력 -->&emsp;
@@ -68,6 +76,12 @@
 					</c:when>
 					<c:when test="${row3.boardtag == 'gallery'}">
 					<a href="/gallery/list" style="color: blue;">사진갤러리</a>
+					</c:when>
+						<c:when test="${row3.boardtag == 'notice'}">
+					<a href="/notice/list" style="color: blue;">공지사항</a>
+					</c:when>
+						<c:when test="${row3.boardtag == 'qna'}">
+					<a href="/qna/list" style="color: blue;">질문게시판</a>
 					</c:when>
 					</c:choose>
 					</td></tr>
@@ -175,6 +189,42 @@
         <!-- /.container -->
 
     </div>
+    <!-- /.content-section-d -->
+     <div class="content-section-b">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-5 col-lg-offset-1 col-sm-push-6  col-sm-6" >             
+                    <hr class="section-heading-spacer">
+                    <div class="clearfix"></div>
+                    <h2 class="section-heading">질문을 해주세요!</h2><br>
+                    <p class="lead">궁금한 사항을 질문으로 남겨주세요! </p>
+           
+                </div>
+                <div class="col-lg-5 col-sm-pull-6 col-sm-6">
+               		인기게시물
+                    <table border="2" align="center" style= "background-color: white" width="100%" >
+					<c:forEach var="row2" items="${map.popQnalist}">
+					<tr>
+					<td height="30">&nbsp;<a href="${path}/qna/view?bnum=${row2.bnum}">${row2.title}
+								<!-- ** 댓글이 있으면 게시글 이름 옆에 출력하기 -->
+				                    <c:if test="${row2.recnt > 0}">
+				                    <span style="color: red;">(${row2.recnt})
+				                    </span>
+				                    </c:if>	
+								</a>&emsp;<fmt:formatDate value="${row2.date}" pattern="yyyy-MM-dd a HH:mm" /></td></tr>
+					</c:forEach>
+					</table>
+						
+                             
+                </div>
+            </div>
+
+        </div>
+        <!-- /.container -->
+
+    </div>
+    <!-- /.content-section-d -->
+  
     
 
  	<%@ include file="../views/commons/_foot.jspf"%>

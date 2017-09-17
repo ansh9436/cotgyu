@@ -26,11 +26,7 @@
 		}
     
 </script>
-<style>
-body{
-background: #F3F3F3;
-}
-</style>
+
 </head>
 <body>
 	<%@ include file="../commons/_top.jspf"%>

@@ -12,8 +12,14 @@ public class FreeBoard {
 	private String userName;
 	private int recnt; //댓글 수
 	private String tag;
+	private String boardtag; //최신글 구분을 위한 글 종류 
 	
-	
+	public String getBoardtag() {
+		return boardtag;
+	}
+	public void setBoardtag(String boardtag) {
+		this.boardtag = boardtag;
+	}
 	public String getTag() {
 		return tag;
 	}
@@ -74,7 +80,7 @@ public class FreeBoard {
 	@Override
 	public String toString() {
 		return "FreeBoard [bnum=" + bnum + ", title=" + title + ", content=" + content + ", writer=" + writer + ", date="
-				+ date + ", hit=" + hit + ", userName=" + userName + ", recnt=" + recnt + ", tag=" + tag + " ]";
+				+ date + ", hit=" + hit + ", userName=" + userName + ", recnt=" + recnt + ", tag=" + tag + ", boardtag="+ boardtag+ " ]";
 	}
 	
 	

@@ -13,10 +13,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import net.cot_pr1.dao.FreeBoardDao;
 import net.cot_pr1.dao.GalleryDao;
+import net.cot_pr1.dao.QnADao;
 import net.cot_pr1.dao.UserDao;
 import net.cot_pr1.dao.WebBoardDao;
 import net.cot_pr1.domain.FreeBoard;
 import net.cot_pr1.domain.Gallery;
+import net.cot_pr1.domain.QnA;
 import net.cot_pr1.domain.User;
 import net.cot_pr1.domain.WebBoard;
 
@@ -26,21 +28,24 @@ import net.cot_pr1.domain.WebBoard;
 @RequestMapping("/")
 public class HomeController {
 	@Autowired
-	private WebBoardDao boardDao;
+	private WebBoardDao webboardDao;
 	@Autowired
 	private FreeBoardDao freeboardDao;
 	@Autowired
 	private GalleryDao galleryDao;
 	@Autowired
+	private QnADao qnaDao;
+	@Autowired
 	private UserDao userDao;
 
 	@RequestMapping("/")
 	public ModelAndView Home(HttpSession session) throws Exception{
-
-		List<WebBoard> poplist = boardDao.popboard();
+//인기게시판 불러오기
+		List<WebBoard> poplist = webboardDao.popboard();
 		List<FreeBoard> popFlist = freeboardDao.popboard();
 		List<Gallery> popImglist = galleryDao.poplist();
-		List<WebBoard> recentlist = boardDao.recentboard(); //최신 글 목록
+		List<QnA> popQnalist = qnaDao.popboard();
+		List<WebBoard> recentlist = webboardDao.recentboard(); //최신 글 목록
 	
 		//데이터를 맵에 저장
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -48,6 +53,7 @@ public class HomeController {
 		map.put("poplist", poplist);
 		map.put("popFlist", popFlist);
 		map.put("popImglist",popImglist);
+		map.put("popQnalist",popQnalist);
 		map.put("recentlist", recentlist);
 	
 		//모델과 뷰

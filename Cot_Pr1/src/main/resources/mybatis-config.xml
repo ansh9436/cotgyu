@@ -11,10 +11,16 @@
    
  
     <mapper resource="net/cot_pr1/mapper/GalleryMapper.xml"/>
-  
+  	
     <mapper resource="net/cot_pr1/mapper/FreeBoardMapper.xml"/>
     <mapper resource="net/cot_pr1/mapper/FreeReplyMapper.xml"/>
-
+ 	
+ 	<mapper resource="net/cot_pr1/mapper/NoticeMapper.xml"/>
+ 	<mapper resource="net/cot_pr1/mapper/NoticeReplyMapper.xml"/>
+ 	
+ 	<mapper resource="net/cot_pr1/mapper/QnAMapper.xml"/>
+ 	<mapper resource="net/cot_pr1/mapper/QnAReplyMapper.xml"/>
+ 	
   </mappers>
 	
 </configuration>

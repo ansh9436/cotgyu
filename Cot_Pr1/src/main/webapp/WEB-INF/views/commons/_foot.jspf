@@ -1,6 +1,6 @@
   <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
   
-   <footer style="background-color:white">
+   <footer style="background-color:#EEE0E0">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
@@ -15,7 +15,7 @@
                         </li>
                        
                     </ul>
-                    <p class="copyright text-muted small">Copyright &copy; Gyu's Page 2017. All Rights Reserved</p>
+                    <p class="copyright text-muted small">Copyright &copy; Cot 2017. All Rights Reserved</p>
                 </div>
             </div>
         </div>
