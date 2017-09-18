@@ -11,6 +11,12 @@ function search(){
 	document.formId.method = "post"     
     document.formId.submit();
 	}
+
+//쪽지 창 띄우기
+function openMessage(writer){  
+    window.open("/users/formmessage?writer="+writer, "메시지 보내기", "width=400, height=500,resizable=yes" );  
+}  
+
 </script>
 <style>
 
@@ -133,7 +139,7 @@ function list(page){
 			<input type="image" src="\resources\images\up.png" onClick="location.href='/gallery/up/${map.imgid}'" width="20" height="20">
 			&nbsp;&nbsp;${map.imgup} &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
 			
-			작성자: ${map.imgwriter}
+			작성자: <a href="#" onClick="javascript_:openMessage('${map.imgwriter}');" style="color:black;">${map.imgwriter}</a>
 			<c:if test="${sessionScope.userId == map.imgwriter}">
 			<button type="button" class="btn btn-default" onClick="location.href='/gallery/delete/${map.imgid}'">삭제</button>
 			</c:if>

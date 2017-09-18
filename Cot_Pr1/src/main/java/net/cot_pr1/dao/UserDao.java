@@ -1,5 +1,7 @@
 package net.cot_pr1.dao;
 
+import java.util.List;
+
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.sql.DataSource;
@@ -14,6 +16,7 @@ import org.springframework.jdbc.datasource.init.DatabasePopulatorUtils;
 import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 import org.springframework.stereotype.Repository;
 
+import net.cot_pr1.domain.Message;
 import net.cot_pr1.domain.User;
 
 
@@ -59,6 +62,23 @@ import net.cot_pr1.domain.User;
 	
 	public int checkId(User vo) {
 		return sqlSession.selectOne("UserMapper.checkId", vo);
+	}
+	public String finduserId(String user_email) {
+		
+		return sqlSession.selectOne("UserMapper.finduserId",user_email);
+	}
+	public String finduseremail(String user_email) {
+		return sqlSession.selectOne("UserMapper.finduserEmail",user_email);
+	}
+	
+	public void sendmessage(Message message) {
+	
+		sqlSession.insert("UserMapper.sendMessage",message);
+	}
+	public List<Message> viewmessage(String userid) {
+		return sqlSession.selectList("UserMapper.viewMessage",userid);
+		
+		
 	}
 
 }

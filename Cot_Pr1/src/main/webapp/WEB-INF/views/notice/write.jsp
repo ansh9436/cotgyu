@@ -61,14 +61,8 @@
 	<form id="frm" method="post" action="/notice/insert" enctype="multipart/form-data">
 		<table width="59.8%">
 			<tr>
-				<td width="3%">제목</td>
-				<td>
-				<select name="tag">     
-	            <option value="잡담">잡담</option>
-	            <option value="일상">일상</option>
-	            <option value="Help!">Help!</option>
-	            </select><input name="title" id="title" size="136">
-	            </td>
+				<td width="3%">제목 </td>
+				<td><input name="title" id="title" size="136"></td>
 			</tr>
 			
 			<tr>

@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Cot :: 회원가입</title>
+<title>Cot :: ID찾기</title>
 
 <%@ include file="../commons/_header.jspf" %>
 </head>
@@ -15,13 +15,10 @@
 	<div class="center">
 	<div class="boardpadding">
 	<br><br><br>
-	
-	<h3>환영합니다! 로그인을 해주세요!</h3>
-	
-	<button type="button" onclick="location.href='/'" class="btn btn-default">홈</button>
+	<h3>${userId} 입니다.</h3><br>
 	</div>
-	</div>
-	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 	<%@ include file="../commons/_foot.jspf"%>
+	</div>
 </body>
 </html>

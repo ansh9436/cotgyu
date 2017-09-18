@@ -3,10 +3,12 @@ package net.cot_pr1.controller;
 import java.io.File;
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.Random;
 import java.util.UUID;
 
 import javax.annotation.Resource;
 import javax.inject.Inject;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -15,6 +17,9 @@ import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.MailSender;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.encoding.PasswordEncoder;
 import org.springframework.security.core.Authentication;
@@ -35,6 +40,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 
 import net.cot_pr1.domain.Authenticate;
+import net.cot_pr1.domain.Message;
 import net.cot_pr1.domain.User;
 import net.cot_pr1.service.UserService;
 
@@ -52,6 +58,9 @@ public class UserController {
 	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
+	
+	@Autowired
+	private JavaMailSender mailSender;
 	
 	@RequestMapping("/form")
 	public String createform(Model model){
@@ -200,8 +209,7 @@ public class UserController {
 	  try {
 
 	   // 넘어온 ID를 받는다.
-	   String paramId = (req.getParameter("prmId") == null) ? "" : String
-	     .valueOf(req.getParameter("prmId"));
+	   String paramId = (req.getParameter("prmId") == null) ? "" : String.valueOf(req.getParameter("prmId"));
 
 	   User vo = new User();
 	   vo.setUserId(paramId.trim());
@@ -230,8 +238,7 @@ public class UserController {
 		return mav;
 	}
 
-	
-	 
+//성공했을때 
 	 @PreAuthorize("authenticated")
 		@RequestMapping(value = "/mypage", method = RequestMethod.GET)
 		public String mypage(Model model,HttpSession session) {
@@ -250,6 +257,128 @@ public class UserController {
 			session.setAttribute("userId", auth.getName()); //세션 추가 !
 			return "redirect:/";
 		}
+	 
+	 //찾기창으로 이동
+	 	@RequestMapping("/idpwfind")
+		public String idfind(){
+	 		
+			return "/users/findidpw";
+		}
+	 	
+
+		//아이디 찾기
+		@RequestMapping("/findid")
+		public ModelAndView findid(@RequestParam String user_email){
+			try{
+			String userId = userService.finduserId(user_email);
+			String Id1 = userId.substring(0,2);
+			Id1 = "**";
+			String Id2 = userId.substring(2);
+			//**~~형태
+			userId = Id1 + Id2;
+			
+			ModelAndView mav = new ModelAndView();
+			mav.addObject("userId",userId);
+			mav.setViewName("users/findresult");
+			return mav;
+			}catch (Exception e){
+				ModelAndView mav = new ModelAndView();
+				mav.setViewName("users/finderror");
+				return mav;
+			}
+		}
+		//비밀번호 찾기 
+		@RequestMapping("/findpw")
+		public ModelAndView findpw(@RequestParam String user_email){
+			try{
+			String userId = userService.finduserId(user_email);
+			User user = new User();
+			user = userService.findByID(userId);
+			
+			Random rd = new Random();
+	 		int num = rd.nextInt(10000)+1000; //랜덤 숫자 범위 정하기 (10)이 0~9니깐... 10000이면 0~9000 여기에 천을더해주면 1000~10000 ??
+			String pw = "cot"+Integer.toString(num) +"cot"; //초기화된 비밀번호 형태 cot 숫자 cot 
+			
+			String password = pw; 
+			
+			//비밀 번호 초기화 
+			user.setPassword(password);
+			userService.update(user);
+			
+			//이메일 보내기 
+			String setfrom = "Cot.com";         //보내는 이메일 이름
+			String tomail  = user_email;     // 받는 사람 이메일
+			String title   = "Cot 비밀번호 찾기";      // 제목
+			String content = "비밀번호는 다음과 같이 초기화됩니다.\n"+"비밀번호는"+password+"입니다.";
+			
+			MimeMessage message = mailSender.createMimeMessage();
+			MimeMessageHelper messageHelper  = new MimeMessageHelper(message, true, "UTF-8");
+			 
+			messageHelper.setFrom(setfrom);  // 보내는사람 생략하거나 하면 정상작동을 안함
+			messageHelper.setTo(tomail);     // 받는사람 이메일
+			messageHelper.setSubject(title); // 메일제목은 생략이 가능하다
+			messageHelper.setText(content);  // 메일 내용
+			     
+			mailSender.send(message);
+	
+			ModelAndView mav = new ModelAndView();	
+			mav.setViewName("users/sendresult");
+			return mav;
+			
+			}catch (Exception e){
+				ModelAndView mav = new ModelAndView();
+				mav.setViewName("users/finderror");
+				return mav;
+			}
+		}
+		//메시지 폼 띄우기
+		@RequestMapping(value = "/formmessage", method = RequestMethod.GET)
+		public ModelAndView formmessage(@RequestParam String writer,  HttpSession session) {
+			//보내는 사람
+			String senduser = (String)session.getAttribute("userId");
+			//받는 사람 
+			String receiver = writer;
+				
+			
+			ModelAndView mav = new ModelAndView();
+			mav.addObject("senduser", senduser);
+			mav.addObject("receiver", receiver);
+			
+			
+			mav.setViewName("/users/messageform");
+			return mav;
+		}
+	
+	//메세지 보내기 	
+		@RequestMapping(value = "/sendmessage", method = RequestMethod.POST)
+		public ModelAndView usermessage(@RequestParam String senduser, @RequestParam String content,@RequestParam String receiver,  HttpSession session) {
+					
+			Message message = new Message();
+			message.setReceiver(receiver);
+			message.setSenduser(senduser);
+			message.setContent(content);
+					
+			userService.sendmessage(message);
+					
+			ModelAndView mav = new ModelAndView();	
+			mav.setViewName("/users/messageok");
+			return mav;
+		}
+		
+		//메세지보기 
+		@RequestMapping(value = "/message", method = RequestMethod.GET)
+		public ModelAndView viewmessage(HttpSession session) {
+			
+			String userid = (String)session.getAttribute("userId");
+			List<Message> message = userService.viewmessage(userid);
+					
+			ModelAndView mav = new ModelAndView();
+			mav.addObject("message", message);
+			mav.setViewName("/users/message");
+			return mav;
+		}
+		
+		
 }
 
 

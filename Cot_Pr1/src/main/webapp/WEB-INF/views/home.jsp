@@ -19,7 +19,7 @@
 </head>
 <body>
 
-	<%@ include file="./commons/_top.jspf" %>
+	<%@ include file="./commons/_top.jspf"%>
 <div class="center">
     <!-- /.intro-header -->
   <!-- Page Content 인기게시판 표시-->

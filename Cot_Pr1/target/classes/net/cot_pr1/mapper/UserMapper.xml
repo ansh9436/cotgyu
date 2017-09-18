@@ -5,26 +5,26 @@
  <mapper namespace="UserMapper">
  	
  	<select id="findByID" resultType="net.cot_pr1.domain.User">
- 		select * from users where userId= #{userId}
+ 		select * from users where userid= #{userid}
  	</select>
  	
  	<select id="findByprofile" resultType="string">
- 		select profileimg from users where userId= #{userId}
+ 		select profileimg from users where userid= #{userid}
  	</select>
  	
  	
  	<insert id="create">
- 		insert into users ( userId, password, name, email) values (#{userId}, #{password}, #{name}, #{email})
+ 		insert into users ( userid, password, name, email) values (#{userid}, #{password}, #{name}, #{email})
  	</insert>
  	
  	<update id="update">
  		update users set
- 		password = #{password}, name = #{name}, email = #{email} where userId = #{userId}
+ 		password = #{password}, name = #{name}, email = #{email} where userid = #{userid}
  	</update>
  	
  	<update id="imgupdate">
  		update users set
- 		profileimg = #{profileimg} where userId = #{userId}
+ 		profileimg = #{profileimg} where userid = #{userid}
  	</update>
  	
  	<select id="checkId" resultType="integer">
@@ -32,6 +32,28 @@
 		  SELECT COUNT(*) AS cnt
 		  FROM users A 
 		  WHERE 1 = 1
-		  AND A.userId = #{userId}  	
+		  AND A.userid = #{userid}  	
  	</select>
+ 	<!-- email로 아이디 찾기 -->
+ 	<select id="finduserId" resultType="string">
+ 		select userid from users where email= #{email}
+ 	</select>
+ 	
+ 	<select id="finduserEmail" resultType="string">
+ 		select email from users where email= #{email}
+ 	</select>
+ 	
+ 	<!-- 메세지 보내기  -->
+ 	<insert id="sendMessage">
+ 		insert into message ( senduser, receiver, content) values (#{senduser}, #{receiver}, #{content})
+ 	</insert>
+ 	
+ 	
+ 	<!--  메시지 보기 -->
+ 	<select id="viewMessage" resultType="net.cot_pr1.domain.Message">	
+ 	select senduser, receiver, content, date from message where receiver = #{userid} order by date desc
+ 	
+ 	
+ 	</select>
+ 	
  </mapper>

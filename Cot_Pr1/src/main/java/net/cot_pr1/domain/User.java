@@ -18,7 +18,7 @@ import net.cot_pr1.security.Role;
 
 public class User implements UserDetails { 
 	@NotEmpty @Size(min=4, max=12)
-	private String userId;
+	private String userid;
 	@NotEmpty @Size(min=4, max=12)
 	private String password;
 	@NotEmpty
@@ -39,9 +39,9 @@ public class User implements UserDetails {
 		
 	}
 	
-	public User(String userId, String password, String name, String email, String profileimg, Date joindate) {
+	public User(String userid, String password, String name, String email, String profileimg, Date joindate) {
 		super();
-		this.userId = userId;
+		this.userid = userid;
 		this.password = password;
 		this.name = name;
 		this.email = email;
@@ -67,10 +67,10 @@ public class User implements UserDetails {
 	}
 
 	public String getUserId() {
-		return userId;
+		return userid;
 	}
-	public void setUserId(String userId) {
-		this.userId = userId;
+	public void setUserId(String userid) {
+		this.userid = userid;
 	}
 	@Override
 	public String getPassword() {
@@ -103,20 +103,20 @@ public class User implements UserDetails {
 		if(inputuserId == null){
 			return false;
 		}
-		return inputuserId.equals(this.userId);
+		return inputuserId.equals(this.userid);
 	}
 	
 	public User update(User updateUser){
-		if(!matchUserId(updateUser.userId)){
+		if(!matchUserId(updateUser.userid)){
 			throw new IllegalArgumentException();
 		}
 		
-		return new User(this.userId, updateUser.password, updateUser.name, updateUser.email ,updateUser.profileimg, updateUser.joindate);
+		return new User(this.userid, updateUser.password, updateUser.name, updateUser.email ,updateUser.profileimg, updateUser.joindate);
 	}
 	
 	@Override
 	public String toString() {
-		return "User [userId=" + userId + ", password=" + password + ", name=" + name + ", email=" + email + ", profileimg="+profileimg+", joindate=" +joindate+" ]";
+		return "User [userid=" + userid + ", password=" + password + ", name=" + name + ", email=" + email + ", profileimg="+profileimg+", joindate=" +joindate+" ]";
 	}
 
 	@Override
@@ -125,7 +125,7 @@ public class User implements UserDetails {
 		int result = 1;
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + ((userId == null) ? 0 : userId.hashCode());
+		result = prime * result + ((userid == null) ? 0 : userid.hashCode());
 		return result;
 	}
 
@@ -148,10 +148,10 @@ public class User implements UserDetails {
 				return false;
 		} else if (!name.equals(other.name))
 			return false;
-		if (userId == null) {
-			if (other.userId != null)
+		if (userid == null) {
+			if (other.userid != null)
 				return false;
-		} else if (!userId.equals(other.userId))
+		} else if (!userid.equals(other.userid))
 			return false;
 		return true;
 	}
@@ -204,10 +204,10 @@ public class User implements UserDetails {
 //코드가 더러워짐 ㅠㅠ 유저 디테일때문에 유저네임을 설정했음..ㅠㅠ
 	@Override
 	public String getUsername() {
-		return userId;
+		return userid;
 	}
 	public void setUsername(String username) {
-		this.userId = username;
+		this.userid = username;
 	}
 	
 }

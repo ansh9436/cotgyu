@@ -65,6 +65,7 @@
 						<c:if test="${not empty sessionScope.userId}">
 						<li><a href="/users/logout">로그아웃</a>
 						<li><a href="/users/myinfo">내 정보</a>
+						<li><a href="/users/message">쪽지함</a>
 						</c:if>
 						<c:if test="${sessionScope.userId == 'admin'}">
 						<li><a href="/admin">관리자 페이지</a>
@@ -93,7 +94,7 @@
 	<br><input type="password" id="password" name="password" placeholder="비밀번호" style="width: 67%;">
 	<br>
 	<button type="submit" id="loginbtn" onclick="javascript:signin();" class="btn btn-default">로그인</button>
-	<button type="button" id="findbtn" onclick="#" class="btn btn-default">ID/PW 찾기</button>
+	<button type="button" id="findbtn" onclick="location.href='/users/idpwfind'" class="btn btn-default">ID/PW 찾기</button>
 	<br>
 	
 	</form>

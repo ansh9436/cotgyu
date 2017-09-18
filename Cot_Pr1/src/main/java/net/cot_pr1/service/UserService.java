@@ -15,6 +15,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import net.cot_pr1.dao.UserDao;
+import net.cot_pr1.domain.Message;
 import net.cot_pr1.domain.User;
 import net.cot_pr1.security.Role;
 
@@ -83,6 +84,23 @@ public class UserService implements UserDetailsService{
 
 		
 		return user;
+	}
+//이메일로 아이디찾기 
+	public String finduserId(String user_email) {
+		return userDao.finduserId(user_email);
+	}
+
+	public String findusereamil(String user_email) {
+		return userDao.finduseremail(user_email);
+	}
+	//쪽지
+	public void sendmessage(Message message) {
+		userDao.sendmessage(message);
+	}
+
+	public List<Message> viewmessage(String userid) {
+		return userDao.viewmessage(userid);
+		
 	}
 	
 	

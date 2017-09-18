@@ -24,6 +24,10 @@
 		document.formId.method = "post"     
         document.formId.submit();
 		}
+	//쪽지 창 띄우기
+	function openMessage(writer){  
+	    window.open("/users/formmessage?writer="+writer, "메시지 보내기", "width=400, height=500,resizable=yes" );  
+	}  
     
 </script>
 
@@ -99,7 +103,7 @@
 				
 				</a></td>
 				-->	 		
-				<td>${row.writer}</td>
+				<td><a href="#" onClick="javascript_:openMessage('${row.writer}');" style="color:black;">${row.writer}</a></td>
 				<td>
 				<fmt:formatDate value="${row.date}" pattern="yyyy-MM-dd a HH:mm" />
 				</td>
