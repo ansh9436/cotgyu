@@ -53,6 +53,11 @@
 		});
 	}
 
+	//쪽지 창 띄우기
+	function openMessage(writer){  
+	    window.open("/users/formmessage?writer="+writer, "메시지 보내기", "width=400, height=500,resizable=yes" );  
+	}  
+
 
 </script>
 </head>
@@ -67,7 +72,11 @@
 	<tr>
 		<td>
 			<div style="display: inline;">
-			&nbsp;<img src="/resources/profile/${profileimg}" width="50" height="40">${dto.writer}
+			&nbsp;<img src="/resources/profile/${profileimg}" width="50" height="40">
+			<c:if test="${not empty sessionScope.userId}">			
+			<a href="#" onClick="javascript_:openMessage('${dto.writer}');" style="color:black;">
+			</c:if>
+			${dto.writer}</a>
 			</div>
 			<div style="float: right; display: inline;" >
 			태그: ${dto.tag} &emsp;작성일자 : <fmt:formatDate value="${dto.date}" pattern="yyyy-MM-dd a HH:mm" /> &emsp; 조회수 : ${dto.hit}

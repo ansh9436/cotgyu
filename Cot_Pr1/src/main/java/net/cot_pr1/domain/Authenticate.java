@@ -6,7 +6,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 public class Authenticate {
 	@NotEmpty @Size(min=4, max=12)
-	private String userId;
+	private String userid;
 	@NotEmpty @Size(min=4, max=12)
 	private String password;
 	
@@ -16,17 +16,17 @@ public class Authenticate {
 	
 	public Authenticate(String userId, String password) {
 		super();
-		this.userId = userId;
+		this.userid = userId;
 		this.password = password;
 	}
 
 	public String getUserId() {
-		return userId;
+		return userid;
 	}
 
 
 	public void setUserId(String userId) {
-		this.userId = userId;
+		this.userid = userId;
 	}
 
 

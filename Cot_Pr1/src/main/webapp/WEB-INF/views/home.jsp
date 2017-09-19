@@ -57,11 +57,11 @@
 					</c:when>
 					
 					<c:when test="${row3.boardtag == 'notice'}">
-					<a href="/notice/list">${row3.title}
+					<a href="${path}/notice/view?bnum=${row3.bnum}">${row3.title}
 					</c:when>
 					
 					<c:when test="${row3.boardtag == 'qna'}">
-					<a href="/qna/list">${row3.title}
+					<a href="${path}/qna/view?bnum=${row3.bnum}">${row3.title}
 					</c:when>
 					
 					</c:choose>
@@ -69,7 +69,7 @@
 					<!-- 글 게시판 종류 출력 -->&emsp;
 					<c:choose>
 					<c:when test="${row3.boardtag == 'web'}">
-					<a href="/webboard/list" style="color: blue;">Web게시판</a>
+					<a href="/webboard/list" style="color: blue;">WEB게시판</a>
 					</c:when>	
 					<c:when test="${row3.boardtag == 'free'}">
 					<a href="/freeboard/list" style="color: blue;">자유게시판</a>

@@ -104,7 +104,11 @@
 				
 				</a></td>
 				-->	 		
-				<td><a href="#" onClick="javascript_:openMessage('${row.writer}');" style="color:black;">${row.writer}</a></td>
+				<td>
+				<c:if test="${not empty sessionScope.userId}">			
+				<a href="#" onClick="javascript_:openMessage('${row.writer}');" style="color:black;">
+				</c:if>
+				${row.writer}</a></td>
 				<td>
 				<fmt:formatDate value="${row.date}" pattern="yyyy-MM-dd a HH:mm" />
 				</td>

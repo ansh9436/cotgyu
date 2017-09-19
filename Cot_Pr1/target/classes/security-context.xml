@@ -51,13 +51,13 @@
 
 	<authentication-manager alias="authenticationManager">
 		<authentication-provider ref="customAuthenticationProvider" />
-		
+		<!--  
 		<authentication-provider user-service-ref="userService">
 			<password-encoder ref="encoder">
 				<salt-source ref="saltSource" />
 			</password-encoder>
 		</authentication-provider>
-		
+		-->
 	</authentication-manager>
 
 

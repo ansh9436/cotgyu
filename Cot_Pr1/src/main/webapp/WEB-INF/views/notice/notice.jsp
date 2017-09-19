@@ -54,7 +54,7 @@
     </form>
     
      ${map.count}개의 게시물이 있습니다.
-	<c:if test="${not empty sessionScope.userId}">
+	<c:if test="${sessionScope.userId =='관리자'}">
 	<button type="button" class="btn btn-default" onClick="location.href='write'">글쓰기</button>
 	</c:if>
 	</div>
@@ -89,7 +89,11 @@
 				
 				</a></td>
 				-->	 		
-				<td><a href="#" onClick="javascript_:openMessage('${row.writer}');" style="color:black;">${row.writer}</a></td>
+				<td>
+				<c:if test="${not empty sessionScope.userId}">
+				<a href="#" onClick="javascript_:openMessage('${row.writer}');" style="color:black;">
+				</c:if>
+				${row.writer}</a></td>
 				<td>
 				<fmt:formatDate value="${row.date}" pattern="yyyy-MM-dd a HH:mm" />
 				</td>

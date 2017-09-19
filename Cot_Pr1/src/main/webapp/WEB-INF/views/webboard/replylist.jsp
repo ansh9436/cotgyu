@@ -33,6 +33,12 @@ function showReplyComment(rnum) {
 	})
 }
 
+//쪽지 창 띄우기
+function openMessage(writer){  
+    window.open("/users/formmessage?writer="+writer, "메시지 보내기", "width=400, height=500,resizable=yes" );  
+}  
+
+
 	</script>
 <style></style>
 </head>
@@ -45,7 +51,10 @@ function showReplyComment(rnum) {
              	
         	 </c:forEach>
         	  	<input type="image" src="\resources\images\re.png" width="40" height="18" >
-                ${row.replyer} &emsp; <fmt:formatDate value="${row.date}" pattern="yyyy-MM-dd a HH:mm" />
+        	  	 <c:if test="${not empty sessionScope.userId}">			
+				<a href="#" onClick="javascript_:openMessage('${row.replyer}');" style="color:black;">
+				</c:if>
+                ${row.replyer}</a> &emsp; <fmt:formatDate value="${row.date}" pattern="yyyy-MM-dd a HH:mm" />
                 <br>
          		&emsp;
                 ${row.replytext}<br>

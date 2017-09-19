@@ -42,7 +42,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 		try {
 			user = userService.loadUserByUsername(username);
 			if(user ==null){
-				//여기서 걸리는데...음   메세지만 따른거 뜨게하면될듯
+				//아이디 못찾을때 메시지
 				throw new BadCredentialsException("아이디가 없습니다.");
 			}
 			//암호화의 다른방식??
@@ -63,7 +63,6 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 			logger.info(e.toString());
 			throw new BadCredentialsException(e.getMessage());
 		} catch (Exception e) {
-			//여기서 에러 걸림..ㅠ
 			logger.info(e.toString());
 			throw new RuntimeException(e.getMessage());
 		}

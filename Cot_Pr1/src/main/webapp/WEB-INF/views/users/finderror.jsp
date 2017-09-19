@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Cot :: ID찾기</title>
+<title>Cot :: ID/PW찾기</title>
 
 <%@ include file="../commons/_header.jspf" %>
 </head>
@@ -15,10 +15,10 @@
 	<div class="center">
 	<div class="boardpadding">
 	<br><br><br>
-	<h3>존재하지 않는 이메일 입니다.</h3>
-	<h3>이메일을 확인해주세요.</h3><br>
+	<h3>존재하지 않는 아이디 입니다.</h3>
+	<h3>아이디을 확인해주세요.</h3><br>
 	<button type="button" onclick="location.href='/'" class="btn btn-default">홈</button>
-	<button type="button" onclick="location.href='/users/idpwfind'" class="btn btn-default">ID 찾기</button>
+	<button type="button" onclick="location.href='/users/idpwfind'" class="btn btn-default">ID/PW 찾기</button>
 	</div>
 	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 	<%@ include file="../commons/_foot.jspf"%>

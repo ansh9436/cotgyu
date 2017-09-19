@@ -15,7 +15,8 @@
 		var para = document.location.href.split("?");
 		console.log(para[1]);
 		if(para[1] == 'error=true'){	
-			alert("로그인에 실패하였습니다. \n아이디와 비밀번호를 다시 확인해주세요!");
+			alert("로그인에 실패하였습니다. \n${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message}");
+			
 		}
 		
 		function signin() {
@@ -117,10 +118,13 @@
 	<li><a href="/freeboard/list">자유게시판</a></li>
 	<li><a href="/gallery/list">사진 갤러리</a></li>
 	<li><a href="/qna/list">질문 게시판</a></li>
-	<!-- 메시지 종류 뜨게 하는거???  
-	${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message}
-	<c:remove scope="session" var="SPRING_SECURITY_LAST_EXCEPTION" />
-	-->
+	<c:if test="${sessionScope.userId =='관리자'}">
+	<br>
+	<li><a href="/">관리자</a></li>
+	</c:if>
+	
+	
+	
 	</ul>
 	</div>
 	</nav>

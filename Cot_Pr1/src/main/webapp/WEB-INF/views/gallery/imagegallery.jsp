@@ -139,7 +139,11 @@ function list(page){
 			<input type="image" src="\resources\images\up.png" onClick="location.href='/gallery/up/${map.imgid}'" width="20" height="20">
 			&nbsp;&nbsp;${map.imgup} &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
 			
-			작성자: <a href="#" onClick="javascript_:openMessage('${map.imgwriter}');" style="color:black;">${map.imgwriter}</a>
+			작성자: 
+			<c:if test="${not empty sessionScope.userId}">
+			<a href="#" onClick="javascript_:openMessage('${map.imgwriter}');" style="color:black;">
+			</c:if>
+			${map.imgwriter}</a>
 			<c:if test="${sessionScope.userId == map.imgwriter}">
 			<button type="button" class="btn btn-default" onClick="location.href='/gallery/delete/${map.imgid}'">삭제</button>
 			</c:if>

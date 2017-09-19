@@ -72,9 +72,19 @@ public class UserService implements UserDetailsService{
 		if(user ==null){
 			return user;
 		}
+		
 		user.setUserId(user.getUsername());
 		user.setPassword(user.getPassword());
 		Role role = new Role();
+		
+		if(username == "°ü¸®ÀÚ"){
+			role.setName("ROLE_ADMIN");
+			List<Role> roles = new ArrayList<Role>();
+			roles.add(role);
+			user.setAuthorities(roles);
+			return user;
+
+		}
 		role.setName("ROLE_USER");
 		List<Role> roles = new ArrayList<Role>();
 		roles.add(role);

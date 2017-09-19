@@ -2,6 +2,7 @@ package net.cot_pr1.controller;
 
 import java.io.File;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.Random;
 import java.util.UUID;
@@ -230,8 +231,7 @@ public class UserController {
 	public ModelAndView signin(@RequestParam(value = "error", required = false) String error, Model model) {
 	//	model.addAttribute("error", error);
 		
-		
-		System.out.println(error);
+	
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("error", error);
 		mav.setViewName("redirect:/");
@@ -243,11 +243,7 @@ public class UserController {
 		@RequestMapping(value = "/mypage", method = RequestMethod.GET)
 		public String mypage(Model model,HttpSession session) {
 			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-			/*
-			if(auth.getName() ==null){
-				return "redirect:/users/form";
-			}
-			*/
+
 			
 			//유저 프로필 가져와서 세션에 적용하기 
 			String userId = auth.getName(); 
@@ -289,12 +285,21 @@ public class UserController {
 		}
 		//비밀번호 찾기 
 		@RequestMapping("/findpw")
-		public ModelAndView findpw(@RequestParam String user_email){
-			try{
-			String userId = userService.finduserId(user_email);
+		public ModelAndView findpw(@RequestParam String user_email,@RequestParam String user_id ){
+			try{			
 			User user = new User();
-			user = userService.findByID(userId);
+			user = userService.findByID(user_id); //아이디에 입력한 id받기, 같은 이메일을 등록했더라도 입력한 아이디만 비밀번호 초기화
 			
+			
+			/*
+			//유저에 등록된 이메일인지 확인 아 ***이게 2개 이메일이 등록되서 겹쳐서 오류나는듯..
+			String ver = userService.finduserId(user_email); 
+			if(userId == null){
+				ModelAndView mav = new ModelAndView();
+				mav.setViewName("users/findemailerror");
+				return mav;
+			}
+			*/
 			Random rd = new Random();
 	 		int num = rd.nextInt(10000)+1000; //랜덤 숫자 범위 정하기 (10)이 0~9니깐... 10000이면 0~9000 여기에 천을더해주면 1000~10000 ??
 			String pw = "cot"+Integer.toString(num) +"cot"; //초기화된 비밀번호 형태 cot 숫자 cot 
@@ -333,10 +338,11 @@ public class UserController {
 		}
 		//메시지 폼 띄우기
 		@RequestMapping(value = "/formmessage", method = RequestMethod.GET)
-		public ModelAndView formmessage(@RequestParam String writer,  HttpSession session) {
+		public ModelAndView formmessage(@RequestParam String writer,  HttpSession session) throws UnsupportedEncodingException {
 			//보내는 사람
 			String senduser = (String)session.getAttribute("userId");
 			//받는 사람 
+			writer  = new String(writer.getBytes("8859_1"),"UTF-8"); //get방식에서 한글을 넣으면 깨지므로  바꿔주기!
 			String receiver = writer;
 				
 			
@@ -352,7 +358,7 @@ public class UserController {
 	//메세지 보내기 	
 		@RequestMapping(value = "/sendmessage", method = RequestMethod.POST)
 		public ModelAndView usermessage(@RequestParam String senduser, @RequestParam String content,@RequestParam String receiver,  HttpSession session) {
-					
+			
 			Message message = new Message();
 			message.setReceiver(receiver);
 			message.setSenduser(senduser);
