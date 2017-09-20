@@ -39,9 +39,8 @@ public class AccessFailureHandler implements AccessDeniedHandler {
 		String error = "true";
 		String message = exception.getMessage();
 		response.setStatus(HttpServletResponse.SC_FORBIDDEN);
-		response.setCharacterEncoding("UTF-8");
-		String data = StringUtils.join(new String[] { " { \"response\" : {", " \"error\" : ", error, ", ",
-				" \"message\" : \"", message, "\" ", "} } " });
+		response.setCharacterEncoding("EUC-KR");
+		String data = StringUtils.join(new String[] { " 권한이없습니다 " });
 		PrintWriter out = response.getWriter();
 		out.print(data);
 		out.flush();

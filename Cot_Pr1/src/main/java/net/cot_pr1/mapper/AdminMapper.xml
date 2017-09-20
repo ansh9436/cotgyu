@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+ <mapper namespace="AdminMapper">
+ 
+  
+  	<!--  게시물 리스트 -->
+ 	<select id="viewlist" resultType="net.cot_pr1.domain.FreeBoard">	
+ 		(SELECT bnum,title,writer,date,boardtag from web_board )
+		UNION
+		(SELECT bnum as bnum, title as title, writer as writer, date as date, boardtag as boardtag from free_board)
+		UNION
+		(SELECT bnum as bnum, title as title, writer as writer, date as date, boardtag as boardtag from qna)
+		UNION
+		(SELECT bnum as bnum, title as title, writer as writer, date as date, boardtag as boardtag from notice)
+		UNION
+		(SELECT imgid as bnum, imgname as title, imgwriter as writer ,imgdate as date, boardtag as boardtag from gallery)
+	
+	 	
+		<!-- WHERE절을 include 태그로 삽입 
+   		<include refid="search"></include>-->
+   		
+		ORDER BY date desc LIMIT ${start}, 20;
+		 	
+	</select>
+	
+	<select id="countboard" resultType="int">
+			select sum(num) from(
+		
+		(SELECT count(bnum)  as num from web_board )
+		UNION
+		(SELECT count(bnum)  as num from free_board)
+		UNION
+		(SELECT count(bnum)  as num from qna)
+		UNION
+		(SELECT count(bnum)  as num from notice)
+		UNION
+		(SELECT count(imgid)  as num from gallery)
+        
+        )a
+      
+		
+
+		<!-- where절을 include 태그로 삽입 
+		<include refid="search"></include>-->
+	</select>
+	
+	 	<!--  댓글 리스트 -->
+ 	<select id="viewreplylist" resultType="net.cot_pr1.domain.WebReply">	
+ 		(SELECT rnum,bnum,replyer,replytext ,date, replytag from web_reply )
+		UNION
+		(SELECT rnum as rnum, bnum as bnum ,replyer as replyer,replytext as replytext ,date as date, replytag as replytag from free_reply)
+		UNION
+		(SELECT rnum as rnum, bnum as bnum ,replyer as replyer,replytext as replytext , date as date, replytag as replytag from qna_reply)
+		UNION
+		(SELECT rnum as rnum, bnum as bnum ,replyer as replyer,replytext as replytext , date as date, replytag as replytag from notice_reply)
+	
+	
+	 	
+		<!-- WHERE절을 include 태그로 삽입 
+   		<include refid="search"></include>-->
+   		
+		ORDER BY date desc LIMIT ${start}, 20;
+		 	
+	</select>
+	
+	<select id="countreply" resultType="int">
+			select sum(num) from(
+		
+		(SELECT count(rnum)  as num from web_reply )
+		UNION
+		(SELECT count(rnum)  as num from free_reply)
+		UNION
+		(SELECT count(rnum)  as num from qna_reply)
+		UNION
+		(SELECT count(rnum)  as num from notice_reply)
+        )a
+
+		<!-- where절을 include 태그로 삽입 
+		<include refid="search"></include>-->
+	</select>
+	
+	
+ 	
+ <!-- sql code 조각 -->
+<!-- 반복되는 sql의 일부를 sql태그를 이용하여 따로 빼둘수 있다. -->
+<sql id="search">
+    <choose>
+        <!-- 검색옵션이 전체 검색일 경우 -->
+        <when test="searchOption == 'all'">
+            WHERE writer like '%${keyword}%'
+            OR content like '%${keyword}%'
+            OR title like '%${keyword}%'
+        </when>
+        <!-- 전체 검색이 아닐 경우 -->
+        <otherwise>
+            WHERE ${searchOption} like '%${keyword}%'
+        </otherwise>
+    </choose>
+</sql>
+ 
+ <!-- 페이징 sql -->
+<sql id="pagingHeader">
+    SELECT * FROM (
+        SELECT ROWNUM AS rn, A.* FROM (
+</sql>
+<sql id="pagingFooter">
+        ) A
+    ) WHERE rn BETWEEN #{start} AND #{end}
+</sql>
+
+ </mapper>

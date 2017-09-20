@@ -44,6 +44,7 @@ import org.springframework.web.servlet.ModelAndView;
 import net.cot_pr1.domain.Authenticate;
 import net.cot_pr1.domain.Message;
 import net.cot_pr1.domain.User;
+import net.cot_pr1.security.Role;
 import net.cot_pr1.service.UserService;
 
 
@@ -197,7 +198,8 @@ public class UserController {
 	
 	@RequestMapping("/logout")
 	public String logout(HttpSession session){
-		session.removeAttribute("userId");
+		
+		session.invalidate();
 		return "redirect:/";
 	}
 	

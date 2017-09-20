@@ -17,13 +17,13 @@
     <form-login login-page="/admin/adminlogin" default-target-url="/users/mypage" 
                 login-processing-url="/loginProcessing" 
                 authentication-failure-url="/adminLogin.htm?error" />
-    <logout invalidate-session="true" logout-success-url="/" logout-url="/logout" />
+    <logout invalidate-session="true" logout-success-url="/" logout-url="/signout" />
+    <access-denied-handler ref="accessFailureHandler" />
 	</http>
 
 	
-		
-	
 	<http auto-config="true" use-expressions="true" >
+
 		<form-login 
 			login-page="/_top" 
 			username-parameter="user_id"

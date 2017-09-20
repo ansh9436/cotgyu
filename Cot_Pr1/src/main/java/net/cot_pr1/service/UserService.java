@@ -63,9 +63,7 @@ public class UserService implements UserDetailsService{
 	}
 
 	@Override
-	public User loadUserByUsername(String username) throws UsernameNotFoundException {	
-		//이부분에  dao 랑 연결해서 네임 등등 가져와야하는 듯 싶다!  >> 비밀번호 오휴 뜸;; >>복호화 풀어서 입력해서 일단 성공 	
-	
+	public User loadUserByUsername(String username) throws UsernameNotFoundException {		
 		User user = new User();
 		user = userDao.findname(username);
 		//아이디가 없을때....
@@ -92,8 +90,6 @@ public class UserService implements UserDetailsService{
 		roles.add(role);
 		user.setAuthorities(roles);
 	
-		if (user == null) throw new UsernameNotFoundException("접속자 정보를 찾을 수 없습니다.");
-
 		
 		return user;
 	}
