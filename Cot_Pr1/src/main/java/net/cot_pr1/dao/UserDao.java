@@ -80,5 +80,8 @@ import net.cot_pr1.domain.User;
 		
 		
 	}
+	public void unregister(String userid) {
+		sqlSession.delete("UserMapper.unregister", userid);
+	}
 
 }

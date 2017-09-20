@@ -112,6 +112,10 @@ public class UserService implements UserDetailsService{
 		return userDao.viewmessage(userid);
 		
 	}
+
+	public void unregister(String userid) {
+		userDao.unregister(userid);
+	}
 	
 	
 }

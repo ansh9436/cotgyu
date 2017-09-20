@@ -22,9 +22,10 @@ import org.springframework.mail.MailSender;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.authentication.encoding.PasswordEncoder;
+
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -224,7 +225,9 @@ public class UserController {
 	   out.print("1");
 	  }
 	 }
-//security 테스트
+	 
+	 
+//security 
 	 
 	 //실패했을때?? 
 	@RequestMapping(value = "/signin", method = RequestMethod.GET)
@@ -283,12 +286,12 @@ public class UserController {
 				return mav;
 			}
 		}
-		//비밀번호 찾기 
+		//비밀번호 찾기  
 		@RequestMapping("/findpw")
 		public ModelAndView findpw(@RequestParam String user_email,@RequestParam String user_id ){
 			try{			
 			User user = new User();
-			user = userService.findByID(user_id); //아이디에 입력한 id받기, 같은 이메일을 등록했더라도 입력한 아이디만 비밀번호 초기화
+			user = userService.findByID(user_id); //아이디에 입력한 id받기, 같은 이메일을 등록했더라도 입력한 아이디만 비밀번호 초기화 /9/20 이러면 그냥 아이디에 아무 이메일이나 입력하면 다바뀜;;; 수정해야함 ㅠㅠ
 			
 			
 			/*
@@ -383,6 +386,39 @@ public class UserController {
 			mav.setViewName("/users/message");
 			return mav;
 		}
+		//탈퇴창 이동
+		@RequestMapping(value = "/unregisterform")
+		public ModelAndView unregisterform(HttpSession session) {
+					
+			ModelAndView mav = new ModelAndView();
+			mav.setViewName("/users/unregisterform");
+			return mav;
+		}
+		
+		
+		//회원 탈퇴
+		@RequestMapping(value = "/unregister", method = RequestMethod.POST)
+		public ModelAndView userunregister(HttpSession session, @RequestParam String user_password) {
+			String userid = (String)session.getAttribute("userId");
+			User user = new User();
+			
+			user = userService.findByID(userid);
+			
+			if(passwordEncoder.matches(user_password ,user.getPassword())){
+				userService.unregister(userid);
+				
+				ModelAndView mav = new ModelAndView();
+				mav.setViewName("/users/unregisterok");
+				
+				session.removeAttribute("userId");
+				return mav;
+			}else{
+			ModelAndView mav = new ModelAndView();
+			mav.setViewName("/users/unregisterfail");
+			return mav;
+			}
+		}
+		
 		
 		
 }

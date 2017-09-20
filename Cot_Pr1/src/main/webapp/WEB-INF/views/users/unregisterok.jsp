@@ -6,21 +6,25 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Cot :: 회원가입</title>
+<title>Cot :: 내 정보</title>
 
 <%@ include file="../commons/_header.jspf" %>
 </head>
 <body>
 	<%@ include file="../commons/_top.jspf" %>
 	<div class="center">
-	<div class="boardpadding">
-	<br><br><br>
-	
-	<h3>환영합니다! 로그인을 해주세요!</h3>
-	
-	<button type="button" onclick="location.href='/'" class="btn btn-default">홈</button>
+	<div class="container">
+		<div class="row">
+			<div class="span12">
+				<section id="typography">
+				<div class="page-header">
+					<h3>회원탈퇴</h3>
+				</div>
+				성공적으로 탈퇴 완료되었습니다.
+		
+			</div>
+		</div>
 	</div>
-	
 	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 	<%@ include file="../commons/_foot.jspf"%>
 	</div>

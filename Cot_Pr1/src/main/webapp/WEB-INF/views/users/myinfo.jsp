@@ -80,6 +80,8 @@
 					<div class="control-group">
 						<div class="controls">
 							<input type="button" value="정보 수정" class="btn btn-default" onClick="location.href='/users/modify'">
+							<input type="button" value="회원 탈퇴" class="btn btn-default" onClick="location.href='/users/unregisterform'">
+							
 						</div>
 					</div>				
 				</form:form> 
