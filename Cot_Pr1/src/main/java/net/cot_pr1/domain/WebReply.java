@@ -12,8 +12,15 @@ public class WebReply {
     private int regroup;
 	private int restep;
 	private int reindent;
-    
+    private String replytag; //´ë´ñ±ÛÁ¾·ù
   
+
+	public String getReplytag() {
+		return replytag;
+	}
+	public void setReplytag(String replytag) {
+		this.replytag = replytag;
+	}
 	public int getRegroup() {
 		return regroup;
 	}

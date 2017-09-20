@@ -50,9 +50,9 @@
 	<h3>게시물 수정</h3>
 	<form id="frm" method="post" action="/freeboard/update" enctype="multipart/form-data">
 		<input type="hidden" name="bnum" value="${vo.bnum}">
-		<table width="60%">
+		<table width="75%">
 			<tr>
-				<td width="3%">태그</td>	
+				<td width="5%">태그</td>	
 				<td><select name="tag" id="tag">     
 	            <option value="잡담">잡담</option>
 	            <option value="일상">일상</option>

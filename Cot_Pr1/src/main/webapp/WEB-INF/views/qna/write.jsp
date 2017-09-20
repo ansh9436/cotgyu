@@ -58,9 +58,9 @@
 	<br>
 	<h3>게시글 작성</h3>
 	<form id="frm" method="post" action="/qna/insert" enctype="multipart/form-data" method="${method}">
-		<table width="59.8%">
+		<table width="75%">
 			<tr>
-				<td width="3%">제목 </td>
+				<td width="5%">제목 </td>
 				<td><input name="title" id="title" size="136"></td>
 			</tr>
 			<tr>

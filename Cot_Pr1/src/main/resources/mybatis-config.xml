@@ -20,7 +20,7 @@
  	
  	<mapper resource="net/cot_pr1/mapper/QnAMapper.xml"/>
  	<mapper resource="net/cot_pr1/mapper/QnAReplyMapper.xml"/>
- 	
+ 	<mapper resource="net/cot_pr1/mapper/AdminMapper.xml"/>
   </mappers>
 	
 </configuration>

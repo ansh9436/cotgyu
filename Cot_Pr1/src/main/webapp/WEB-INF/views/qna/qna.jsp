@@ -114,7 +114,7 @@
 				<td>${row.hit}</td>
 			</tr>
 		</c:forEach>
-		 <tr tr height="30">
+		 <tr height="30">
             <td colspan="6">
                 <!-- **처음페이지로 이동 : 현재 페이지가 1보다 크면  [처음]하이퍼링크를 화면에 출력-->
                 <c:if test="${map.boardPage.curBlock > 1}">
@@ -152,7 +152,7 @@
         </tr>
 	</table>
 	</div>
-	<br><br><br><br><br><br><br><br><br>
+	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 	<%@ include file="../commons/_foot.jspf"%>
 	</div>
 </body>

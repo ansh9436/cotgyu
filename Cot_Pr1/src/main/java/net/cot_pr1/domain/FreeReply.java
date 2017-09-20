@@ -12,8 +12,15 @@ public class FreeReply {
     private int regroup;
 	private int restep;
 	private int reindent;
-    
+    private String replytag; //´ñ±ÛÁ¾·ù..
   
+
+	public String getReplytag() {
+		return replytag;
+	}
+	public void setReplytag(String replytag) {
+		this.replytag = replytag;
+	}
 	public int getRegroup() {
 		return regroup;
 	}
@@ -75,7 +82,7 @@ public class FreeReply {
     @Override
     public String toString() {
         return "FreeReply [rnum=" + rnum + ", bnum=" + bnum + ", replytext=" + replytext + ", replyer=" + replyer
-                + ", userName=" + userName + ", date=" + date + ", regroup=" + regroup +", restep=" +restep+", reindent="+ reindent+"]";
+                + ", userName=" + userName + ", date=" + date + ", regroup=" + regroup +", restep=" +restep+", reindent="+ reindent+", replytag="+replytag+"]";
     }
     
 }

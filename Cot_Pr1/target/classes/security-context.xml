@@ -10,7 +10,17 @@
   http://www.springframework.org/schema/security/spring-security-3.1.xsd
   http://www.springframework.org/schema/util 
   http://www.springframework.org/schema/util/spring-util-3.1.xsd">
+  
+  
+	<http pattern="/admin/**" auto-config="true" disable-url-rewriting="true" >
+    <intercept-url pattern="/admin/**" access="ROLE_ADMIN" />
+    <form-login login-page="/admin/adminlogin" default-target-url="/users/mypage" 
+                login-processing-url="/loginProcessing" 
+                authentication-failure-url="/adminLogin.htm?error" />
+    <logout invalidate-session="true" logout-success-url="/" logout-url="/logout" />
+	</http>
 
+	
 		
 	
 	<http auto-config="true" use-expressions="true" >

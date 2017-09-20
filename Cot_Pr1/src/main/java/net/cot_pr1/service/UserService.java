@@ -76,16 +76,18 @@ public class UserService implements UserDetailsService{
 		user.setUserId(user.getUsername());
 		user.setPassword(user.getPassword());
 		Role role = new Role();
-		
-		if(username == "관리자"){
+		//아이디가 관리자일지 어드민 부여.....너무허술한듯...
+		if(username.equals("관리자")){
 			role.setName("ROLE_ADMIN");
 			List<Role> roles = new ArrayList<Role>();
 			roles.add(role);
 			user.setAuthorities(roles);
+		
 			return user;
 
 		}
 		role.setName("ROLE_USER");
+		
 		List<Role> roles = new ArrayList<Role>();
 		roles.add(role);
 		user.setAuthorities(roles);

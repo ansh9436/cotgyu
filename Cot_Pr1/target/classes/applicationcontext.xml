@@ -70,6 +70,13 @@
 		p:sqlSession-ref="sqlSession"
 		p:dataSource-ref="dataSource" />
 
+	<bean id="adminDao" class="net.cot_pr1.dao.AdminDao"
+		p:sqlSession-ref="sqlSession"
+		p:dataSource-ref="dataSource" />
+		
+		
+		
+
 	<!-- 파일업로드를 위한 디렉토리 설정 -->
 	<!-- String uploadPath = new String("업로드 경로") -->
 	<bean id="uploadPath" class="java.lang.String">

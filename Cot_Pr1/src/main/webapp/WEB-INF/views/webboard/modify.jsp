@@ -51,9 +51,9 @@
 	<h3>게시물 수정</h3>
 	<form id="frm" method="post" action="/webboard/update" enctype="multipart/form-data">
 		<input type="hidden" name="bnum" value="${vo.bnum}">
-		<table width="59.3%">
+		<table width="75%">
 			<tr>
-				<td width="3%">제목</td>
+				<td width="5%">제목</td>
 				<td><input name="title" id="title" size="136" value="${vo.title}">
 	            </td>
 			</tr>		

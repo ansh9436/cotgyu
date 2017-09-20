@@ -59,9 +59,9 @@
 	<br>
 	<h3>게시글 작성</h3>
 	<form id="frm" method="post" action="/freeboard/insert" enctype="multipart/form-data">
-		<table width="59.8%">
+		<table width="75%">
 			<tr>
-				<td width="3%">제목</td>
+				<td width="5%">제목</td>
 				<td>
 				<select name="tag">     
 	            <option value="잡담">잡담</option>

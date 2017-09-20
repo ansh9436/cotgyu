@@ -120,7 +120,7 @@
 	<li><a href="/qna/list">질문 게시판</a></li>
 	<c:if test="${sessionScope.userId =='관리자'}">
 	<br>
-	<li><a href="/">관리자</a></li>
+	<li><a href="/admin/adminform">관리자</a></li>
 	</c:if>
 	
 	
