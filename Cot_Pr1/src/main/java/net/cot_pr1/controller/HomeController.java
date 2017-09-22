@@ -19,7 +19,7 @@ import net.cot_pr1.dao.WebBoardDao;
 import net.cot_pr1.domain.FreeBoard;
 import net.cot_pr1.domain.Gallery;
 import net.cot_pr1.domain.QnA;
-import net.cot_pr1.domain.User;
+
 import net.cot_pr1.domain.WebBoard;
 
 

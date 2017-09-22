@@ -11,21 +11,29 @@
   http://www.springframework.org/schema/util 
   http://www.springframework.org/schema/util/spring-util-3.1.xsd">
   
-  
-	<http pattern="/admin/**" auto-config="true" disable-url-rewriting="true" >
-    <intercept-url pattern="/admin/**" access="ROLE_ADMIN" />
-    <form-login login-page="/admin/adminlogin" default-target-url="/users/mypage" 
-                login-processing-url="/loginProcessing" 
-                authentication-failure-url="/adminLogin.htm?error" />
-    <logout invalidate-session="true" logout-success-url="/" logout-url="/signout" />
-    <access-denied-handler ref="accessFailureHandler" />
-	</http>
+
 
 	
 	<http auto-config="true" use-expressions="true" >
-
+		<intercept-url pattern="/admin/**" access="hasAnyRole('ROLE_ADMIN')" />		
+		<intercept-url pattern="/webboard/write/**" access="hasAnyRole('ROLE_USER','ROLE_ADMIN')" />	
+		<intercept-url pattern="/freeboard/write/**" access="hasAnyRole('ROLE_USER','ROLE_ADMIN')" />	
+		<intercept-url pattern="/qna/write/**" access="hasAnyRole('ROLE_USER','ROLE_ADMIN')" />
+		<intercept-url pattern="/users/myinfo/**" access="hasAnyRole('ROLE_USER','ROLE_ADMIN')" />
+		<intercept-url pattern="/users/formmessage/**" access="hasAnyRole('ROLE_USER','ROLE_ADMIN')" />	
+		<intercept-url pattern="/users/message/**" access="hasAnyRole('ROLE_USER','ROLE_ADMIN')" />	
+		
+		<intercept-url pattern="/notice/write/**" access="hasAnyRole('ROLE_ADMIN')" />	
+		
+		<intercept-url pattern="/webreply/**" access="hasAnyRole('ROLE_USER','ROLE_ADMIN')" />	
+		<intercept-url pattern="/freereply/**" access="hasAnyRole('ROLE_USER','ROLE_ADMIN')" />	
+		<intercept-url pattern="/qnareply/**" access="hasAnyRole('ROLE_USER','ROLE_ADMIN')" />	
+		<intercept-url pattern="/noticereply/**" access="hasAnyRole('ROLE_USER','ROLE_ADMIN')" />	
+		
+		
 		<form-login 
-			login-page="/_top" 
+		
+			login-page="/" 
 			username-parameter="user_id"
 			password-parameter="password" 
 		
