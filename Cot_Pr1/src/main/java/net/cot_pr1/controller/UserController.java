@@ -134,7 +134,7 @@ public class UserController {
 	        vo.setUserId(userId);
 	     
 	        userService.imgmodify(vo);
-	        
+	        session.setAttribute("userimg", savedName);
 	        mav.setViewName("redirect:/");
 	        return mav;
 
@@ -171,7 +171,7 @@ public class UserController {
 		model.addAttribute("authenticate", new Authenticate());
 		return "users/login";
 	}
-	
+	/*  옛날 로그인 
 	@RequestMapping("/login")
 	public String login(@Valid Authenticate authenticate, BindingResult bindingResult, HttpSession session, Model model){
 		if(bindingResult.hasErrors()){
@@ -194,7 +194,7 @@ public class UserController {
 		// 세션 사용자 정보 저장 
 		return "redirect:/";
 	}
-	
+	*/
 	
 	@RequestMapping("/logout")
 	public String logout(HttpSession session){
