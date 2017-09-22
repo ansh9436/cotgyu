@@ -40,8 +40,12 @@
  	</select>
  	
  	<select id="finduserEmail" resultType="string">
- 		select email from users where email= #{email}
+ 		select email from users where userid= #{userid}
  	</select>
+ 	<!-- 아이디로 이메일 찾기 -->
+ 	
+ 	
+ 	
  	
  	<!-- 메세지 보내기  -->
  	<insert id="sendMessage">

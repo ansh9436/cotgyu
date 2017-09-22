@@ -63,12 +63,13 @@ import net.cot_pr1.domain.User;
 	public int checkId(User vo) {
 		return sqlSession.selectOne("UserMapper.checkId", vo);
 	}
-	public String finduserId(String user_email) {
-		
+	
+	public String finduserId(String user_email) {		
 		return sqlSession.selectOne("UserMapper.finduserId",user_email);
 	}
-	public String finduseremail(String user_email) {
-		return sqlSession.selectOne("UserMapper.finduserEmail",user_email);
+	
+	public String finduseremail(String userid) {
+		return sqlSession.selectOne("UserMapper.finduserEmail",userid);
 	}
 	
 	public void sendmessage(Message message) {

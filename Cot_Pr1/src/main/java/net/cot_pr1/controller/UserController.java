@@ -296,17 +296,16 @@ public class UserController {
 			user = userService.findByID(user_id); //아이디에 입력한 id받기, 같은 이메일을 등록했더라도 입력한 아이디만 비밀번호 초기화 /9/20 이러면 그냥 아이디에 아무 이메일이나 입력하면 다바뀜;;; 수정해야함 ㅠㅠ
 			
 			
-			/*
-			//유저에 등록된 이메일인지 확인 아 ***이게 2개 이메일이 등록되서 겹쳐서 오류나는듯..
-			String ver = userService.finduserId(user_email); 
-			if(userId == null){
+			//입력한 아이디에 등록된 이메일과  입력한 이메일이 맞지 않으면 오류!
+			String useremail = userService.finduseremail(user_id); 
+			if(!useremail.equals(user_email)){
 				ModelAndView mav = new ModelAndView();
 				mav.setViewName("users/findemailerror");
 				return mav;
 			}
-			*/
+			
 			Random rd = new Random();
-	 		int num = rd.nextInt(10000)+1000; //랜덤 숫자 범위 정하기 (10)이 0~9니깐... 10000이면 0~9000 여기에 천을더해주면 1000~10000 ??
+	 		int num = rd.nextInt(10000)+1000; //랜덤 숫자 범위 정하기 (10)이 0~9니깐... 10000이면 0~9999 여기에 천을더해주면 1000~10999(
 			String pw = "cot"+Integer.toString(num) +"cot"; //초기화된 비밀번호 형태 cot 숫자 cot 
 			
 			String password = pw; 

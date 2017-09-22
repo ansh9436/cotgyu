@@ -98,8 +98,8 @@ public class UserService implements UserDetailsService{
 		return userDao.finduserId(user_email);
 	}
 
-	public String findusereamil(String user_email) {
-		return userDao.finduseremail(user_email);
+	public String finduseremail(String userid) {
+		return userDao.finduseremail(userid);
 	}
 	//ÂÊÁö
 	public void sendmessage(Message message) {
