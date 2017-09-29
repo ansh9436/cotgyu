@@ -36,13 +36,10 @@ public class AdminController {
 	private UserService userService;
 	@Autowired
 	private AdminService adminService;
-	
-	
-	
 	@Autowired
 	PasswordEncoder passwordEncoder;
 	
-	//비밀번호확인 창으로 이동
+	//관리자 비밀번호 확인 창으로 이동
 	@RequestMapping(value="adminform")
     public ModelAndView form() throws Exception{
         ModelAndView mav = new ModelAndView();
@@ -50,17 +47,19 @@ public class AdminController {
         return mav;
     }
 	
-	//비밀번호 입력 후 확인 
+	//비밀번호 입력 후 관리자 확인 
 	@RequestMapping(value="login", method=RequestMethod.POST)
     public ModelAndView login(@RequestParam String password) throws Exception{
+		//관리자 유저 찾기 
 		User user = userService.findByID("관리자");
 		
+		//입력한 비밀번호와 관리자 유저 비밀번호 비교 
 		if(passwordEncoder.matches(password ,user.getPassword())){
-		
 			ModelAndView mav = new ModelAndView();
 			mav.setViewName("redirect:/admin/list");
 			return mav;
 		}
+		//비밀번호 오류시 창 이동 
 		else{
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("/admin/loginfail");
@@ -95,7 +94,7 @@ public class AdminController {
 		
 		//모델과 뷰
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("map", map); // 맵에 저장된 데이터를 mav에 저장
+		mav.addObject("map", map); // 맵에 저장된 데이터를 mav(모델 앤 뷰)에 저장
     			
 		mav.setViewName("/admin/adminmode");
 		return mav;

@@ -3,12 +3,12 @@ package net.cot_pr1.domain;
 import java.util.Date;
 
 public class Gallery {
-	Integer imgid;
-	String imgname;
+	Integer imgid;	//이미지 번호
+	String imgname;	//이미지 제목
 	String imgfile; //들어가는 파일이름
-	Date imgdate;	
+	Date imgdate;	//작성날짜
 	Integer imgup; //이미지 추천 수
-	String imgwriter;
+	String imgwriter; //작성자
 	
 	public String getImgwriter() {
 		return imgwriter;

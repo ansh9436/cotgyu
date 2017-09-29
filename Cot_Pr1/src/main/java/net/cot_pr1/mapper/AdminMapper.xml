@@ -4,7 +4,6 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
  <mapper namespace="AdminMapper">
  
-  
   	<!--  게시물 리스트 -->
  	<select id="viewlist" resultType="net.cot_pr1.domain.FreeBoard">	
  		(SELECT bnum,title,writer,date,boardtag from web_board )
@@ -16,15 +15,14 @@
 		(SELECT bnum as bnum, title as title, writer as writer, date as date, boardtag as boardtag from notice)
 		UNION
 		(SELECT imgid as bnum, imgname as title, imgwriter as writer ,imgdate as date, boardtag as boardtag from gallery)
-	
-	 	
+		
 		<!-- WHERE절을 include 태그로 삽입 
    		<include refid="search"></include>-->
    		
 		ORDER BY date desc LIMIT ${start}, 20;
-		 	
 	</select>
 	
+	<!-- 게시물 수 카운트 -->
 	<select id="countboard" resultType="int">
 			select sum(num) from(
 		
@@ -39,14 +37,11 @@
 		(SELECT count(imgid)  as num from gallery)
         
         )a
-      
-		
-
 		<!-- where절을 include 태그로 삽입 
 		<include refid="search"></include>-->
 	</select>
 	
-	 	<!--  댓글 리스트 -->
+	<!--  댓글 리스트 -->
  	<select id="viewreplylist" resultType="net.cot_pr1.domain.WebReply">	
  		(SELECT rnum,bnum,replyer,replytext ,date, replytag from web_reply )
 		UNION
@@ -55,16 +50,14 @@
 		(SELECT rnum as rnum, bnum as bnum ,replyer as replyer,replytext as replytext , date as date, replytag as replytag from qna_reply)
 		UNION
 		(SELECT rnum as rnum, bnum as bnum ,replyer as replyer,replytext as replytext , date as date, replytag as replytag from notice_reply)
-	
-	
-	 	
+ 	
 		<!-- WHERE절을 include 태그로 삽입 
    		<include refid="search"></include>-->
-   		
-		ORDER BY date desc LIMIT ${start}, 20;
-		 	
+  
+		ORDER BY date desc LIMIT ${start}, 20;	 	
 	</select>
 	
+	<!-- 댓글 수 카운트 -->
 	<select id="countreply" resultType="int">
 			select sum(num) from(
 		
@@ -82,9 +75,6 @@
 	</select>
 	
 	
- 	
- <!-- sql code 조각 -->
-<!-- 반복되는 sql의 일부를 sql태그를 이용하여 따로 빼둘수 있다. -->
 <sql id="search">
     <choose>
         <!-- 검색옵션이 전체 검색일 경우 -->

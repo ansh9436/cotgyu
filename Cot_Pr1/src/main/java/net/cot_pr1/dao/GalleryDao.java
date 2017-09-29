@@ -34,38 +34,37 @@ public class GalleryDao {
 	}
 
 	public List<Gallery> viewimglist(int start, int end, String searchOption, String keyword) {
-		//검색 옵션, 키워드 맵에 저장
-				Map<String, Object> map = new HashMap<String, Object>();
-				map.put("searchOption", searchOption);
-				map.put("keyword", keyword);
-				// BETWEEN #{start}, #{end}에 입력될 값을 맵에 
-			    map.put("start", start);
-			    map.put("end", end);
-				return sqlSession.selectList("GalleryMapper.viewimglist", map);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("searchOption", searchOption);
+		map.put("keyword", keyword);
+		map.put("start", start);
+		map.put("end", end);
+		
+		return sqlSession.selectList("GalleryMapper.viewimglist", map);
 	}
-	
 	
 	public void imageinsert(Gallery vo) {
 		sqlSession.insert("GalleryMapper.insertimage",vo);
-		
 	}
+	
 	public void imageup(int imgid) {
 		sqlSession.update("GalleryMapper.upimage",imgid);
-		
 	}
+	
 	public void imagedelete(int imgid) {
 		sqlSession.delete("GalleryMapper.deleteimage",imgid);
-		
 	}
+	
 	public List<Gallery> uplist(int start, int end, String searchOption, String keyword) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("searchOption", searchOption);
 		map.put("keyword", keyword);
-		// BETWEEN #{start}, #{end}에 입력될 값을 맵에 
 	    map.put("start", start);
 	    map.put("end", end);
+	    
 		return sqlSession.selectList("GalleryMapper.uplist", map);
 	}
+	
 	public List<Gallery> poplist() {
 		Map<String, String> map = new HashMap<String, String>();
 		

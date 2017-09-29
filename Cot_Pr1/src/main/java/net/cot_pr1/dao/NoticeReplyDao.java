@@ -23,8 +23,8 @@ public class NoticeReplyDao {
 		this.dataSource = dataSource;
 	}
 
+	
 	public List<NoticeReply> list(Integer bnum) {
-		
 		return sqlSession.selectList("NoticeReplyMapper.listReply", bnum);
 	}
 	
@@ -33,19 +33,18 @@ public class NoticeReplyDao {
 		//sqlSession.update("replyMapper.setreGroup");
 	}
 	
-	
     public void update(NoticeReply vo) throws Exception {
         sqlSession.update("NoticeReplyMapper.updateReply",vo);
     }
-    // ¥Ò±€ ªË¡¶
    
     public void delete(Integer rnum)  {
     	sqlSession.delete("NoticeReplyMapper.deleteReply", rnum);
- 
     }
+    
 	public NoticeReply detail(Integer rnum) {
 		return sqlSession.selectOne("NoticeReplyMapper.replymodifyview", rnum);
 	}
+	
 	public void createcomment(NoticeReply vo) {
 		sqlSession.insert("NoticeReplyMapper.insertReplyComment",vo);
 	}
@@ -53,6 +52,7 @@ public class NoticeReplyDao {
 	public void stepshape(NoticeReply vo){
 		sqlSession.update("NoticeReplyMapper.replyStepShape", vo);	
 	}
+	
 	public void create_setgroup(NoticeReply vo) {
 		sqlSession.update("NoticeReplyMapper.create_setgroup",vo);
 		

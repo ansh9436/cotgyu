@@ -12,8 +12,9 @@
 	<context:property-placeholder location="classpath*:application-properties.xml"/>
 	
 	<context:annotation-config />
-
- 	 <bean id="dataSource"
+	
+	<!-- 데이터 부분 -->
+ 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
 			<property name="driverClass" value="com.mysql.jdbc.Driver"></property>
 			<property name="url" value="jdbc:mysql://localhost:3306/cot_pr1"></property>
@@ -30,6 +31,7 @@
 		<constructor-arg index="0" ref="sqlSessionFactory"></constructor-arg>
     </bean>
    
+   	<!-- 의존성 주입? -->
     <bean id="UserDao" class="net.cot_pr1.dao.UserDao"
 		p:sqlSession-ref="sqlSession"
 		p:dataSource-ref="dataSource" />

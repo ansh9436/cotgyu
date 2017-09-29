@@ -24,8 +24,8 @@ public class QnAReplyDao {
 		this.dataSource = dataSource;
 	}
 
+	
 	public List<QnAReply> list(Integer bnum) {
-		
 		return sqlSession.selectList("QnAReplyMapper.listReply", bnum);
 	}
 	
@@ -34,19 +34,18 @@ public class QnAReplyDao {
 		//sqlSession.update("replyMapper.setreGroup");
 	}
 	
-	
     public void update(QnAReply vo) throws Exception {
         sqlSession.update("QnAReplyMapper.updateReply",vo);
     }
-    // ¥Ò±€ ªË¡¶
    
     public void delete(Integer rnum)  {
     	sqlSession.delete("QnAReplyMapper.deleteReply", rnum);
- 
     }
+    
 	public QnAReply detail(Integer rnum) {
 		return sqlSession.selectOne("QnAReplyMapper.replymodifyview", rnum);
 	}
+	
 	public void createcomment(QnAReply vo) {
 		sqlSession.insert("QnAReplyMapper.insertReplyComment",vo);
 	}
@@ -54,8 +53,8 @@ public class QnAReplyDao {
 	public void stepshape(QnAReply vo){
 		sqlSession.update("QnAReplyMapper.replyStepShape", vo);	
 	}
+	
 	public void create_setgroup(QnAReply vo) {
 		sqlSession.update("QnAReplyMapper.create_setgroup",vo);
-		
 	}
 }

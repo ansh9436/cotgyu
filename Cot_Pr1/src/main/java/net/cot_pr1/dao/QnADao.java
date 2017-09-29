@@ -29,16 +29,14 @@ public class QnADao {
 	
 	
 	public List<QnA> Viewlist(int start, int end, String searchOption, String keyword) throws Exception{
-		//검색 옵션, 키워드 맵에 저장
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("searchOption", searchOption);
 		map.put("keyword", keyword);
-		// BETWEEN #{start}, #{end}에 입력될 값을 맵에 
 	    map.put("start", start);
 	    map.put("end", end);
+	    
 		return sqlSession.selectList("QnAMapper.viewlist", map);
 	}
-	
 	
 	public void create(QnA vo)  throws Exception{
 		 sqlSession.insert("QnAMapper.insert",vo);
@@ -49,20 +47,16 @@ public class QnADao {
 		sqlSession.update("QnAMapper.uphit", bnum);
 	}
 	
-	
 	public QnA read(int bnum) throws Exception{
 		return sqlSession.selectOne("QnAMapper.view",bnum);
 	}
-	
 	
 	public void update(QnA vo) throws Exception{
 		sqlSession.update("QnAMapper.updateArticle", vo);
 	}
 	
-	
 	public void delete(int bnum) throws Exception{
 		sqlSession.delete("QnAMapper.delete", bnum);
-		
 	}
 	
 	public int countboard(String searchOption, String keyword) throws Exception{
@@ -78,8 +72,8 @@ public class QnADao {
 		
 		return sqlSession.selectList("QnAMapper.popboard", map);
 	}
+	
 	public QnA detail(Integer bnum) {
-		
 		return sqlSession.selectOne("QnAMapper.modifyview", bnum);
 	}
 	

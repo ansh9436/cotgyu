@@ -11,28 +11,50 @@
   http://www.springframework.org/schema/util 
   http://www.springframework.org/schema/util/spring-util-3.1.xsd">
   
-
-
 	
 	<http auto-config="true" use-expressions="true" >
-		<intercept-url pattern="/admin/**" access="hasAnyRole('ROLE_ADMIN')" />		
+	<!-- 권한 설정 -->
+		<intercept-url pattern="/admin/**" access="hasAnyRole('ROLE_ADMIN')" />
+				
 		<intercept-url pattern="/webboard/write/**" access="hasAnyRole('ROLE_USER','ROLE_ADMIN')" />	
 		<intercept-url pattern="/freeboard/write/**" access="hasAnyRole('ROLE_USER','ROLE_ADMIN')" />	
 		<intercept-url pattern="/qna/write/**" access="hasAnyRole('ROLE_USER','ROLE_ADMIN')" />
+		
+		<intercept-url pattern="/webboard/updatedetail/**" access="hasAnyRole('ROLE_USER','ROLE_ADMIN')" />	
+		<intercept-url pattern="/freeboard/updatedetail/**" access="hasAnyRole('ROLE_USER','ROLE_ADMIN')" />	
+		<intercept-url pattern="/qna/updatedetail/**" access="hasAnyRole('ROLE_USER','ROLE_ADMIN')" />
+		
+		<intercept-url pattern="/webboard/delete/**" access="hasAnyRole('ROLE_USER','ROLE_ADMIN')" />	
+		<intercept-url pattern="/freeboard/delete/**" access="hasAnyRole('ROLE_USER','ROLE_ADMIN')" />	
+		<intercept-url pattern="/qna/delete/**" access="hasAnyRole('ROLE_USER','ROLE_ADMIN')" />
+		
+		
 		<intercept-url pattern="/users/myinfo/**" access="hasAnyRole('ROLE_USER','ROLE_ADMIN')" />
 		<intercept-url pattern="/users/formmessage/**" access="hasAnyRole('ROLE_USER','ROLE_ADMIN')" />	
 		<intercept-url pattern="/users/message/**" access="hasAnyRole('ROLE_USER','ROLE_ADMIN')" />	
+		<intercept-url pattern="/users/unregisterform/**" access="hasAnyRole('ROLE_USER','ROLE_ADMIN')" />	
+		
 		
 		<intercept-url pattern="/notice/write/**" access="hasAnyRole('ROLE_ADMIN')" />	
+		<intercept-url pattern="/notice/updatedetail/**" access="hasAnyRole('ROLE_ADMIN')" />	
+		<intercept-url pattern="/notice/delete/**" access="hasAnyRole('ROLE_ADMIN')" />	
 		
-		<intercept-url pattern="/webreply/**" access="hasAnyRole('ROLE_USER','ROLE_ADMIN')" />	
-		<intercept-url pattern="/freereply/**" access="hasAnyRole('ROLE_USER','ROLE_ADMIN')" />	
-		<intercept-url pattern="/qnareply/**" access="hasAnyRole('ROLE_USER','ROLE_ADMIN')" />	
-		<intercept-url pattern="/noticereply/**" access="hasAnyRole('ROLE_USER','ROLE_ADMIN')" />	
+		
+		<intercept-url pattern="/webreply/comment/**" access="hasAnyRole('ROLE_USER','ROLE_ADMIN')" />
+		<intercept-url pattern="/webreply/update/**" access="hasAnyRole('ROLE_USER','ROLE_ADMIN')" />		
+		<intercept-url pattern="/webreply/delete/**" access="hasAnyRole('ROLE_USER','ROLE_ADMIN')" />	
+		<intercept-url pattern="/freereply/comment/**" access="hasAnyRole('ROLE_USER','ROLE_ADMIN')" />
+		<intercept-url pattern="/freereply/update/**" access="hasAnyRole('ROLE_USER','ROLE_ADMIN')" />	
+		<intercept-url pattern="/freereply/delete/**" access="hasAnyRole('ROLE_USER','ROLE_ADMIN')" />		
+		<intercept-url pattern="/qnareply/comment/**" access="hasAnyRole('ROLE_USER','ROLE_ADMIN')" />
+		<intercept-url pattern="/qnareply/update/**" access="hasAnyRole('ROLE_USER','ROLE_ADMIN')" />
+		<intercept-url pattern="/qnareply/delete/**" access="hasAnyRole('ROLE_USER','ROLE_ADMIN')" />	
+		<intercept-url pattern="/noticereply/comment/**" access="hasAnyRole('ROLE_USER','ROLE_ADMIN')" />	
+		<intercept-url pattern="/noticereply/update/**" access="hasAnyRole('ROLE_USER','ROLE_ADMIN')" />	
+		<intercept-url pattern="/noticereply/delete/**" access="hasAnyRole('ROLE_USER','ROLE_ADMIN')" />	
 		
 		
 		<form-login 
-		
 			login-page="/" 
 			username-parameter="user_id"
 			password-parameter="password" 

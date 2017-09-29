@@ -93,17 +93,7 @@
                     </span>
                     </c:if>	
 				</a></td>
-				
-				<!--  댓글누르면 이동하기..수정이 필요할듯.
-				<td><a href="${path}/board/view?bnum=${row.bnum}">${row.title}</a>				
-				<a href="#" OnClick="javascript:openreply('${row.bnum}');">
-                    <c:if test="${row.recnt > 0}">
-                    <span style="color: red;">(${row.recnt})
-                    </span>
-                    </c:if>
-				
-				</a></td>
-				-->	 		
+					
 				<td>
 				<c:if test="${not empty sessionScope.userId}">			
 				<a href="#" onClick="javascript_:openMessage('${row.writer}');" style="color:black;">

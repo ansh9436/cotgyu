@@ -15,10 +15,10 @@
 	<bean class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping"/>
 	<mvc:annotation-driven/>
 	
-	<!--  security 추가  -->
+	<!--  security  -->
 	<security:global-method-security secured-annotations="enabled" pre-post-annotations="enabled" />
 
-
+	<!-- 업로드위치, 리소스, css등 위치  -->
 	<!--  <mvc:resources location="images" mapping="/images/" />-->
 	<mvc:resources location="uploads" mapping="/uploasds/**" />
 	<mvc:resources location="/editors/" mapping="/editors/**" />	
@@ -27,9 +27,8 @@
 	<mvc:resources location="/stylesheets/" mapping="/stylesheets/**" />	
 	<mvc:resources location="javasripts" mapping="/javascripts/**" />
 	
-		<!-- 파일업로드에 필요한 bean -->
-	<bean id="multipartResolver"
-		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+	<!-- 파일업로드에 필요한 bean -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<!-- 파일업로드 용량 -->
 		<property name="maxUploadSize" value="20971520" /> <!-- 20MB -->
 	 	 <!-- max size of file in memory (in bytes) -->

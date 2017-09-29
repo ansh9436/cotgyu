@@ -3,15 +3,14 @@ package net.cot_pr1.domain;
 import java.util.Date;
 
 public class FreeBoard {
-	private int bnum;
-	private String title;
-	private String content;
-	private String writer;
-	private Date date;
-	private int hit;
-	private String userName;
-	private int recnt; //댓글 수
-	private String tag;
+	private int bnum;		 //글번호
+	private String title; 	//글제목
+ 	private String content;	//글내용
+	private String writer;	//작성자
+	private Date date;		//작성날짜
+	private int hit;		//조회수
+	private int recnt; 		//댓글 수
+	private String tag;		//자유게시판 태그
 	private String boardtag; //최신글 구분을 위한 글 종류 
 	
 	public String getBoardtag() {
@@ -62,12 +61,6 @@ public class FreeBoard {
 	public void setHit(int hit) {
 		this.hit = hit;
 	}
-	public String getUserName() {
-		return userName;
-	}
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
 
 	public int getRecnt() {
 		return recnt;
@@ -80,7 +73,7 @@ public class FreeBoard {
 	@Override
 	public String toString() {
 		return "FreeBoard [bnum=" + bnum + ", title=" + title + ", content=" + content + ", writer=" + writer + ", date="
-				+ date + ", hit=" + hit + ", userName=" + userName + ", recnt=" + recnt + ", tag=" + tag + ", boardtag="+ boardtag+ " ]";
+				+ date + ", hit=" + hit + ",  recnt=" + recnt + ", tag=" + tag + ", boardtag="+ boardtag+ " ]";
 	}
 	
 	

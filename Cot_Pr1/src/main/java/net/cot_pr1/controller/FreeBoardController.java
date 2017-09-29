@@ -53,6 +53,7 @@ public class FreeBoardController {
 		int start = boardPage.getPageBegin();
 		int end = boardPage.getPageEnd();
 		
+		//게시판 리스트, 인기게시판 리스트 
 		List<FreeBoard> list = freeboardService.Viewlist(start, end, searchOption, keyword);
 		
 		List<FreeBoard> poplist = freeboardService.popboard();
@@ -70,40 +71,46 @@ public class FreeBoardController {
 		mav.addObject("map", map); // 맵에 저장된 데이터를 mav에 저장
         mav.setViewName("freeboard/freeboard"); // 뷰를 list.jsp로 설정
        
-        return mav; // list.jsp로 List가 전달된다.
+        return mav; // list.jsp로  map이 전달된다.
 	}
 	
-	//02 게시물 작성화면 이동
+	// 게시물 작성화면 이동
 	@RequestMapping(value="write", method=RequestMethod.GET)
     public String write(){
         return "freeboard/write"; // write.jsp로 이동
     }
 	
-	//03 게시물 작성
+	// 게시물 작성
 	@RequestMapping(value="insert", method=RequestMethod.POST)
 	public String insert(@ModelAttribute FreeBoard vo, HttpSession session) throws Exception{
-	    // session에 저장된 userId를 writer에 저장
+	    //writer에 세션에서 가져온 id값 사용
 	    String writer = (String) session.getAttribute("userId");
-	    // vo에 writer를 세팅
+	    
+	    // freeboard에 writer를 세팅
 	    vo.setWriter(writer);
+	    
+	    //vo정보로 게시물 생성
 	    freeboardService.create(vo);
+	    
+	    //작성 후 게시물 list로 다시 이동
 	    return "redirect:list";
 	}
 
-	//04 게시물 보기
+	// 게시물 보기
 	@RequestMapping(value="view", method=RequestMethod.GET)
     public ModelAndView view(@RequestParam int bnum, HttpSession session) throws Exception{
         // 조회수 증가 처리
 		freeboardService.uphit(bnum);
-		
-		
+		//bnum을 받아와 작성자 찾기
 		String userId = freeboardService.findByWriter(bnum);
-		String userimg = userService.findByprofile(userId);	
+		//작성자로 이미지 불러오기
+		String userimg = userService.findprofile(userId);	
+		
         // 모델(데이터)+뷰(화면)를 함께 전달하는 객체
         ModelAndView mav = new ModelAndView();
         // 뷰의 이름
         mav.setViewName("freeboard/view");
-        // 뷰에 전달할 데이터
+        // 뷰에 전달할 데이터(bnum으로 정보 가져오기)
         mav.addObject("dto", freeboardService.read(bnum));
         mav.addObject("profileimg",userimg);
         return mav;
@@ -113,29 +120,32 @@ public class FreeBoardController {
 	//글 수정창으로 연결     
     @RequestMapping(value="/updatedetail/{bnum}", method=RequestMethod.GET)
     public ModelAndView boardDetail(@PathVariable("bnum") Integer bnum, ModelAndView mav){
+    	//bnum으로 정보 가져와 freeboard vo에 저장 
         FreeBoard vo = freeboardService.detail(bnum);
         // 뷰이름 지정
         mav.setViewName("freeboard/modify");
         // 뷰에 전달할 데이터 지정
         mav.addObject("vo", vo);
-        // replyDetail.jsp로 포워딩
         return mav;
     }
-    // 05. 게시글 수정
-    // 폼에서 입력한 내용들은 @ModelAttribute BoardVO vo로 전달됨
+    
+    // 게시글 수정
     @RequestMapping(value="update", method=RequestMethod.POST)
     public String update(@ModelAttribute FreeBoard vo) throws Exception{
+    	//수정한 내용 업데이트
     	freeboardService.update(vo);
         return "redirect:list";
     }
    
-    // 06. 게시글 삭제
+    // 게시글 삭제
     @RequestMapping("delete")
     public String delete(@RequestParam int bnum) throws Exception{
+    	//bnum에 맞는 게시물 삭제 처리
     	freeboardService.delete(bnum);
         return "redirect:list";
     }
 	
+    //게시물 작성시 사진 업로드 부분(네이버 스마트에디터)
     @RequestMapping("/photoUpload")
     public String photoUpload(HttpServletRequest request, PhotoVo vo){
         String callback = vo.getCallback();

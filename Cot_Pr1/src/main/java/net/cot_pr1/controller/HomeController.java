@@ -38,14 +38,16 @@ public class HomeController {
 	@Autowired
 	private UserDao userDao;
 
+	//메인화면
 	@RequestMapping("/")
 	public ModelAndView Home(HttpSession session) throws Exception{
-//인기게시판 불러오기
+		//인기게시판 가져오기
 		List<WebBoard> poplist = webboardDao.popboard();
 		List<FreeBoard> popFlist = freeboardDao.popboard();
 		List<Gallery> popImglist = galleryDao.poplist();
 		List<QnA> popQnalist = qnaDao.popboard();
-		List<WebBoard> recentlist = webboardDao.recentboard(); //최신 글 목록
+		//최신 글 가져오기
+		List<WebBoard> recentlist = webboardDao.recentboard(); 
 	
 		//데이터를 맵에 저장
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -56,12 +58,12 @@ public class HomeController {
 		map.put("popQnalist",popQnalist);
 		map.put("recentlist", recentlist);
 	
-		//모델과 뷰
+	
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("map", map); // 맵에 저장된 데이터를 mav에 저장
-        mav.setViewName("home"); // 뷰를 list.jsp로 설정
+		mav.addObject("map", map); 
+        mav.setViewName("home"); 
        
-        return mav; // list.jsp로 List가 전달된다.
+        return mav; 
 	}
 	
 	

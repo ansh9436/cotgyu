@@ -36,7 +36,7 @@ public class GalleryController {
 	@Resource(name="uploadPath")
 	String uploadPath;
 	
-	//리스트
+	//갤러리 리스트
     @RequestMapping("list")
 	public ModelAndView list(@RequestParam(defaultValue="imgname") String searchOption, 
 			@RequestParam(defaultValue="") String keyword,
@@ -75,12 +75,8 @@ public class GalleryController {
         return "gallery/imagewrite"; // write.jsp로 이동
     }
 	
-	@RequestMapping(value="insert", method=RequestMethod.GET)
-	    public void insert(){
-	        // upload/uploadForm.jsp(업로드 페이지)로 포워딩
-	    }
-    
-    //이미지 올리는창으로 이동 
+
+    //이미지 작성 
 	@RequestMapping(value="insert", method=RequestMethod.POST)
 	public ModelAndView insert(@ModelAttribute Gallery vo, HttpSession session, MultipartFile file, ModelAndView mav, @RequestParam String imgname) throws Exception{
 	    // session에 저장된 userId를 writer에 저장
@@ -88,7 +84,7 @@ public class GalleryController {
 	    // vo에 writer를 세팅
 	    vo.setImgwriter(imgwriter);
 	    
-	    //랜덤이름 붙이기
+	    //파일이름 중복을 막기위한 랜덤이름 붙이기
 	    UUID uuid = UUID.randomUUID();	    
         String savedName = uuid.toString()+"_"+file.getOriginalFilename();
         File target = new File(uploadPath, savedName);
@@ -97,7 +93,7 @@ public class GalleryController {
         // FileCopyUtils.copy(바이트배열, 파일객체)
         FileCopyUtils.copy(file.getBytes(), target);
 
-    //    mav.setViewName("gallery/result");
+  
         mav.addObject("savedName", savedName);
         //vo에 데이터 넣기
         vo.setImgfile(savedName);
@@ -106,15 +102,13 @@ public class GalleryController {
         galleryService.imageinsert(vo);
         
         mav.setViewName("redirect:/gallery/list");
-        return mav; // uploadResult.jsp(결과화면)로 포워딩
-
-	
+        return mav;
 	}
 
+	//이미지 추천 
     @RequestMapping(value="/up/{imgid}",method=RequestMethod.GET)
     public String up(@PathVariable("imgid") Integer imgid){
-    	
-    	
+    	//이미지 번호 받아와서 추천   	
     	galleryService.imageup(imgid);
     	return "redirect:/gallery/list";
     }
@@ -144,20 +138,19 @@ public class GalleryController {
     	map.put("keyword", keyword); //검색 키워드
     	map.put("boardPage", boardPage); 
     			
-    	//모델과 뷰
+    	
     	ModelAndView mav = new ModelAndView();
-    	mav.addObject("map", map); // 맵에 저장된 데이터를 mav에 저장
-    	mav.setViewName("gallery/imagegallery"); // 뷰를 list.jsp로 설정
+    	mav.addObject("map", map); 
+    	mav.setViewName("gallery/imagegallery"); 
     	       
-    	return mav; // list.jsp로 List가 전달된다.
+    	return mav; 
     	
     }
     
-    
+    //이미지 삭제
     @RequestMapping(value="/delete/{imgid}",method=RequestMethod.GET)
     public String delete(@PathVariable("imgid") Integer imgid){
-    	
-    	
+    	//이미지 번호 받아와서 이미지 삭제
     	galleryService.imagedelete(imgid);
     	return "redirect:/gallery/list";
     }

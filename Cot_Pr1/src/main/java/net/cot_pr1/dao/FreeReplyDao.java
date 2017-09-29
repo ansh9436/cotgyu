@@ -23,8 +23,8 @@ public class FreeReplyDao {
 		this.dataSource = dataSource;
 	}
 
+	
 	public List<FreeReply> list(Integer bnum) {
-		
 		return sqlSession.selectList("FreeReplyMapper.listReply", bnum);
 	}
 	
@@ -37,15 +37,15 @@ public class FreeReplyDao {
     public void update(FreeReply vo) throws Exception {
         sqlSession.update("FreeReplyMapper.updateReply",vo);
     }
-    // ¥Ò±€ ªË¡¶
    
     public void delete(Integer rnum)  {
     	sqlSession.delete("FreeReplyMapper.deleteReply", rnum);
- 
     }
+    
 	public FreeReply detail(Integer rnum) {
 		return sqlSession.selectOne("FreeReplyMapper.replymodifyview", rnum);
 	}
+	
 	public void createcomment(FreeReply vo) {
 		sqlSession.insert("FreeReplyMapper.insertReplyComment",vo);
 	}
@@ -53,6 +53,7 @@ public class FreeReplyDao {
 	public void stepshape(FreeReply vo){
 		sqlSession.update("FreeReplyMapper.replyStepShape", vo);	
 	}
+	
 	public void create_setgroup(FreeReply vo) {
 		sqlSession.update("FreeReplyMapper.create_setgroup",vo);
 		

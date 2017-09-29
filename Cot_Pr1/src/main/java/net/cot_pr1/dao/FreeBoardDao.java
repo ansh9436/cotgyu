@@ -28,13 +28,12 @@ public class FreeBoardDao {
 	
 	
 	public List<FreeBoard> Viewlist(int start, int end, String searchOption, String keyword) throws Exception{
-		//검색 옵션, 키워드 맵에 저장
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("searchOption", searchOption);
 		map.put("keyword", keyword);
-		// BETWEEN #{start}, #{end}에 입력될 값을 맵에 
 	    map.put("start", start);
 	    map.put("end", end);
+	    
 		return sqlSession.selectList("FreeBoardMapper.viewlist", map);
 	}
 	
@@ -77,9 +76,9 @@ public class FreeBoardDao {
 		
 		return sqlSession.selectList("FreeBoardMapper.popboard", map);
 	}
+	
 	public FreeBoard detail(Integer bnum) {
-		
-		return sqlSession.selectOne("FreeBoardMapper.modifyview", bnum);
+		return sqlSession.selectOne("FreeBoardMapper.detail", bnum);
 	}
 	
 	public String findByWriter(int bnum) {

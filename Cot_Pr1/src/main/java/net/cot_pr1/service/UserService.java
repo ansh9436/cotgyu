@@ -28,9 +28,11 @@ public class UserService implements UserDetailsService{
 	private PasswordEncoder passwordEncoder;
 
 	public void create(User user) {
-		//암호화는 다시 찾아서 할것!
+		//회원가입시 회원이 입력한 비밀번호 암호화하여 db에 저장 
 		String password = user.getPassword();
 		password = passwordEncoder.encode(password);
+		
+		//암호화된 비밀번호를 유저에 셋팅
 		user.setPassword(password);
 		
 		userDao.create(user);
@@ -58,10 +60,11 @@ public class UserService implements UserDetailsService{
 		return userDao.checkId(vo);
 	}
 
-	public String findByprofile(String userId) {	
-		return userDao.findByprofile(userId);
+	public String findprofile(String userId) {	
+		return userDao.findprofile(userId);
 	}
-
+	
+	//시큐리티 로그인성공시 처리 및 권한 부여 
 	@Override
 	public User loadUserByUsername(String username) throws UsernameNotFoundException {		
 		User user = new User();
@@ -70,30 +73,29 @@ public class UserService implements UserDetailsService{
 		if(user ==null){
 			return user;
 		}
-		
+
 		user.setUserId(user.getUsername());
 		user.setPassword(user.getPassword());
 		Role role = new Role();
+		
 		//아이디가 관리자일지 어드민 부여.....너무허술한듯...
 		if(username.equals("관리자")){
 			role.setName("ROLE_ADMIN");
 			List<Role> roles = new ArrayList<Role>();
 			roles.add(role);
-			user.setAuthorities(roles);
-		
+			user.setAuthorities(roles);		
 			return user;
 
 		}
 		role.setName("ROLE_USER");
-		
 		List<Role> roles = new ArrayList<Role>();
 		roles.add(role);
 		user.setAuthorities(roles);
-	
 		
 		return user;
 	}
-//이메일로 아이디찾기 
+	
+	//이메일로 아이디찾기 
 	public String finduserId(String user_email) {
 		return userDao.finduserId(user_email);
 	}
@@ -101,7 +103,8 @@ public class UserService implements UserDetailsService{
 	public String finduseremail(String userid) {
 		return userDao.finduseremail(userid);
 	}
-	//쪽지
+	
+	//메세지 부분 
 	public void sendmessage(Message message) {
 		userDao.sendmessage(message);
 	}

@@ -9,9 +9,8 @@ public class Notice{
 	private String writer;
 	private Date date;
 	private int hit;
-	private String userName;
-	private int recnt; //댓글 수
-	private String boardtag; //최신글 구분을 위한 글 종류 
+	private int recnt; 
+	private String boardtag; 
 	
 	public String getBoardtag() {
 		return boardtag;
@@ -55,12 +54,6 @@ public class Notice{
 	public void setHit(int hit) {
 		this.hit = hit;
 	}
-	public String getUserName() {
-		return userName;
-	}
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
 
 	public int getRecnt() {
 		return recnt;
@@ -73,7 +66,7 @@ public class Notice{
 	@Override
 	public String toString() {
 		return "Notice [bnum=" + bnum + ", title=" + title + ", content=" + content + ", writer=" + writer + ", date="
-				+ date + ", hit=" + hit + ", userName=" + userName + ", recnt=" + recnt + ", boardtag="+ boardtag+ "]";
+				+ date + ", hit=" + hit + ", recnt=" + recnt + ", boardtag="+ boardtag+ "]";
 	}
 	
 	

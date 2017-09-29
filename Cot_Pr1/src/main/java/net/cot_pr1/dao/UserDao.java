@@ -39,7 +39,7 @@ import net.cot_pr1.domain.User;
 	public User findByID(String userId) {
 		return sqlSession.selectOne("UserMapper.findByID",userId);
 	}
-	//시큐리티 테스트
+
 	public User findname(String username){
 		return sqlSession.selectOne("UserMapper.findByID",username);
 	}
@@ -56,8 +56,8 @@ import net.cot_pr1.domain.User;
 		sqlSession.update("UserMapper.imgupdate",vo);		
 	}
 	
-	public String findByprofile(String userId) {
-		return sqlSession.selectOne("UserMapper.findByprofile", userId);
+	public String findprofile(String userId) {
+		return sqlSession.selectOne("UserMapper.findprofile", userId);
 	}
 	
 	public int checkId(User vo) {
@@ -73,14 +73,13 @@ import net.cot_pr1.domain.User;
 	}
 	
 	public void sendmessage(Message message) {
-	
 		sqlSession.insert("UserMapper.sendMessage",message);
 	}
+	
 	public List<Message> viewmessage(String userid) {
 		return sqlSession.selectList("UserMapper.viewMessage",userid);
-		
-		
 	}
+	
 	public void unregister(String userid) {
 		sqlSession.delete("UserMapper.unregister", userid);
 	}

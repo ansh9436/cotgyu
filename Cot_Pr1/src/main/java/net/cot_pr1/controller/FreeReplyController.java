@@ -29,18 +29,22 @@ public class FreeReplyController {
     @RequestMapping(value="insert.do", method=RequestMethod.POST)
     public ModelAndView insert(@ModelAttribute FreeReply vo, HttpSession session,@RequestParam int bnum, @RequestParam String replytext){
     	
-    	ModelAndView mav = new ModelAndView();
-    	
+    	//세션으로부터 userid 가져오기 
         String userId = (String) session.getAttribute("userId");
-    
-        
+        //reply vo에 리플작성자 셋팅
         vo.setReplyer(userId);
+        //댓글 생성
         freereplyService.create(vo);
+        
+        //댓글 순서관련 그룹 설정
         int rnum = vo.getRnum();  
         vo.setRegroup(rnum);
         freereplyService.create_setgroup(vo);
         
+        //댓글 작성한 글로 가기위해 bnum 가져오기
         bnum = vo.getBnum();
+        
+        ModelAndView mav = new ModelAndView();
         mav.addObject("bnum", bnum);
         mav.setViewName("redirect:/freeboard/view?bnum={bnum}");
         
@@ -48,52 +52,48 @@ public class FreeReplyController {
   
     }
       
-    // 댓글 목록(@Controller방식 : veiw(화면)를 리턴)
+    // 댓글 목록
     @RequestMapping("list.do")
     public ModelAndView list(@RequestParam int bnum, ModelAndView mav){
+    	//bnum에 있는 댓글 리스트 가져오기 
         List<FreeReply> list = freereplyService.list(bnum);
         // 뷰이름 지정
         mav.setViewName("freeboard/replylist");	
-        // 뷰에 전달할 데이터 지정
+        
+        // mav에 데이터 추가 
         mav.addObject("bnum", bnum);
         mav.addObject("list", list);
-        // replyList.jsp로 포워딩
+        
         return mav;
     }
-      
-    // 댓글 목록(@RestController Json방식으로 처리 : 데이터를 리턴)
+    /* 지워도 될듯? 현재는 윗방법 쓰고있음 
+    // 댓글 목록(@RestController Json방식으로 처리 : 데이터를 리턴) >> 
     @RequestMapping("listJson.do")
     @ResponseBody // 리턴데이터를 json으로 변환(생략가능)
     public List<FreeReply> listJson(@RequestParam int bnum){
         List<FreeReply> list = freereplyService.list(bnum);
         return list;
     }
-    
+    */
+    //댓글 삭제
     @RequestMapping("delete")
     public ModelAndView replydelete(@RequestParam int rnum, @RequestParam int bnum) throws Exception{
+    	//댓글번호(rnum)에 맞는 댓글 삭제 
     	freereplyService.delete(rnum);
     	
     	ModelAndView mav = new ModelAndView();
+    	//게시물로 돌아가기위한 bnum 
     	mav.addObject("bnum", bnum);
         mav.setViewName("redirect:/freeboard/view?bnum={bnum}");
     	
     	return mav;
     }
     
-    @RequestMapping(value="update", method=RequestMethod.POST)
-    public ModelAndView replyupdate(@ModelAttribute FreeReply vo,  @RequestParam int bnum, @RequestParam int rnum, @RequestParam String replytext) throws Exception{
-    	ModelAndView mav = new ModelAndView();
-    	
-    	freereplyService.update(vo);
-    	
-    	mav.addObject("bnum", bnum);
-    	mav.setViewName("redirect:/freeboard/view?bnum={bnum}");
-    		
-    	return mav; 	
-    }
-//댓글 수정창으로 연결     
+    //댓글 수정창으로 연결     
     @RequestMapping(value="/detail/{rnum}", method=RequestMethod.GET)
     public ModelAndView replyDetail(@PathVariable("rnum") Integer rnum, ModelAndView mav){
+    	
+    	//댓글 번호(rnum)에 맞는 reply 불러오기 
         FreeReply vo = freereplyService.detail(rnum);
         // 뷰이름 지정
         mav.setViewName("freeboard/replymodify");
@@ -102,23 +102,40 @@ public class FreeReplyController {
         // replyDetail.jsp로 포워딩
         return mav;
     }
+    
+    //댓글 수정
+    @RequestMapping(value="update", method=RequestMethod.POST)
+    public ModelAndView replyupdate(@ModelAttribute FreeReply vo,  @RequestParam int bnum) throws Exception{
+    	ModelAndView mav = new ModelAndView();
+    	//받아온 정보 vo로 수정
+    	freereplyService.update(vo);
+    	
+    	mav.addObject("bnum", bnum);
+    	mav.setViewName("redirect:/freeboard/view?bnum={bnum}");
+    		
+    	return mav; 	
+    }
+    
+ 
   
-  //댓글 수정창으로 연결     
+    //코맨트 작성 창 생성
     @RequestMapping(value="/commentwrite/{rnum}", method=RequestMethod.GET)
     public ModelAndView commentwrite(@PathVariable("rnum") Integer rnum, ModelAndView mav){
+    	//코멘트달려는 댓글 정보 가져오기
         FreeReply vo = freereplyService.detail(rnum);
         // 뷰이름 지정
         mav.setViewName("freeboard/replycomment");
         // 뷰에 전달할 데이터 지정
         mav.addObject("vo", vo);
-        // replyDetail.jsp로 포워딩
         return mav;
     }    
     
+    //코멘트 작성
     @RequestMapping(value="comment")
     public ModelAndView replycomment(@ModelAttribute FreeReply vo, HttpSession session, @RequestParam int bnum, 
     		@RequestParam String replytext, @RequestParam int regroup, @RequestParam int restep, @RequestParam int reindent){
     	ModelAndView mav = new ModelAndView();
+    	//댓글 순서 위한 셋팅
     	vo.setRegroup(regroup);
     	vo.setRestep(restep);
     	vo.setReindent(reindent);
@@ -128,7 +145,7 @@ public class FreeReplyController {
     	vo.setReplyer(userId);
     	
     	freereplyService.createcomment(vo); //코멘트생성
-    	//실행하고 보여줄 페이지
+    
     	bnum = vo.getBnum();        
         mav.addObject("bnum", bnum);
         mav.setViewName("redirect:/freeboard/view?bnum={bnum}");

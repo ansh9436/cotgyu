@@ -28,40 +28,33 @@ public class NoticeDao {
 	
 	
 	public List<Notice> Viewlist(int start, int end, String searchOption, String keyword) throws Exception{
-		//검색 옵션, 키워드 맵에 저장
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("searchOption", searchOption);
 		map.put("keyword", keyword);
-		// BETWEEN #{start}, #{end}에 입력될 값을 맵에 
 	    map.put("start", start);
 	    map.put("end", end);
+	    
 		return sqlSession.selectList("NoticeMapper.viewlist", map);
 	}
-	
 	
 	public void create(Notice vo)  throws Exception{
 		 sqlSession.insert("NoticeMapper.insert",vo);
 	}
 	
-	
 	public void uphit(int bnum) throws Exception{
 		sqlSession.update("NoticeMapper.uphit", bnum);
 	}
-	
 	
 	public Notice read(int bnum) throws Exception{
 		return sqlSession.selectOne("NoticeMapper.view",bnum);
 	}
 	
-	
 	public void update(Notice vo) throws Exception{
 		sqlSession.update("NoticeMapper.updateArticle", vo);
 	}
 	
-	
 	public void delete(int bnum) throws Exception{
 		sqlSession.delete("NoticeMapper.delete", bnum);
-		
 	}
 	
 	public int countboard(String searchOption, String keyword) throws Exception{
@@ -77,8 +70,8 @@ public class NoticeDao {
 		
 		return sqlSession.selectList("NoticeMapper.popboard", map);
 	}
+	
 	public Notice detail(Integer bnum) {
-		
 		return sqlSession.selectOne("NoticeMapper.modifyview", bnum);
 	}
 	

@@ -30,45 +30,36 @@ public class WebBoardDao {
 	}
 	
 	
-
-	public List<WebBoard> Viewlist(int start, int end, String searchOption, String keyword) throws Exception{
-		//검색 옵션, 키워드 맵에 저장
+	public List<WebBoard> Viewlist(int start, int end, String searchOption, String keyword) throws Exception{	
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("searchOption", searchOption);
 		map.put("keyword", keyword);
-		// BETWEEN #{start}, #{end}에 입력될 값을 맵에 
 	    map.put("start", start);
 	    map.put("end", end);
+	    
 		return sqlSession.selectList("WebBoardMapper.viewlist", map);
 	}
-	
-	
+		
 	public void create(WebBoard vo)  throws Exception{
 		 sqlSession.insert("WebBoardMapper.insert",vo);
 	}
 	
-	
 	public void uphit(int bnum) throws Exception{
 		sqlSession.update("WebBoardMapper.uphit", bnum);
 	}
-	
 
 	public WebBoard read(int bnum) throws Exception{
 		return sqlSession.selectOne("WebBoardMapper.view",bnum);
 	}
 	
-
 	public void update(WebBoard vo) throws Exception{
 		sqlSession.update("WebBoardMapper.updateArticle", vo);
 	}
 	
-
 	public void delete(int bnum) throws Exception{
 		sqlSession.delete("WebBoardMapper.delete", bnum);
-		
 	}
 
-	
 	public int countboard(String searchOption, String keyword) throws Exception{
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("searchOption", searchOption);
@@ -77,7 +68,6 @@ public class WebBoardDao {
 		return sqlSession.selectOne("WebBoardMapper.countboard", map);
 	}
 	
-	
 	public List<WebBoard> popboard() throws Exception{
 		Map<String, String> map = new HashMap<String, String>();
 		
@@ -85,13 +75,13 @@ public class WebBoardDao {
 	}
 	
 	public WebBoard detail(Integer bnum) {
-		// TODO Auto-generated method stub
-		return sqlSession.selectOne("WebBoardMapper.modifyview", bnum);
+			return sqlSession.selectOne("WebBoardMapper.modifyview", bnum);
 	}
 	
 	public String userlist() {
 		return sqlSession.selectOne("WebBoardMapper.userlist");
 	}
+	
 	public String findByWriter(int bnum) {
 		return sqlSession.selectOne("WebBoardMapper.findBywriter",bnum);
 	}

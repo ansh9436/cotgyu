@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
-
+<!-- mapper들  -->
   <mappers>
     <mapper resource="net/cot_pr1/mapper/UserMapper.xml"/>
     <mapper resource="net/cot_pr1/mapper/WebBoardMapper.xml"/>

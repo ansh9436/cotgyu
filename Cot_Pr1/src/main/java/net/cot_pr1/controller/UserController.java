@@ -52,25 +52,27 @@ import net.cot_pr1.service.UserService;
 @RequestMapping("/users")
 public class UserController {
 	private static final Logger log = LoggerFactory.getLogger(UserController.class);
-	
+	//프로필 이미지 업로드 경로(applicationcontext.xml에 경로 있음)
 	@Resource(name="uploadPath2")
 	String uploadPath2;
 
 	@Autowired
 	UserService userService;
-	
+	//시큐리티 암호화 관련 
 	@Autowired
 	private PasswordEncoder passwordEncoder;
-	
+	//메일 관련
 	@Autowired
 	private JavaMailSender mailSender;
 	
+	//회원가입
 	@RequestMapping("/form")
 	public String createform(Model model){
 		model.addAttribute("user", new User());
 		return "users/form";
 	}
 	
+	//회원 생성
 	@RequestMapping(value="/create" , method=RequestMethod.POST)
 	public String create(@Valid User user, BindingResult bindingResult){
 		log.debug("User : {}", user);
@@ -88,6 +90,8 @@ public class UserController {
 		log.debug("Database: {}", userService.findByID(user.getUserId()));
 		return "users/joinok";
 	}
+	
+	
 	//내정보- 세션으로 아이디 가져와서 정보 불러오기 
 	@RequestMapping("/myinfo")
 	public String myifo(Model model, HttpSession session){
@@ -113,11 +117,11 @@ public class UserController {
 		return "users/infomodify";
 	}
 	
-	//이미지 올리는창으로 이동 
+	//프로필 변경
 		@RequestMapping(value="imgmodify", method=RequestMethod.POST)
 		public ModelAndView imgmodify(@ModelAttribute User vo, HttpSession session, MultipartFile file, ModelAndView mav) throws Exception{
 			String userId = (String) session.getAttribute("userId");
-		    //랜덤이름 붙이기
+		    //업로드 파일 이름중복 방지 
 		    UUID uuid = UUID.randomUUID();	    
 	        String savedName = uuid.toString()+"_"+file.getOriginalFilename();
 	        File target = new File(uploadPath2, savedName);
@@ -139,9 +143,7 @@ public class UserController {
 	        return mav;
 
 		}
-	
-	
-	
+		/*
 	@RequestMapping(value="" , method=RequestMethod.POST)
 	public String updatecreate(@Valid User user, BindingResult bindingResult, HttpSession session){
 		log.debug("User : {}", user);
@@ -165,7 +167,7 @@ public class UserController {
 		log.debug("Database: {}", userService.findByID(user.getUserId()));
 		return "redirect:/";
 	}
-	
+	*/
 	@RequestMapping("/login/form")
 	public String loginform(Model model){
 		model.addAttribute("authenticate", new Authenticate());
@@ -205,7 +207,6 @@ public class UserController {
 	
 	
 	//아이디 중복체크 
-
 	 @RequestMapping(value = "/checkId.do")
 	 public void checkId(HttpServletRequest req, HttpServletResponse res,
 	   ModelMap model) throws Exception {
@@ -231,10 +232,10 @@ public class UserController {
 	 
 //security 
 	 
-	 //실패했을때?? 
+	//실패했을때?? 
 	@RequestMapping(value = "/signin", method = RequestMethod.GET)
 	public ModelAndView signin(@RequestParam(value = "error", required = false) String error, Model model) {
-	//	model.addAttribute("error", error);
+		//model.addAttribute("error", error);
 		
 	
 		ModelAndView mav = new ModelAndView();
@@ -243,8 +244,8 @@ public class UserController {
 		return mav;
 	}
 
-//성공했을때 
-	 @PreAuthorize("authenticated")
+	//성공했을때 
+	@PreAuthorize("authenticated")
 		@RequestMapping(value = "/mypage", method = RequestMethod.GET)
 		public String mypage(Model model,HttpSession session) {
 			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -252,30 +253,29 @@ public class UserController {
 			
 			//유저 프로필 가져와서 세션에 적용하기 
 			String userId = auth.getName(); 
-			String userimg = userService.findByprofile(userId);	
+			String userimg = userService.findprofile(userId);	
 
 			session.setAttribute("userimg", userimg);
 			session.setAttribute("userId", auth.getName()); //세션 추가 !
 			return "redirect:/";
 		}
 	 
-	 //찾기창으로 이동
+	 	//idpw찾기창으로 이동
 	 	@RequestMapping("/idpwfind")
 		public String idfind(){
-	 		
 			return "/users/findidpw";
 		}
 	 	
-
 		//아이디 찾기
 		@RequestMapping("/findid")
 		public ModelAndView findid(@RequestParam String user_email){
 			try{
+			//id찾기시 **~~형태로 주기 위해
 			String userId = userService.finduserId(user_email);
 			String Id1 = userId.substring(0,2);
 			Id1 = "**";
 			String Id2 = userId.substring(2);
-			//**~~형태
+		
 			userId = Id1 + Id2;
 			
 			ModelAndView mav = new ModelAndView();
@@ -288,13 +288,13 @@ public class UserController {
 				return mav;
 			}
 		}
+		
 		//비밀번호 찾기  
 		@RequestMapping("/findpw")
 		public ModelAndView findpw(@RequestParam String user_email,@RequestParam String user_id ){
 			try{			
 			User user = new User();
-			user = userService.findByID(user_id); //아이디에 입력한 id받기, 같은 이메일을 등록했더라도 입력한 아이디만 비밀번호 초기화 /9/20 이러면 그냥 아이디에 아무 이메일이나 입력하면 다바뀜;;; 수정해야함 ㅠㅠ
-			
+			user = userService.findByID(user_id);
 			
 			//입력한 아이디에 등록된 이메일과  입력한 이메일이 맞지 않으면 오류!
 			String useremail = userService.finduseremail(user_id); 
@@ -315,7 +315,7 @@ public class UserController {
 			userService.update(user);
 			
 			//이메일 보내기 
-			String setfrom = "Cot.com";         //보내는 이메일 이름
+			String setfrom = "Cot.com";         //보내는 이메일 이름?
 			String tomail  = user_email;     // 받는 사람 이메일
 			String title   = "Cot 비밀번호 찾기";      // 제목
 			String content = "비밀번호는 다음과 같이 초기화됩니다.\n"+"비밀번호는"+password+"입니다.";
@@ -340,6 +340,7 @@ public class UserController {
 				return mav;
 			}
 		}
+		
 		//메시지 폼 띄우기
 		@RequestMapping(value = "/formmessage", method = RequestMethod.GET)
 		public ModelAndView formmessage(@RequestParam String writer,  HttpSession session) throws UnsupportedEncodingException {
@@ -359,7 +360,7 @@ public class UserController {
 			return mav;
 		}
 	
-	//메세지 보내기 	
+		//메세지 보내기 	
 		@RequestMapping(value = "/sendmessage", method = RequestMethod.POST)
 		public ModelAndView usermessage(@RequestParam String senduser, @RequestParam String content,@RequestParam String receiver,  HttpSession session) {
 			
@@ -387,6 +388,7 @@ public class UserController {
 			mav.setViewName("/users/message");
 			return mav;
 		}
+		
 		//탈퇴창 이동
 		@RequestMapping(value = "/unregisterform")
 		public ModelAndView unregisterform(HttpSession session) {
@@ -404,7 +406,7 @@ public class UserController {
 			User user = new User();
 			
 			user = userService.findByID(userid);
-			
+			//비밀번호 비교 후 탈퇴
 			if(passwordEncoder.matches(user_password ,user.getPassword())){
 				userService.unregister(userid);
 				

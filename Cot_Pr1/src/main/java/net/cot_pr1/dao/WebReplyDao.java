@@ -27,7 +27,6 @@ public class WebReplyDao {
 	}
 
 	public List<WebReply> list(Integer bnum) {
-		
 		return sqlSession.selectList("WebReplyMapper.listReply", bnum);
 	}
 	
@@ -36,19 +35,18 @@ public class WebReplyDao {
 		//sqlSession.update("replyMapper.setreGroup");
 	}
 	
-	
     public void update(WebReply vo) throws Exception {
         sqlSession.update("WebReplyMapper.updateReply",vo);
     }
-    // ¥Ò±€ ªË¡¶
    
     public void delete(Integer rnum)  {
     	sqlSession.delete("WebReplyMapper.deleteReply", rnum);
- 
     }
+    
 	public WebReply detail(Integer rnum) {
 		return sqlSession.selectOne("WebReplyMapper.replymodifyview", rnum);
 	}
+	
 	public void createcomment(WebReply vo) {
 		sqlSession.insert("WebReplyMapper.insertReplyComment",vo);
 	}
@@ -56,6 +54,7 @@ public class WebReplyDao {
 	public void stepshape(WebReply vo){
 		sqlSession.update("WebReplyMapper.replyStepShape", vo);	
 	}
+	
 	public void create_setgroup(WebReply vo) {
 		sqlSession.update("WebReplyMapper.create_setgroup", vo);
 	}

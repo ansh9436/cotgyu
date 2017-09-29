@@ -7,9 +7,8 @@ public class FreeReply {
     private Integer bnum;        // 게시글 번호
     private String replytext;    // 댓글 내용
     private String replyer;        // 댓글 작성자
-    private String userName;    // 댓글 작성자의 이름(회원의 이름)
     private Date date;        // 댓글 작성일자
-    private int regroup;
+    private int regroup;		//댓글 순서를 위한(수정할것)  
 	private int restep;
 	private int reindent;
     private String replytag; //댓글종류..
@@ -39,7 +38,6 @@ public class FreeReply {
 	public void setReindent(int reindent) {
 		this.reindent = reindent;
 	}
-	// Getter/Setter
     public Integer getRnum() {
         return rnum;
     }
@@ -64,12 +62,7 @@ public class FreeReply {
     public void setReplyer(String replyer) {
         this.replyer = replyer;
     }
-    public String getUserName() {
-        return userName;
-    }
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
+
     public Date getdate() {
         return date;
     }
@@ -77,12 +70,10 @@ public class FreeReply {
         this.date = date;
     }
 
-    
-    // toString()
     @Override
     public String toString() {
         return "FreeReply [rnum=" + rnum + ", bnum=" + bnum + ", replytext=" + replytext + ", replyer=" + replyer
-                + ", userName=" + userName + ", date=" + date + ", regroup=" + regroup +", restep=" +restep+", reindent="+ reindent+", replytag="+replytag+"]";
+                +  ", date=" + date + ", regroup=" + regroup +", restep=" +restep+", reindent="+ reindent+", replytag="+replytag+"]";
     }
     
 }

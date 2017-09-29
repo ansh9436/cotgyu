@@ -23,19 +23,17 @@ public class AdminDao {
 	public void setDataSource(DataSource dataSource) {
 		this.dataSource = dataSource;
 	}
-	
+		
 	
 	public List<WebBoard> ViewList(int start, int end, String searchOption, String keyword) {
-		//검색 옵션, 키워드 맵에 저장
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("searchOption", searchOption);
 		map.put("keyword", keyword);
-		// BETWEEN #{start}, #{end}에 입력될 값을 맵에 
 		map.put("start", start);
 		map.put("end", end);
+		
 		return sqlSession.selectList("AdminMapper.viewlist", map);
 	}
-	
 	
 	public int countboard(String searchOption, String keyword) {
 		Map<String, String> map = new HashMap<String, String>();
@@ -47,14 +45,13 @@ public class AdminDao {
 	
 	
 	
-	public List<WebReply> Viewreplylist(int start, int end, String searchOption, String keyword) {
-		//검색 옵션, 키워드 맵에 저장
+	public List<WebReply> Viewreplylist(int start, int end, String searchOption, String keyword) {	
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("searchOption", searchOption);
 		map.put("keyword", keyword);
-		// BETWEEN #{start}, #{end}에 입력될 값을 맵에 
 		map.put("start", start);
 		map.put("end", end);
+		
 		return sqlSession.selectList("AdminMapper.viewreplylist", map);
 	}
 	

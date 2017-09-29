@@ -20,75 +20,59 @@
     
     <update id="updateArticle">
         UPDATE notice SET
-            title = #{title},
+        	title = #{title},
             content = #{content}
-      
         WHERE bnum = #{bnum}
     </update>
     
-    <!-- 06. 게시글 삭제처리 -->
     <delete id="delete">
         DELETE FROM notice
         WHERE bnum = #{bnum}
     </delete>
  	
  	<select id="viewlist" resultType="net.cot_pr1.domain.Notice">	
- 	
 	 	SELECT bnum, title, content, writer, date, hit,
-	 	<!-- ** 댓글숫자표시 -->
         (SELECT COUNT(*) FROM notice_reply WHERE bnum= b.bnum) AS recnt
 	 	FROM notice b
-	 	
-		<!-- WHERE절을 include 태그로 삽입 -->
    		<include refid="search"></include>
 		ORDER BY bnum desc, date desc LIMIT ${start}, 20;
-		 	
 	</select>
 	
 	<select id="countboard" resultType="int">
 		SELECT COUNT(*) FROM notice
-		<!-- where절을 include 태그로 삽입 -->
 		<include refid="search"></include>
 	</select>
-	
-
 	
 	<select id="modifyview" resultType="net.cot_pr1.domain.Notice">
         SELECT bnum, title, content, writer, date, hit FROM notice
         WHERE bnum = #{bnum}
     </select>
     
-    
-    <!-- 프로필가져오기위한  -->
 	<select id="findByWriter" resultType="string">
  		select writer from notice where bnum= #{bnum}
  	</select>
- 	
- <!-- sql code 조각 -->
-<!-- 반복되는 sql의 일부를 sql태그를 이용하여 따로 빼둘수 있다. -->
-<sql id="search">
-    <choose>
-        <!-- 검색옵션이 전체 검색일 경우 -->
-        <when test="searchOption == 'all'">
-            WHERE writer like '%${keyword}%'
-            OR content like '%${keyword}%'
-            OR title like '%${keyword}%'
-        </when>
-        <!-- 전체 검색이 아닐 경우 -->
-        <otherwise>
-            WHERE ${searchOption} like '%${keyword}%'
-        </otherwise>
-    </choose>
-</sql>
- 
- <!-- 페이징 sql -->
-<sql id="pagingHeader">
-    SELECT * FROM (
-        SELECT ROWNUM AS rn, A.* FROM (
-</sql>
-<sql id="pagingFooter">
-        ) A
-    ) WHERE rn BETWEEN #{start} AND #{end}
-</sql>
+
+	<sql id="search">
+	    <choose>
+	        <when test="searchOption == 'all'">
+	            WHERE writer like '%${keyword}%'
+	            OR content like '%${keyword}%'
+	            OR title like '%${keyword}%'
+	        </when>
+	        <otherwise>
+	            WHERE ${searchOption} like '%${keyword}%'
+	        </otherwise>
+	    </choose>
+	</sql>
+	 
+	
+	<sql id="pagingHeader">
+	    SELECT * FROM (
+	        SELECT ROWNUM AS rn, A.* FROM (
+	</sql>
+	<sql id="pagingFooter">
+	        ) A
+	    ) WHERE rn BETWEEN #{start} AND #{end}
+	</sql>
 
  </mapper>

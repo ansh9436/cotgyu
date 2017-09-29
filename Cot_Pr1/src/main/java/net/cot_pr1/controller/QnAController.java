@@ -39,11 +39,9 @@ public class QnAController {
 	public ModelAndView list(@RequestParam(defaultValue="title") String searchOption, 
 			@RequestParam(defaultValue="") String keyword,
 			@RequestParam(defaultValue="1") int curPage) throws Exception{
-		
-		//레코드의 개수
+				
 		int count = qnaService.countboard(searchOption, keyword);
 		
-		//페이지
 		BoardPage boardPage = new BoardPage(count, curPage);
 		int start = boardPage.getPageBegin();
 		int end = boardPage.getPageEnd();
@@ -52,54 +50,51 @@ public class QnAController {
 		
 		List<QnA> poplist = qnaService.popboard();
 		
-		//데이터를 맵에 저장
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("list", list); //list
-		map.put("count", count); //레코드 개수
-		map.put("searchOption", searchOption); //검색 옵션
-		map.put("keyword", keyword); //검색 키워드
+		map.put("list", list); 
+		map.put("count", count); 
+		map.put("searchOption", searchOption); 
+		map.put("keyword", keyword);
 		map.put("boardPage", boardPage); 
 		map.put("poplist", poplist);
 		
-		//모델과 뷰
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("map", map); // 맵에 저장된 데이터를 mav에 저장
-        mav.setViewName("qna/qna"); // 뷰를 list.jsp로 설정
+		mav.addObject("map", map); 
+        mav.setViewName("qna/qna"); 
        
-        return mav; // list.jsp로 List가 전달된다.
+        return mav; 
 	}
 	
-	//02 게시물 작성화면 이동
+	//게시물 작성화면 이동
 	@RequestMapping(value="write", method=RequestMethod.GET)
     public String write(){
-        return "qna/write"; // write.jsp로 이동
+        return "qna/write"; 
     }
 	
-	//03 게시물 작성
+	//게시물 작성
 	@RequestMapping(value="insert", method=RequestMethod.POST)
 	public String insert(@ModelAttribute QnA vo, HttpSession session) throws Exception{
-	    // session에 저장된 userId를 writer에 저장
+	  
 	    String writer = (String) session.getAttribute("userId");
-	    // vo에 writer를 세팅
+	  
 	    vo.setWriter(writer);
 	    qnaService.create(vo);
 	    return "redirect:list";
 	}
 
-	//04 게시물 보기
+	//게시물 보기
 	@RequestMapping(value="view", method=RequestMethod.GET)
     public ModelAndView view(@RequestParam int bnum, HttpSession session) throws Exception{
-        // 조회수 증가 처리
+      
 		qnaService.uphit(bnum);
 	
-		
 		String userId = qnaService.findByWriter(bnum);
-		String userimg = userService.findByprofile(userId);	
-        // 모델(데이터)+뷰(화면)를 함께 전달하는 객체
+		String userimg = userService.findprofile(userId);	
+    
         ModelAndView mav = new ModelAndView();
-        // 뷰의 이름
+      
         mav.setViewName("qna/view");
-        // 뷰에 전달할 데이터
+     
         mav.addObject("dto", qnaService.read(bnum));
         mav.addObject("profileimg",userimg);
         return mav;
@@ -110,28 +105,28 @@ public class QnAController {
     @RequestMapping(value="/updatedetail/{bnum}", method=RequestMethod.GET)
     public ModelAndView boardDetail(@PathVariable("bnum") Integer bnum, ModelAndView mav){
         QnA vo = qnaService.detail(bnum);
-        // 뷰이름 지정
+     
         mav.setViewName("qna/modify");
-        // 뷰에 전달할 데이터 지정
+       
         mav.addObject("vo", vo);
-        // replyDetail.jsp로 포워딩
+       
         return mav;
     }
-    // 05. 게시글 수정
-    // 폼에서 입력한 내용들은 @ModelAttribute BoardVO vo로 전달됨
+    //게시글 수정
     @RequestMapping(value="update", method=RequestMethod.POST)
     public String update(@ModelAttribute QnA vo) throws Exception{
     	qnaService.update(vo);
         return "redirect:list";
     }
    
-    // 06. 게시글 삭제
+    // 게시글 삭제
     @RequestMapping("delete")
     public String delete(@RequestParam int bnum) throws Exception{
     	qnaService.delete(bnum);
         return "redirect:list";
     }
 	
+    //게시물 사진 업로드
     @RequestMapping("/photoUpload")
     public String photoUpload(HttpServletRequest request, PhotoVo vo){
         String callback = vo.getCallback();

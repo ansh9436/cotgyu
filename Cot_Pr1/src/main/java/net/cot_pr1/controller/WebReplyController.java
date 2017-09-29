@@ -49,28 +49,20 @@ public class WebReplyController {
   
     }
       
-    // 댓글 목록(@Controller방식 : veiw(화면)를 리턴)
+    // 댓글 목록
     @RequestMapping("list.do")
     public ModelAndView list(@RequestParam int bnum, ModelAndView mav){
         List<WebReply> list = webReplyService.list(bnum);
         
-        // 뷰이름 지정
         mav.setViewName("webboard/replylist");	
-        // 뷰에 전달할 데이터 지정
+     
         mav.addObject("bnum", bnum);
         mav.addObject("list", list);
-        // replyList.jsp로 포워딩
+      
         return mav;
     }
       
-    // 댓글 목록(@RestController Json방식으로 처리 : 데이터를 리턴)
-    @RequestMapping("listJson.do")
-    @ResponseBody // 리턴데이터를 json으로 변환(생략가능)
-    public List<WebReply> listJson(@RequestParam int bnum){
-        List<WebReply> list = webReplyService.list(bnum);
-        return list;
-    }
-    
+    //댓글 삭제
     @RequestMapping("delete")
     public ModelAndView replydelete(@RequestParam int rnum, @RequestParam int bnum) throws Exception{
     	webReplyService.delete(rnum);
@@ -82,6 +74,19 @@ public class WebReplyController {
     	return mav;
     }
     
+  //댓글 수정창으로 연결     
+    @RequestMapping(value="/detail/{rnum}", method=RequestMethod.GET)
+    public ModelAndView replyDetail(@PathVariable("rnum") Integer rnum, ModelAndView mav){
+        WebReply vo = webReplyService.detail(rnum);
+       
+        mav.setViewName("webboard/replymodify");
+       
+        mav.addObject("vo", vo);
+     
+        return mav;
+    }
+    
+    //댓글 수정
     @RequestMapping(value="update", method=RequestMethod.POST)
     public ModelAndView replyupdate(@ModelAttribute WebReply vo,  @RequestParam int bnum, @RequestParam int rnum, @RequestParam String replytext) throws Exception{
     	ModelAndView mav = new ModelAndView();
@@ -93,30 +98,21 @@ public class WebReplyController {
     		
     	return mav; 	
     }
-//댓글 수정창으로 연결     
-    @RequestMapping(value="/detail/{rnum}", method=RequestMethod.GET)
-    public ModelAndView replyDetail(@PathVariable("rnum") Integer rnum, ModelAndView mav){
-        WebReply vo = webReplyService.detail(rnum);
-        // 뷰이름 지정
-        mav.setViewName("webboard/replymodify");
-        // 뷰에 전달할 데이터 지정
-        mav.addObject("vo", vo);
-        // replyDetail.jsp로 포워딩
-        return mav;
-    }
+
   
-  //댓글 수정창으로 연결     
+  //코멘트창으로 연결     
     @RequestMapping(value="/commentwrite/{rnum}", method=RequestMethod.GET)
     public ModelAndView commentwrite(@PathVariable("rnum") Integer rnum, ModelAndView mav){
         WebReply vo = webReplyService.detail(rnum);
-        // 뷰이름 지정
+      
         mav.setViewName("webboard/replycomment");
-        // 뷰에 전달할 데이터 지정
+      
         mav.addObject("vo", vo);
-        // replyDetail.jsp로 포워딩
+      
         return mav;
     }    
     
+    //코멘트 작성
     @RequestMapping(value="comment")
     public ModelAndView replycomment(@ModelAttribute WebReply vo, HttpSession session, @RequestParam int bnum, 
     		@RequestParam String replytext, @RequestParam int regroup, @RequestParam int restep, @RequestParam int reindent){
@@ -129,8 +125,8 @@ public class WebReplyController {
     	String userId = (String)session.getAttribute("userId");
     	vo.setReplyer(userId);
     	
-    	webReplyService.createcomment(vo); //코멘트생성
-    	//실행하고 보여줄 페이지
+    	webReplyService.createcomment(vo); 
+    	
     	bnum = vo.getBnum();        
         mav.addObject("bnum", bnum);
         mav.setViewName("redirect:/webboard/view?bnum={bnum}");
