@@ -1,15 +1,15 @@
 package net.cot_pr1.common;
 
 public class BoardPage {
-	// 페이지당 게시물 수
+	// 페이지당 게시물 
     public static final int PAGE_SCALE = 20;
-    // 화면당 페이지 수
-    public static final int BLOCK_SCALE = 10;
-    private int curPage; // 현재 페이수
+    // 블록 크기(글이 5개가 넘어가면 한 블록 생성)
+    public static final int BLOCK_SCALE = 5;
+    private int curPage; // 현재 페이지 수
     private int prevPage; // 이전 페이지
     private int nextPage; // 다음 페이지
-    private int totPage; // 전체 페이지 갯수
-    private int totBlock; // 전체 페이지 블록 갯수
+    private int totPage; // 전체 페이지 수
+    private int totBlock; // 전체 페이지 블록 수
     private int curBlock; // 현재 페이지 블록 
     private int prevBlock; // 이전 페이지 블록
     private int nextBlock; // 다음 페이지 블록
@@ -22,13 +22,13 @@ public class BoardPage {
     // [이전] 41 42 43 44 45 46 47 48 49 50 <- blockEnd [다음]
     private int blockEnd; // 현재 페이지 블록의 끝번호
     
-    // 생성자
+    
     // BoardPager(레코드 갯수, 현재 페이지 번호)
     public BoardPage(int count, int curPage){
-        curBlock = 1; // 현재 페이지 블록 번호
-        this.curPage = curPage; // 현재 페이지 설정
+        curBlock = 1; // 현재 페이지 블록 번호(기본1)
+        this.curPage = curPage; 
         setTotPage(count); // 전체 페이지 갯수 계산
-        setPageRange(); // 
+        setPageRange(); //시작페이지, 끝페이지 구하기
         setTotBlock(); // 전체 페이지 블록 갯수 계산
         setBlockRange(); // 페이지 블록의 시작, 끝 번호 계산
     }
@@ -52,13 +52,12 @@ public class BoardPage {
     
     public void setPageRange(){
     // WHERE rn BETWEEN #{start} AND #{end}
-        // 시작번호 = (현재페이지-1)*페이지당 게시물수 +1
+        // 시작번호 
         pageBegin = (curPage-1)*PAGE_SCALE;
-        // 끝번호 = 시작번호+페이지당 게시물수 -1
+        // 끝번호 
         pageEnd = pageBegin+PAGE_SCALE;
     }
     
-    // Getter/Setter
     public int getCurPage() {
         return curPage;
     }
@@ -80,6 +79,8 @@ public class BoardPage {
     public int getTotPage() {
         return totPage;
     }
+    
+    //페이지 개수 구하기 
     public void setTotPage(int count) {
         // Math.ceil(실수) 올림 처리
         totPage = (int) Math.ceil(count*1.0 / PAGE_SCALE);
@@ -87,6 +88,7 @@ public class BoardPage {
     public int getTotBlock() {
         return totBlock;
     }
+    
     // 페이지 블록의 갯수 계산(총 100페이지라면 10개의 블록)
     public void setTotBlock() {
         // 전체 페이지 갯수 / 10

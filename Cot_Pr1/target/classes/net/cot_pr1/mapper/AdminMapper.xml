@@ -68,7 +68,7 @@
 		(SELECT count(rnum)  as num from qna_reply)
 		UNION
 		(SELECT count(rnum)  as num from notice_reply)
-        )a
+        )r
 
 		<!-- where절을 include 태그로 삽입 
 		<include refid="search"></include>-->
@@ -90,14 +90,5 @@
     </choose>
 </sql>
  
- <!-- 페이징 sql -->
-<sql id="pagingHeader">
-    SELECT * FROM (
-        SELECT ROWNUM AS rn, A.* FROM (
-</sql>
-<sql id="pagingFooter">
-        ) A
-    ) WHERE rn BETWEEN #{start} AND #{end}
-</sql>
 
  </mapper>

@@ -11,18 +11,15 @@
 <%@ include file="../commons/_header.jspf" %>
 </head>
 <body>
-	<%@ include file="../commons/_top.jspf" %>
-	<div class="center">
+<%@ include file="../commons/_top.jspf" %>
+<div class="center">
 	<div class="boardpadding">
-	<br><br><br>
-	
-	<h3>환영합니다! 로그인을 해주세요!</h3>
-	
-	<button type="button" onclick="location.href='/'" class="btn btn-default">홈</button>
+		<br><br><br>	
+		<h3>환영합니다! 로그인을 해주세요!</h3>
+		<button type="button" onclick="location.href='/'" class="btn btn-default">홈</button>
 	</div>
-	
-	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-	<%@ include file="../commons/_foot.jspf"%>
-	</div>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<%@ include file="../commons/_foot.jspf"%>
+</div>
 </body>
 </html>

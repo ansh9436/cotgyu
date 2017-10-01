@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Cot :: Web게시판</title>
+<title>Cot :: 자유게시판</title>
 <script type="text/javascript" src="/resources/Editors/js/HuskyEZCreator.js" charset="utf-8"></script> 
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.0.min.js"></script>
 
@@ -53,27 +53,30 @@
 		<table width="75%">
 			<tr>
 				<td width="5%">태그</td>	
-				<td><select name="tag" id="tag">     
+				<td>
+				<select name="tag" id="tag">     
 	            <option value="잡담">잡담</option>
 	            <option value="일상">일상</option>
-	            <option value="Help!">Help!</option></select></td>
-	           
+	            <option value="Help!">Help!</option></select>
+	            </td>
 			</tr>
+			
 			<tr>
 				<td>제목</td>
-				<td><input name="title" id="title" size="136" value="${vo.title}">
-	            </td>
+				<td><input name="title" id="title" size="136" value="${vo.title}"></td>
 			</tr>
 			
 			<tr>
 				<td>내용</td>
 				<td style=background-color:white;><textarea name="content" id="content" style="width: 1100px; height: 600px;" >${vo.content}</textarea></td>
 			</tr>
+			
 			<tr>
 				<td colspan="2">
 				<input type="button" class="btn btn-default" id="save" value="저장" /> 
 				<button type="button" class="btn btn-default" onClick="location.href='/freeboard/view?bnum=${vo.bnum}'">취소</button>
 			</tr>
+			
 		</table>
 	</form>
 	</div>

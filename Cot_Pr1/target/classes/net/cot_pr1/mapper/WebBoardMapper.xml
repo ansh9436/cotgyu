@@ -90,13 +90,6 @@
 	    </choose>
 	</sql>
 	 
-	<sql id="pagingHeader">
-	    SELECT BB.* FROM (
-	        SELECT rownum AS rn, A.* FROM (
-	</sql>
-	<sql id="pagingFooter">
-	        ) A
-	    )BB WHERE rn BETWEEN #{start} AND #{end}
-	</sql>
+
 
  </mapper>

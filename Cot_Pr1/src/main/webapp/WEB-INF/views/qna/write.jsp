@@ -9,9 +9,7 @@
 <title>Cot :: 질문게시판</title>
 <script type="text/javascript" src="/resources/Editors/js/HuskyEZCreator.js?ver=1.2" charset="utf-8"></script> 
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.0.min.js"></script>
-
 <script type="text/javascript"> 
-
 	$(function() {
 		var oEditors = [];
 		
@@ -43,40 +41,37 @@
 			 
 		});
 	});
-
-
-
 </script>
-
 <%@ include file="../commons/_header.jspf"%>
 </head>
 <body>
-	<%@ include file="../commons/_top.jspf"%>
-	<div class="center">
+<%@ include file="../commons/_top.jspf"%>
+<div class="center">
 	<div class="studyboard_write">
-	<h3>질문게시판</h3>
-	<br>
-	<h3>게시글 작성</h3>
-	<form id="frm" method="post" action="/qna/insert" enctype="multipart/form-data" method="${method}">
-		<table width="75%">
-			<tr>
-				<td width="5%">제목 </td>
-				<td><input name="title" id="title" size="136"></td>
-			</tr>
-			<tr>
-				<td>내용</td>
-				<td style=background-color:white;><textarea name="content" id="content" style="width: 1100px; height: 600px;"></textarea></td>
-			</tr>
-			<tr>
-				<td colspan="2">
-				<input type="button" class="btn btn-default" id="save" value="저장" /> 
-				<button type="button" class="btn btn-default" onClick="location.href='/qna/list'">목록</button>
-			</tr>
-		</table>
-	</form>
-</div>
-<br><br><br><br><br><br><br><br><br>
-	<%@ include file="../commons/_foot.jspf"%>
+		<h3>질문게시판</h3><br>
+		<h3>게시글 작성</h3>
+		<form id="frm" method="post" action="/qna/insert" enctype="multipart/form-data" method="${method}">
+			<table width="75%">
+				<tr>
+					<td width="5%">제목 </td>
+					<td><input name="title" id="title" size="136"></td>
+				</tr>
+				
+				<tr>
+					<td>내용</td>
+					<td style=background-color:white;><textarea name="content" id="content" style="width: 1100px; height: 600px;"></textarea></td>
+				</tr>
+				
+				<tr>
+					<td colspan="2">
+					<input type="button" class="btn btn-default" id="save" value="저장" /> 
+					<button type="button" class="btn btn-default" onClick="location.href='/qna/list'">목록</button>
+				</tr>
+			</table>
+		</form>
 	</div>
+<br><br><br><br><br><br><br><br><br>
+<%@ include file="../commons/_foot.jspf"%>
+</div>
 </body>
 </html>

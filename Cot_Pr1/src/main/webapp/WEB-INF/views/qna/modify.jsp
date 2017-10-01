@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Cot :: Web게시판</title>
+<title>Cot :: 질문 게시판</title>
 <script type="text/javascript" src="/resources/Editors/js/HuskyEZCreator.js" charset="utf-8"></script> 
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.0.min.js"></script>
 
@@ -36,42 +36,39 @@
 			 });
 	});
 
-
 </script>
-
 <%@ include file="../commons/_header.jspf"%>
 </head>
 <body>
-	<%@ include file="../commons/_top.jspf"%>
+<%@ include file="../commons/_top.jspf"%>
 <div class="center">
-<div class="boardView">
-	<h3>질문게시판</h3>
-	<br>
-	<h3>게시물 수정</h3>
-	<form id="frm" method="post" action="/qna/update" enctype="multipart/form-data">
-		<input type="hidden" name="bnum" value="${vo.bnum}">
-		<table width="75%">
+	<div class="boardView">
+		<h3>질문게시판</h3>
+		<br>
+		<h3>게시물 수정</h3>
+		<form id="frm" method="post" action="/qna/update" enctype="multipart/form-data">
+			<input type="hidden" name="bnum" value="${vo.bnum}">
+			<table width="75%">	
+				<tr>
+					<td width="75%">제목</td>
+					<td><input name="title" id="title" size="136" value="${vo.title}"></td>
+				</tr>
 		
-			<tr>
-				<td width="75%">제목</td>
-				<td><input name="title" id="title" size="136" value="${vo.title}">
-	            </td>
-			</tr>
-			
-			<tr>
-				<td>내용</td>
-				<td style=background-color:white;><textarea name="content" id="content" style="width: 1100px; height: 600px;" >${vo.content}</textarea></td>
-			</tr>
-			<tr>
-				<td colspan="2">
-				<input type="button" class="btn btn-default" id="save" value="저장" /> 
-				<button type="button" class="btn btn-default" onClick="location.href='/qna/view?bnum=${vo.bnum}'">취소</button>
-			</tr>
-		</table>
-	</form>
+				<tr>
+					<td>내용</td>
+					<td style=background-color:white;><textarea name="content" id="content" style="width: 1100px; height: 600px;" >${vo.content}</textarea></td>
+				</tr>
+				
+				<tr>
+					<td colspan="2">
+					<input type="button" class="btn btn-default" id="save" value="저장" /> 
+					<button type="button" class="btn btn-default" onClick="location.href='/qna/view?bnum=${vo.bnum}'">취소</button>
+				</tr>
+			</table>
+		</form>
 	</div>
-	<br><br><br><br><br><br><br><br><br>
-	<%@ include file="../commons/_foot.jspf"%>
+<br><br><br><br><br><br><br><br><br>
+<%@ include file="../commons/_foot.jspf"%>
 </div>
 </body>
 </html>

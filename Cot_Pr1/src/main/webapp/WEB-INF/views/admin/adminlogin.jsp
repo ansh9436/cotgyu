@@ -11,12 +11,13 @@
 <%@ include file="../commons/_header.jspf" %>
 </head>
 <body>
+<!-- 관리자 비밀번호 확인 창 -->
 	<%@ include file="../commons/_top.jspf" %>
 	<div class="center">
 	<div class="container">
 		<div class="row">
 			<div class="span12">
-				<section id="typography">
+				
 				<div class="page-header">
 					<h3>관리자</h3>
 				</div>

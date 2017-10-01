@@ -18,11 +18,10 @@
 		<input type="hidden" name="reindent" id="reindent" value="${vo.reindent}">
 		<input type="hidden" name="bnum" id="bnum" value="${vo.bnum}"> 
 		<input type="hidden" name="rnum" id="rnum" value="${vo.rnum}">
+		
 		<br>
-		
-			<button type="submit" class="btn btn-default">작성</button>
-			<button type="button" class="btn btn-default" onClick="location.href='/freeboard/view?bnum=${vo.bnum}'">취소</button>
-		
+		<button type="submit" class="btn btn-default">작성</button>
+		<button type="button" class="btn btn-default" onClick="location.href='/freeboard/view?bnum=${vo.bnum}'">취소</button>	
 	</form>
 </body>
 </html>

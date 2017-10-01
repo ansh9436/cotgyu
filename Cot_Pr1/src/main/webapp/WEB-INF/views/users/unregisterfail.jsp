@@ -7,12 +7,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Cot :: 내 정보</title>
-
 <%@ include file="../commons/_header.jspf" %>
 </head>
 <body>
-	<%@ include file="../commons/_top.jspf" %>
-	<div class="center">
+<%@ include file="../commons/_top.jspf" %>
+<div class="center">
 	<div class="container">
 		<div class="row">
 			<div class="span12">
@@ -23,12 +22,11 @@
 				비밀번호를 다시 확인해주세요.<br><br>
 				<button type="button" onclick="location.href='/'" class="btn btn-default">홈</button>
 				<button type="button" onclick="location.href='/users/unregisterform'" class="btn btn-default">회원탈퇴</button>
-		
 			</div>
 		</div>
 	</div>
-	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-	<%@ include file="../commons/_foot.jspf"%>
-	</div>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<%@ include file="../commons/_foot.jspf"%>
+</div>
 </body>
 </html>

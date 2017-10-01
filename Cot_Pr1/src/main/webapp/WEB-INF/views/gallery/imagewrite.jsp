@@ -32,23 +32,20 @@ $("#save").click(function(){
 	<%@ include file="../commons/_top.jspf"%>
 <br>
 <div class="center">
-<div class="ImageGallery-writebutton">
-<h3>이미지 등록</h3>
-<br><br>
-<form id=form1 action="${path}/gallery/insert" method="post" enctype="multipart/form-data">
-        <input type="file" name="file">
-        
-       
-               사진제목을 입력해주세요!<input type="text" name="imgname" id="imgname">
-        <br><br>
-        <input type="button" class="btn btn-default" id="save" value="업로드" /> 
-        <button type="button" class="btn btn-default" onClick="location.href='/gallery/list'">갤러리로</button>    
-    </form>
-    
-   
- </div>
+	<div class="ImageGallery-writebutton">
+		<h3>이미지 등록</h3>
+		<br><br>
+		<form id=form1 action="${path}/gallery/insert" method="post" enctype="multipart/form-data">
+		        <input type="file" name="file">
+		               사진제목을 입력해주세요!<input type="text" name="imgname" id="imgname">
+		        <br><br>
+		        <input type="button" class="btn btn-default" id="save" value="업로드" /> 
+		        <button type="button" class="btn btn-default" onClick="location.href='/gallery/list'">갤러리로</button>    
+		</form>  
+	 </div>
+	 
  <br><br><br><br><br><br><br><br><br> <br><br><br><br><br><br><br><br><br> <br><br><br><br><br><br><br><br><br> <br><br><br><br>
-	<%@ include file="../commons/_foot.jspf"%>
+<%@ include file="../commons/_foot.jspf"%>
  </div>
 </body>
 </html>

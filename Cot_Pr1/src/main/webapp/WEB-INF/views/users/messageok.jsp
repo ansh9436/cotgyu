@@ -11,17 +11,16 @@
 <title>쪽지 보내기</title>
 <%@ include file="../commons/_header.jspf"%>
 <script>
+//창닫기
 $(document).ready(function() {
     $("#close").click(function() {
         window.open('about:blank', '_self').close();
     });
 });
-
 </script>
 </head>
 <body>
-<h3>쪽지 전송이 성공하였습니다.</h3><br>
-<button type="button" id="close" class="btn btn-default">창 닫기</button>
-
+	<h3>쪽지 전송이 성공하였습니다.</h3><br>
+	<button type="button" id="close" class="btn btn-default">창 닫기</button>
 </body>
 </html>

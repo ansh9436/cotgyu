@@ -109,9 +109,9 @@ public class AdminController {
 			
 			
 			//레코드의 개수
-			int count = adminService.countreply(searchOption, keyword);
+			int countreply = adminService.countreply(searchOption, keyword);
 			//페이지
-			BoardPage boardPage = new BoardPage(count, curPage);
+			BoardPage boardPage = new BoardPage(countreply, curPage);
 			int start = boardPage.getPageBegin();
 			int end = boardPage.getPageEnd();
 			List<WebReply> list = adminService.Viewreplylist(start, end, searchOption, keyword);
@@ -120,7 +120,7 @@ public class AdminController {
 			//데이터를 맵에 저장
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("list", list); //list
-			map.put("count", count); //레코드 개수
+			map.put("countreply", countreply); //레코드 개수
 			map.put("searchOption", searchOption); //검색 옵션
 			map.put("keyword", keyword); //검색 키워드
 			map.put("boardPage", boardPage); 

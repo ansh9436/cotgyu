@@ -11,14 +11,14 @@
 <%@ include file="../commons/_header.jspf" %>
 </head>
 <body>
-	<%@ include file="../commons/_top.jspf" %>
-	<div class="center">
+<%@ include file="../commons/_top.jspf" %>
+<div class="center">
 	<div class="boardpadding">
-	<br><br><br>
-	<h3>${userId} 입니다.</h3><br>
+		<br><br><br>
+		<h3>${userId} 입니다.</h3><br>
 	</div>
-	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-	<%@ include file="../commons/_foot.jspf"%>
-	</div>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<%@ include file="../commons/_foot.jspf"%>
+</div>
 </body>
 </html>

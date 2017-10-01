@@ -1,5 +1,5 @@
   <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-  
+  <!-- 공통 바닥부분 -->
    <footer style="background-color:#EEE0E0">
         <div class="container">
             <div class="row">

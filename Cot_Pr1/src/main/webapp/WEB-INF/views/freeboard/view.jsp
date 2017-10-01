@@ -12,13 +12,9 @@
 <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
-		listReply(); // **댓글 목록 불러오기
-		//listReply2(); // ** json 리턴방식
-
+		listReply(); // 댓글 목록 
 	});
 
-	// Controller방식
-	// **댓글 목록1
 	function listReply() {
 		$.ajax({
 			type : "get",
@@ -30,35 +26,10 @@
 		});
 	}
 
-	// RestController방식 (Json)
-	// **댓글 목록2 (json)
-	function listReply2() {
-		$.ajax({
-			type : "get",
-			//contentType: "application/json", ==> 생략가능(RestController이기때문에 가능)
-			url : "${path}/freereply/listJson.do?bnum=${dto.bnum}",
-			success : function(result) {
-				console.log(result);
-				var output = "<table>";
-				for ( var i in result) {
-					output += "<tr>";
-					output += "<td>" + result[i].replyer;
-					output += "(" + changeDate(result[i].date) + ")<br>";
-					output += result[i].replytext + "</td>";
-					output += "<tr>";
-				}
-				output += "</table>";
-				$("#listReply").html(output);
-			}
-		});
-	}
-
 	//쪽지 창 띄우기
 	function openMessage(writer){  
 	    window.open("/users/formmessage?writer="+writer, "메시지 보내기", "width=400, height=500,resizable=yes" );  
 	}  
-
-
 </script>
 </head>
 <body>
@@ -71,16 +42,17 @@
 	<h3>${dto.title}</h3>
 	<tr>
 		<td>
-			<div style="display: inline;">
+		<div style="display: inline;">
 			&nbsp;<img src="/resources/profile/${profileimg}" width="50" height="40">
-			<c:if test="${not empty sessionScope.userId}">			
-			<a href="#" onClick="javascript_:openMessage('${dto.writer}');" style="color:black;">
-			</c:if>
+			<c:if test="${not empty sessionScope.userId}">
+			<c:if test="${sessionScope.userId ne dto.writer  }">			
+				<a href="#" onClick="javascript_:openMessage('${dto.writer}');" style="color:black;">
+			</c:if></c:if>
 			${dto.writer}</a>
-			</div>
-			<div style="float: right; display: inline;" >
+		</div>
+		<div style="float: right; display: inline;" >
 			태그: ${dto.tag} &emsp;작성일자 : <fmt:formatDate value="${dto.date}" pattern="yyyy-MM-dd a HH:mm" /> &emsp; 조회수 : ${dto.hit}
-			</div>
+		</div>
 		</td>
 	</tr>
 	
@@ -91,28 +63,21 @@
 		</div>
 	</td>
 	</tr>
-	
-		</table>
+	</table>
 			<!-- 게시물번호를 hidden으로 처리 -->
 			<input type="hidden" name="bnum" value="${dto.bnum}">
-			<c:if test="${sessionScope.userId == dto.writer}">				
-				<button type="button" class="btn btn-default" onClick="location.href='updatedetail/${dto.bnum}'">수정</button>
-				<button type="button" class="btn btn-default" onClick="location.href='delete?bnum=${dto.bnum}'">삭제</button>
-			</c:if>
+		<c:if test="${sessionScope.userId == dto.writer}">				
+			<button type="button" class="btn btn-default" onClick="location.href='updatedetail/${dto.bnum}'">수정</button>
+			<button type="button" class="btn btn-default" onClick="location.href='delete?bnum=${dto.bnum}'">삭제</button>
+		</c:if>
 			<button type="button" class="btn btn-default" onClick="location.href='/freeboard/list'">목록</button>		
 	</div>
-	
 	<br><br>
-	
+
 	<div class="boardpadding">
-		<!-- **댓글 목록 출력할 위치 -->
-		<div id="listReply">
-		</div>
-		
 	<form name="form2" method="post" action="/freereply/insert.do" method="${method}">
 		<div style="width: 15%;">
 			<br>
-			<!-- **로그인 한 회원에게만 댓글 작성폼이 보이게 처리 -->
 			<c:if test="${sessionScope.userId != null}">
 				${sessionScope.userId}
 				<textarea rows="5" cols="82" name="replytext" placeholder="댓글을 작성해주세요"></textarea>
@@ -123,12 +88,13 @@
 		</div>
 	</form>
 	<br>
+	<!-- **댓글 목록 출력할 위치 -->
+		<div id="listReply"></div>
+		
+	</div>
 	
-	</div>
-	<div>
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-	<%@ include file="../commons/_foot.jspf"%>
-	</div>
+<%@ include file="../commons/_foot.jspf"%>
 	</div>
 </body>
 </html>

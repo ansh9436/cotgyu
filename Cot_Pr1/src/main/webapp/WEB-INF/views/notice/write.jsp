@@ -43,42 +43,38 @@
 			 
 		});
 	});
-
-
-
-
 </script>
-
 <%@ include file="../commons/_header.jspf"%>
 </head>
 <body>
-	<%@ include file="../commons/_top.jspf"%>
-	<div class="center">
+<%@ include file="../commons/_top.jspf"%>
+<div class="center">
 	<div class="studyboard_write">
-	<h3>공지사항</h3>
-	<br>
-	<h3>게시글 작성</h3>
-	<form id="frm" method="post" action="/notice/insert" enctype="multipart/form-data">
-		<table width="75%">
-			<tr>
-				<td width="5%">제목 </td>
-				<td><input name="title" id="title" size="136"></td>
-			</tr>
-			
-			<tr>
-				<td>내용</td>
-				<td style=background-color:white;><textarea name="content" id="content"  style="width: 1100px; height: 600px;"></textarea></td>
-			</tr>
-			<tr>
-				<td colspan="2">
-				<input type="button" id="save" class="btn btn-default" value="저장" /> 		
-				<button type="button" class="btn btn-default" onClick="location.href='/notice/list'">취소</button>
-			</tr>
-		</table>
-	</form>
-</div>
-<br><br><br><br><br><br><br><br><br>
-	<%@ include file="../commons/_foot.jspf"%>
+		<h3>공지사항</h3>
+		<br>
+		<h3>게시글 작성</h3>
+		<form id="frm" method="post" action="/notice/insert" enctype="multipart/form-data">
+			<table width="75%">
+				<tr>
+					<td width="5%">제목 </td>
+					<td><input name="title" id="title" size="136"></td>
+				</tr>
+				
+				<tr>
+					<td>내용</td>
+					<td style=background-color:white;><textarea name="content" id="content"  style="width: 1100px; height: 600px;"></textarea></td>
+				</tr>
+				
+				<tr>
+					<td colspan="2">
+					<input type="button" id="save" class="btn btn-default" value="저장" /> 		
+					<button type="button" class="btn btn-default" onClick="location.href='/notice/list'">취소</button>
+				</tr>
+			</table>
+		</form>
 	</div>
+<br><br><br><br><br><br><br><br><br>
+<%@ include file="../commons/_foot.jspf"%>
+</div>
 </body>
 </html>

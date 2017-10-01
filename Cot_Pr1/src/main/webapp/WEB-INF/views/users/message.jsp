@@ -7,40 +7,39 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Cot :: 쪽지함</title>
-
 <%@ include file="../commons/_header.jspf" %>
 <script>
+//메세지 보내기
 function openMessage(writer){  
     window.open("/users/formmessage?writer="+writer, "메시지 보내기", "width=400, height=500,resizable=yes" );  
 }  
-
 </script>
 </head>
 <body>
-	<%@ include file="../commons/_top.jspf" %>
-	<div class="center">
+<%@ include file="../commons/_top.jspf" %>
+<div class="center">
 	<div class="boardpadding">
 	<br><br><br>
 		<h4 style="color:grey">보낸 사람 아이디를 클릭하여 답장을 보낼 수 있습니다.</h4>
-	
+
 		<table border="2" width="75%" height="50%" style= "background-color: white">
-		<tr align="center">
-		<td width="8%">보낸 사람</td>
-		<td width="45%">내용</td>
-		<td width="10%">날짜</td>
-		</tr>
-		<c:forEach var="row" items="${message}">
-		<tr align="center">
-		<td><a href="#" onClick="javascript_:openMessage('${row.senduser}');" style="color:black;">${row.senduser}</a></td>
-		<td align="left">&nbsp; ${row.content}</td>
-		<td><fmt:formatDate value="${row.date}" pattern="yyyy-MM-dd a HH:mm" /></td>
-		</tr>
-		
-		</c:forEach>
+			<tr align="center">
+				<td width="8%">보낸 사람</td>
+				<td width="45%">내용</td>
+				<td width="10%">날짜</td>
+			</tr>
+			
+			<c:forEach var="row" items="${message}">
+			<tr align="center">
+				<td><a href="#" onClick="javascript_:openMessage('${row.senduser}');" style="color:black;">${row.senduser}</a></td>
+				<td align="left">&nbsp; ${row.content}</td>
+				<td><fmt:formatDate value="${row.date}" pattern="yyyy-MM-dd a HH:mm" /></td>
+			</tr>
+			</c:forEach>
 		</table>
 	</div>
-	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-	<%@ include file="../commons/_foot.jspf"%>
-	</div>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<%@ include file="../commons/_foot.jspf"%>	
+</div>
 </body>
 </html>

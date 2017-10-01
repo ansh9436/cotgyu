@@ -65,14 +65,6 @@
 	    </choose>
 	</sql>
 	 
-	
-	<sql id="pagingHeader">
-	    SELECT * FROM (
-	        SELECT ROWNUM AS rn, A.* FROM (
-	</sql>
-	<sql id="pagingFooter">
-	        ) A
-	    ) WHERE rn BETWEEN #{start} AND #{end}
-	</sql>
+
 
  </mapper>

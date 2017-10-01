@@ -85,7 +85,6 @@ public class UserService implements UserDetailsService{
 			roles.add(role);
 			user.setAuthorities(roles);		
 			return user;
-
 		}
 		role.setName("ROLE_USER");
 		List<Role> roles = new ArrayList<Role>();

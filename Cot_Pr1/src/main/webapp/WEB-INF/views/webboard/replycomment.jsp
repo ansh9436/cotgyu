@@ -5,11 +5,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
 </head>
 <body> 
-	<br>
-	<코멘트><br>
+	<br><코멘트><br>
 	${sessionScope.userId}
 	<form name="form4" method="post" action="/webreply/comment" method="${method}">
 		<textarea name="replytext" id="replytext" rows="5" cols="82" ></textarea>
@@ -22,7 +20,6 @@
 		<br>
 		<button type="submit" class="btn btn-default">작성</button>
 		<button type="button" class="btn btn-default" onClick="location.href='/webboard/view?bnum=${vo.bnum}'">취소</button>
-	
 	</form>
 </body>
 </html>
