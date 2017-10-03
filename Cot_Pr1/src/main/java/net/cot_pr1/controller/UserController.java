@@ -389,6 +389,21 @@ public class UserController {
 			return mav;
 		}
 		
+		//보낸메세지보기 
+		@RequestMapping(value = "/viewsendmessage", method = RequestMethod.GET)
+		public ModelAndView viewsendmessage(HttpSession session) {
+			
+			String userid = (String)session.getAttribute("userId");
+			List<Message> message = userService.viewsendmessage(userid);
+					
+			ModelAndView mav = new ModelAndView();
+			mav.addObject("message", message);
+			mav.setViewName("/users/viewsendmessage");
+			return mav;
+		}
+
+		
+		
 		//탈퇴창 이동
 		@RequestMapping(value = "/unregisterform")
 		public ModelAndView unregisterform(HttpSession session) {

@@ -103,7 +103,7 @@ public class AdminController {
 	
 	//댓글 모두 보여주기
 		@RequestMapping(value="replylist")
-	    public ModelAndView replylist(@RequestParam(defaultValue="title") String searchOption, 
+	    public ModelAndView replylist(@RequestParam(defaultValue="replytext") String searchOption, 
 				@RequestParam(defaultValue="") String keyword,
 				@RequestParam(defaultValue="1") int curPage) throws Exception{
 			
@@ -116,7 +116,7 @@ public class AdminController {
 			int end = boardPage.getPageEnd();
 			List<WebReply> list = adminService.Viewreplylist(start, end, searchOption, keyword);
 			
-			
+			System.out.println(countreply);
 			//데이터를 맵에 저장
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("list", list); //list

@@ -40,7 +40,7 @@ public class FreeReplyController {
         int rnum = vo.getRnum();  
         vo.setRegroup(rnum);
         freereplyService.create_setgroup(vo);
-        
+        freereplyService.stepshape(vo);
         //댓글 작성한 글로 가기위해 bnum 가져오기
         bnum = vo.getBnum();
         
@@ -66,15 +66,7 @@ public class FreeReplyController {
         
         return mav;
     }
-    /* 지워도 될듯? 현재는 윗방법 쓰고있음 
-    // 댓글 목록(@RestController Json방식으로 처리 : 데이터를 리턴) >> 
-    @RequestMapping("listJson.do")
-    @ResponseBody // 리턴데이터를 json으로 변환(생략가능)
-    public List<FreeReply> listJson(@RequestParam int bnum){
-        List<FreeReply> list = freereplyService.list(bnum);
-        return list;
-    }
-    */
+
     //댓글 삭제
     @RequestMapping("delete")
     public ModelAndView replydelete(@RequestParam int rnum, @RequestParam int bnum) throws Exception{
@@ -139,6 +131,7 @@ public class FreeReplyController {
     	vo.setRegroup(regroup);
     	vo.setRestep(restep);
     	vo.setReindent(reindent);
+    	
     	freereplyService.stepshape(vo); 
     	
     	String userId = (String)session.getAttribute("userId");

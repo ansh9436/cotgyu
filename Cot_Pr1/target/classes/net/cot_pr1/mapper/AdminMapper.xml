@@ -6,6 +6,7 @@
  
   	<!--  게시물 리스트 -->
  	<select id="viewlist" resultType="net.cot_pr1.domain.FreeBoard">	
+ 		SELECT bnum, title, writer, date ,boardtag from (
  		(SELECT bnum,title,writer,date,boardtag from web_board )
 		UNION
 		(SELECT bnum as bnum, title as title, writer as writer, date as date, boardtag as boardtag from free_board)
@@ -15,10 +16,9 @@
 		(SELECT bnum as bnum, title as title, writer as writer, date as date, boardtag as boardtag from notice)
 		UNION
 		(SELECT imgid as bnum, imgname as title, imgwriter as writer ,imgdate as date, boardtag as boardtag from gallery)
+		)g
 		
-		<!-- WHERE절을 include 태그로 삽입 
-   		<include refid="search"></include>-->
-   		
+   		<include refid="search"></include>		
 		ORDER BY date desc LIMIT ${start}, 20;
 	</select>
 	
@@ -37,12 +37,13 @@
 		(SELECT count(imgid)  as num from gallery)
         
         )a
-		<!-- where절을 include 태그로 삽입 
+		<!-- 총합계를 내는 방식이라 일반 게시판과 같은 방식으로 검색 옵션을 적용할 수 없음...
 		<include refid="search"></include>-->
 	</select>
 	
 	<!--  댓글 리스트 -->
- 	<select id="viewreplylist" resultType="net.cot_pr1.domain.WebReply">	
+ 	<select id="viewreplylist" resultType="net.cot_pr1.domain.WebReply">
+ 		SELECT rnum, bnum, replyer, replytext ,date, replytag from (	
  		(SELECT rnum,bnum,replyer,replytext ,date, replytag from web_reply )
 		UNION
 		(SELECT rnum as rnum, bnum as bnum ,replyer as replyer,replytext as replytext ,date as date, replytag as replytag from free_reply)
@@ -50,27 +51,26 @@
 		(SELECT rnum as rnum, bnum as bnum ,replyer as replyer,replytext as replytext , date as date, replytag as replytag from qna_reply)
 		UNION
 		(SELECT rnum as rnum, bnum as bnum ,replyer as replyer,replytext as replytext , date as date, replytag as replytag from notice_reply)
- 	
-		<!-- WHERE절을 include 태그로 삽입 
-   		<include refid="search"></include>-->
+ 		)b
+   		<include refid="replysearch"></include>
   
 		ORDER BY date desc LIMIT ${start}, 20;	 	
 	</select>
 	
 	<!-- 댓글 수 카운트 -->
 	<select id="countreply" resultType="int">
-			select sum(num) from(
+			select sum(snum) from(
 		
-		(SELECT count(rnum)  as num from web_reply )
+		(SELECT count(rnum)  as snum from web_reply )
 		UNION
-		(SELECT count(rnum)  as num from free_reply)
+		(SELECT count(rnum)  as snum from free_reply)
 		UNION
-		(SELECT count(rnum)  as num from qna_reply)
+		(SELECT count(rnum)  as snum from qna_reply)
 		UNION
-		(SELECT count(rnum)  as num from notice_reply)
+		(SELECT count(rnum)  as snum from notice_reply)
         )r
 
-		<!-- where절을 include 태그로 삽입 
+		<!-- 
 		<include refid="search"></include>-->
 	</select>
 	
@@ -80,8 +80,21 @@
         <!-- 검색옵션이 전체 검색일 경우 -->
         <when test="searchOption == 'all'">
             WHERE writer like '%${keyword}%'
-            OR content like '%${keyword}%'
             OR title like '%${keyword}%'
+        </when>
+        <!-- 전체 검색이 아닐 경우 -->
+        <otherwise>
+            WHERE ${searchOption} like '%${keyword}%'
+        </otherwise>
+    </choose>
+</sql>
+
+<sql id="replysearch">
+    <choose>
+        <!-- 검색옵션이 전체 검색일 경우 -->
+        <when test="searchOption == 'all'">
+            WHERE replyer like '%${keyword}%'
+            OR replytext like '%${keyword}%'
         </when>
         <!-- 전체 검색이 아닐 경우 -->
         <otherwise>

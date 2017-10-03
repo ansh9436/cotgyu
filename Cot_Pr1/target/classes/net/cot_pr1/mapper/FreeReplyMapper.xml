@@ -6,10 +6,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <!-- 다른 mapper와 중복되지 않도록 네임스페이스 기재 -->
 <mapper namespace="FreeReplyMapper">
      
-    <!-- 댓글 입력  문제점 중간에 삭제되면 그룹이름이 꼬임-->
+    <!-- 댓글 입력 -->
     <insert id="insertReply" parameterType="net.cot_pr1.domain.FreeReply" useGeneratedKeys="true" keyProperty="rnum">
         INSERT INTO free_reply (rnum, bnum, replytext, replyer ,regroup, restep, reindent)
-        VALUES (0, #{bnum}, #{replytext}, #{replyer}, 0, 0,0)	
+        VALUES (0, #{bnum}, #{replytext}, #{replyer}, 0, 1,0)	
     </insert>
    
     <!-- 그룹 이름 설정-->
@@ -19,11 +19,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         WHERE rnum = #{rnum}
     </update>
     
-    <!-- 댓글입력할때 그룹넘버 설정 ㅁㅇㅇㅈㅇ실패    수정or삭제-->
-    <update id="setreGroup" parameterType="net.cot_pr1.domain.FreeReply" useGeneratedKeys="true">
-    	UPDATE free_reply set regroup = last_insert_id()
-    	
-    </update>
     
     <!-- 댓글 목록 -->
     <select id="listReply" resultType="net.cot_pr1.domain.FreeReply">
@@ -55,13 +50,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <!--  댓글 코맨트 -->
     <insert id="insertReplyComment">
     	INSERT INTO free_reply (rnum, bnum, replytext, replyer ,regroup, restep , reindent)
-        VALUES (0, #{bnum}, #{replytext}, #{replyer}, #{regroup} ,#{restep}+1 , #{reindent}+1) 
+    	VALUES (0, #{bnum}, #{replytext}, #{replyer}, #{regroup} ,#{restep}+1 , #{reindent}+1)
+    	
+     
     </insert>
     
     <!-- 스탭  순서 정리하기 -->
     <update id="replyStepShape">
-    	UPDATE free_reply
-    	SET restep = restep + 1
+    UPDATE free_reply
+	SET restep = restep +1
     	WHERE regroup = #{regroup} and restep > #{restep} 
     </update>
     

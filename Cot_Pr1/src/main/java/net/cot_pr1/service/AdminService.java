@@ -24,7 +24,7 @@ public class AdminService {
 	}
 	
 	public int countreply(String searchOption, String keyword) {
-		return adminDao.countboard(searchOption, keyword);
+		return adminDao.countreply(searchOption, keyword);
 	}
 
 	public List<WebReply> Viewreplylist(int start, int end, String searchOption, String keyword) {

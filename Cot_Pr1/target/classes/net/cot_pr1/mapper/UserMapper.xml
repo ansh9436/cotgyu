@@ -59,6 +59,11 @@
  	select senduser, receiver, content, date from message where receiver = #{userid} order by date desc
  	</select>
  	
+ 	<!--  보낸메시지 보기 -->
+ 	<select id="viewsendMessage" resultType="net.cot_pr1.domain.Message">	
+ 	select senduser, receiver, content, date from message where senduser = #{userid} order by date desc
+ 	</select>
+ 	
  	<!--  회원탈퇴 -->
  	<delete id="unregister">
 	delete from users where userid = #{userid} 	
