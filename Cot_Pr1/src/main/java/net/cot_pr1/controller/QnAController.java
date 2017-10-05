@@ -73,13 +73,22 @@ public class QnAController {
 	
 	//게시물 작성
 	@RequestMapping(value="insert", method=RequestMethod.POST)
-	public String insert(@ModelAttribute QnA vo, HttpSession session) throws Exception{
-	  
-	    String writer = (String) session.getAttribute("userId");
-	  
+	public ModelAndView insert(@ModelAttribute QnA vo, HttpSession session) throws Exception{
+		ModelAndView mav = new ModelAndView();
+	    
+		String writer = (String) session.getAttribute("userId");
+	    vo.setAnswer("q");
 	    vo.setWriter(writer);
+	    
 	    qnaService.create(vo);
-	    return "redirect:list";
+	    
+	    int bnum = vo.getBnum();
+	    System.out.println(bnum);
+	  	qnaService.setgroup(vo);
+	    
+	   
+	    mav.setViewName("redirect:list");
+	    return mav;
 	}
 
 	//게시물 보기
@@ -94,24 +103,44 @@ public class QnAController {
         ModelAndView mav = new ModelAndView();
       
         mav.setViewName("qna/view");
-     
         mav.addObject("dto", qnaService.read(bnum));
         mav.addObject("profileimg",userimg);
         return mav;
     }
-  
 	
+	//답변작성화면 이동
+	@RequestMapping(value="writeanswer/{bnum}", method=RequestMethod.GET)
+    public ModelAndView writeanswer(@PathVariable("bnum") int bnum,ModelAndView mav){
+		
+		mav.setViewName("qna/writeanswer");
+	    mav.addObject("bnum", bnum);
+		
+        return mav; 
+    }
+		
+	//글 답변
+	@RequestMapping(value="answer", method=RequestMethod.POST)
+	public String answer(@ModelAttribute QnA vo, HttpSession session, @RequestParam int bnum) throws Exception{
+	  
+	    String writer = (String) session.getAttribute("userId");
+	    vo.setQgroup(bnum);
+	    vo.setWriter(writer);
+	    vo.setAnswer("a");
+	  
+	    qnaService.create(vo);
+	    return "redirect:list";
+	}
+ 
 	//글 수정창으로 연결     
     @RequestMapping(value="/updatedetail/{bnum}", method=RequestMethod.GET)
     public ModelAndView boardDetail(@PathVariable("bnum") Integer bnum, ModelAndView mav){
         QnA vo = qnaService.detail(bnum);
      
-        mav.setViewName("qna/modify");
-       
-        mav.addObject("vo", vo);
-       
+        mav.setViewName("qna/modify");       
+        mav.addObject("vo", vo);     
         return mav;
     }
+    
     //게시글 수정
     @RequestMapping(value="update", method=RequestMethod.POST)
     public String update(@ModelAttribute QnA vo) throws Exception{

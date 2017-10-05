@@ -77,7 +77,6 @@ public class UserController {
 	public String create(@Valid User user, BindingResult bindingResult){
 		log.debug("User : {}", user);
 		if(bindingResult.hasErrors()){
-			System.out.println("유효성검사");
 			
 			log.debug("Binding Result has error");
 			List<ObjectError> errors = bindingResult.getAllErrors();

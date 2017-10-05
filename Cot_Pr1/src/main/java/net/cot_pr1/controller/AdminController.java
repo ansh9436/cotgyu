@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -116,7 +117,6 @@ public class AdminController {
 			int end = boardPage.getPageEnd();
 			List<WebReply> list = adminService.Viewreplylist(start, end, searchOption, keyword);
 			
-			System.out.println(countreply);
 			//데이터를 맵에 저장
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("list", list); //list
@@ -134,8 +134,50 @@ public class AdminController {
 		
 	    }
 	
-	
-	
+		//유저 리스트 
+		@RequestMapping(value="userlist")
+	    public ModelAndView userlist(@RequestParam(defaultValue="name") String searchOption, 
+				@RequestParam(defaultValue="") String keyword,
+				@RequestParam(defaultValue="1") int curPage) throws Exception{
+			
+			
+			//레코드의 개수
+			int countuser = adminService.countuser(searchOption, keyword);
+			//페이지
+			BoardPage boardPage = new BoardPage(countuser, curPage);
+			int start = boardPage.getPageBegin();
+			int end = boardPage.getPageEnd();
+			List<User> list = adminService.Viewuserlist(start, end, searchOption, keyword);
+			
+			//데이터를 맵에 저장
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("list", list); //list
+			map.put("countuser", countuser); //레코드 개수
+			map.put("searchOption", searchOption); //검색 옵션
+			map.put("keyword", keyword); //검색 키워드
+			map.put("boardPage", boardPage); 
+			
+			//모델과 뷰
+			ModelAndView mav = new ModelAndView();
+			mav.addObject("map", map); // 맵에 저장된 데이터를 mav에 저장
+	    			
+			mav.setViewName("/admin/adminmode_users");
+			return mav;
+		
+	    }
+		
+		//관리자 회원탈퇴
+		@RequestMapping("/userunregister/{username}")
+		public ModelAndView userUnregi(@PathVariable("username") String username){
+			
+			userService.unregister(username);
+			
+			
+			ModelAndView mav = new ModelAndView();
+	    			
+			mav.setViewName("redirect:/admin/userlist");
+			return mav;
+		}
 	
 }
 	

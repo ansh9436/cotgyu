@@ -29,7 +29,7 @@ public class QnAService {
 	}
 
 	public void create(QnA vo) throws Exception {
-		qnaDao.create(vo);	
+		qnaDao.create(vo);
 	}
 
 	public void uphit(int bnum) throws Exception {
@@ -58,6 +58,10 @@ public class QnAService {
 
 	public List<QnA> popboard() throws Exception{
 		return qnaDao.popboard();
+	}
+
+	public void setgroup(QnA vo) {
+		qnaDao.setgroup(vo);
 	}
 
 }

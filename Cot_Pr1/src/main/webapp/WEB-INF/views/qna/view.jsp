@@ -67,6 +67,11 @@
 					<button type="button" class="btn btn-default" onClick="location.href='updatedetail/${dto.bnum}'">수정</button>
 					<button type="button" class="btn btn-default" onClick="location.href='delete?bnum=${dto.bnum}'">삭제</button>
 				</c:if>
+				<c:if test="${sessionScope.userId != null}">
+				<!-- 질문게시글에만 답변버튼 생성 -->
+				<c:if test="${dto.answer =='q'}">
+				<button type="button" class="btn btn-default" onClick="location.href='/qna/writeanswer/${dto.bnum}'">답변</button>
+				</c:if></c:if>
 				<button type="button" class="btn btn-default" onClick="location.href='/qna/list'">목록</button>		
 	</div><br><br>
 		
@@ -74,7 +79,6 @@
 		<form name="form2" method="post" action="/qnareply/insert.do" method="${method}">
 			<div style="width: 15%;">
 				<br>
-				<!-- **로그인 한 회원에게만 댓글 작성폼이 보이게 처리 -->
 				<c:if test="${sessionScope.userId != null}">
 					${sessionScope.userId}
 					<textarea rows="5" cols="82" name="replytext" placeholder="댓글을 작성해주세요"></textarea>

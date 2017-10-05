@@ -80,6 +80,9 @@ public class QnADao {
 	public String findByWriter(int bnum) {
 		return sqlSession.selectOne("QnAMapper.findByWriter", bnum);
 	}
+	public void setgroup(QnA vo) {
+		sqlSession.update("QnAMapper.setgroup", vo);
+	}
 
 	
 }

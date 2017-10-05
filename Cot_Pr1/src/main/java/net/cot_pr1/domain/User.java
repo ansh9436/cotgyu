@@ -25,7 +25,7 @@ public class User implements UserDetails {
 	private String name;			//회원 이름
 	@Email
 	private String email;			//회원 이메일
-	
+
 	private String profileimg;		//회원 프로필사진
 	private Date joindate;			//가입날짜
 	//이부분 찾아보기 

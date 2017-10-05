@@ -76,7 +76,7 @@ function join(){
 				
 				<form:form id="form1" modelAttribute="user" cssClass="form-horizontal" action="/users/create" method="${method}">
 					<div class="control-group">
-						<label class="control-label" for="userId">사용자 아이디[4~12문자로 입력해주세요.]</label>
+						<label class="control-label" for="userId">사용자 아이디[4~12영어로 입력해주세요.]</label>
 						<!-- idChk 기본값은 N 중복체크를 해야 Y로 바꿀 수 있음 -->
 						<input type="hidden" id="idChk" value="N" />	
 						

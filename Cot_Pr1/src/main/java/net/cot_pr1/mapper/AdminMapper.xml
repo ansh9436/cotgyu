@@ -74,6 +74,23 @@
 		<include refid="search"></include>-->
 	</select>
 	
+		<!--  유저 리스트 -->
+ 	<select id="viewuserlist" resultType="net.cot_pr1.domain.User">
+ 		SELECT * from users
+   		<include refid="usersearch"></include>
+  
+		ORDER BY joindate desc LIMIT ${start}, 20;	 	
+	</select>
+	
+	<!-- 유저 수 카운트 -->
+	<select id="countuser" resultType="int">
+			select count(*) from users
+
+		
+		<include refid="usersearch"></include>
+	</select>
+	
+	
 	
 <sql id="search">
     <choose>
@@ -95,6 +112,20 @@
         <when test="searchOption == 'all'">
             WHERE replyer like '%${keyword}%'
             OR replytext like '%${keyword}%'
+        </when>
+        <!-- 전체 검색이 아닐 경우 -->
+        <otherwise>
+            WHERE ${searchOption} like '%${keyword}%'
+        </otherwise>
+    </choose>
+</sql>
+
+<sql id="usersearch">
+    <choose>
+        <!-- 검색옵션이 전체 검색일 경우 -->
+        <when test="searchOption == 'all'">
+            WHERE userid like '%${keyword}%'
+            OR name like '%${keyword}%'
         </when>
         <!-- 전체 검색이 아닐 경우 -->
         <otherwise>

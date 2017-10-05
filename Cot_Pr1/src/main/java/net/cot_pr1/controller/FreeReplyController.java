@@ -39,6 +39,8 @@ public class FreeReplyController {
         //댓글 순서관련 그룹 설정
         int rnum = vo.getRnum();  
         vo.setRegroup(rnum);
+        
+        //여기 2개는 하나의 서비스에 합쳐도 될듯 싶음
         freereplyService.create_setgroup(vo);
         freereplyService.stepshape(vo);
         //댓글 작성한 글로 가기위해 bnum 가져오기

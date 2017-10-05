@@ -36,8 +36,8 @@ public class QnAReplyController {
     	
         String userId = (String) session.getAttribute("userId");
     
-        
         vo.setReplyer(userId);
+        
         qnareplyService.create(vo);
         int rnum = vo.getRnum();  
         vo.setRegroup(rnum);

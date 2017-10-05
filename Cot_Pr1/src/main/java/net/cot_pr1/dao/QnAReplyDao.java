@@ -31,7 +31,6 @@ public class QnAReplyDao {
 	
 	public void create(QnAReply vo) {
 		sqlSession.insert("QnAReplyMapper.insertReply", vo);
-		//sqlSession.update("replyMapper.setreGroup");
 	}
 	
     public void update(QnAReply vo) throws Exception {

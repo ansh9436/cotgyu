@@ -9,6 +9,7 @@ import javax.sql.DataSource;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import net.cot_pr1.domain.User;
 import net.cot_pr1.domain.WebBoard;
 import net.cot_pr1.domain.WebReply;
 
@@ -62,6 +63,23 @@ public class AdminDao {
 		map.put("keyword", keyword);
 		
 		return sqlSession.selectOne("AdminMapper.countreply", map);
+	}
+	
+	public int countuser(String searchOption, String keyword) {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("searchOption", searchOption);
+		map.put("keyword", keyword);
+		
+		return sqlSession.selectOne("AdminMapper.countuser", map);
+	}
+	public List<User> Viewuserlist(int start, int end, String searchOption, String keyword) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("searchOption", searchOption);
+		map.put("keyword", keyword);
+		map.put("start", start);
+		map.put("end", end);
+		
+		return sqlSession.selectList("AdminMapper.viewuserlist", map);
 	}
 
 }

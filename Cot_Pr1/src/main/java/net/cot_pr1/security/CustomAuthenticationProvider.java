@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.authentication.dao.SaltSource;
+//import org.springframework.security.authentication.dao.SaltSource;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -29,15 +29,15 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
+	/* 없어도 되는듯?
 	@Autowired
 	private SaltSource saltSource;
-
+	 */
 	@Override
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 		String username = authentication.getName();
 		String password = (String) authentication.getCredentials();
 		
-		//User_s user;
 		User user;
 		Collection<? extends GrantedAuthority> authorities;
 		try {
@@ -52,7 +52,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 			logger.info(
 					"username : " + username + " / password : " + password + " / hash password : " + hashedPassword);
 			logger.info("username : " + user.getUsername() + " / password : " + user.getPassword());
-			//match로 비교하기 
+			//matchs로 비교하기, 비밀번호 틀렸을때 메세지
 			if (!passwordEncoder.matches(hashedPassword ,user.getPassword()))
 				throw new BadCredentialsException("비밀번호가 일치하지 않습니다.");
 			authorities = user.getAuthorities();

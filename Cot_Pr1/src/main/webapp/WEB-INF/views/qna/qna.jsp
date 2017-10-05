@@ -77,7 +77,10 @@
 				<td >${row.bnum}</td>
 				
 				
-				<td align="left">&nbsp;<a href="${path}/qna/view?bnum=${row.bnum}">${row.title}
+				<td align="left">
+				<c:if test="${row.answer == 'a'}"><span style="color: red;">&emsp;&nbsp;A</span></c:if>
+				<c:if test="${row.answer == 'q'}"><span style="color: black;">Q</span></c:if>
+				&nbsp;<a href="${path}/qna/view?bnum=${row.bnum}">${row.title}
 				<!-- ** 댓글이 있으면 게시글 이름 옆에 출력하기 -->
 	                   <c:if test="${row.recnt > 0}">
 	                   		<span style="color: red;">(${row.recnt})</span>

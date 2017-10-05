@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import net.cot_pr1.dao.AdminDao;
+import net.cot_pr1.domain.User;
 import net.cot_pr1.domain.WebBoard;
 import net.cot_pr1.domain.WebReply;
 
@@ -29,6 +30,14 @@ public class AdminService {
 
 	public List<WebReply> Viewreplylist(int start, int end, String searchOption, String keyword) {
 		return adminDao.Viewreplylist(start, end, searchOption, keyword);
+	}
+
+	public int countuser(String searchOption, String keyword) {
+		return adminDao.countuser(searchOption, keyword);
+	}
+
+	public List<User> Viewuserlist(int start, int end, String searchOption, String keyword) {
+		return  adminDao.Viewuserlist(start, end, searchOption, keyword);
 	}
 
 }

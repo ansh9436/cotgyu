@@ -11,6 +11,8 @@ public class QnA {
 	private int hit;
 	private int recnt;
 	private String boardtag; 
+	private String answer;
+	private int qgroup;
 	
 	public String getBoardtag() {
 		return boardtag;
@@ -62,10 +64,24 @@ public class QnA {
 		this.recnt = recnt;
 	}
 	
+	public String getAnswer() {
+		return answer;
+	}
+	public void setAnswer(String answer) {
+		this.answer = answer;
+	}
+	
+	
+	public int getQgroup() {
+		return qgroup;
+	}
+	public void setQgroup(int qgroup) {
+		this.qgroup = qgroup;
+	}
 	@Override
 	public String toString() {
 		return "QnA [bnum=" + bnum + ", title=" + title + ", content=" + content + ", writer=" + writer + ", date="
-				+ date + ", hit=" + hit + ", recnt=" + recnt + ", boardtag="+ boardtag+ "]";
+				+ date + ", hit=" + hit + ", recnt=" + recnt + ", boardtag="+ boardtag+ ", answer="+answer+", qgroup="+qgroup+"]";
 	}
 	
 	

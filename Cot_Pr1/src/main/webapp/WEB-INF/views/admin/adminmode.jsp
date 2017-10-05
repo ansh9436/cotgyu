@@ -36,7 +36,7 @@
 				<!-- 게시물 볼건지 댓글 볼건지 선택  -->
 				<a href="/admin/list" style="color: black">게시물</a>&nbsp;  
 				<a href="/admin/replylist" style="color: black">댓글</a>
-				
+				<a href="/admin/userlist" style="color: black">사용자</a>
 				<!-- 검색부분 -->
 				<div class="searchMenu5">
 					 <form name="form1" method="post" action="${path}/admin/list">

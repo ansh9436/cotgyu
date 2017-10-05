@@ -19,7 +19,6 @@
 	<security:global-method-security secured-annotations="enabled" pre-post-annotations="enabled" />
 
 	<!-- 업로드위치, 리소스, css등 위치  -->
-	<!--  <mvc:resources location="images" mapping="/images/" />-->
 	<mvc:resources location="uploads" mapping="/uploasds/**" />
 	<mvc:resources location="/editors/" mapping="/editors/**" />	
 	<mvc:resources location="profile" mapping="/profile/**" />
@@ -39,6 +38,7 @@
 		p:prefix="/WEB-INF/views/"
 		p:suffix=".jsp" />
 	
+	<!-- 회원가입 오류시 뜨는 메시지 쓰기위한 bean  -->
 	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource" 
 		p:basename="message"
 		p:defaultEncoding="UTF-8"
