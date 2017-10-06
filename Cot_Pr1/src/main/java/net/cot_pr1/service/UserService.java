@@ -52,8 +52,7 @@ public class UserService implements UserDetailsService{
 		password = passwordEncoder.encode(password);
 		user.setPassword(password);
 		
-		userDao.update(user);
-		
+		userDao.update(user);	
 	}
 
 	public int checkId(User vo) {
@@ -64,7 +63,7 @@ public class UserService implements UserDetailsService{
 		return userDao.findprofile(userId);
 	}
 	
-	//시큐리티 로그인성공시 처리 및 권한 부여 
+	//시큐리티 아이디확인 및  로그인성공시 처리,권한 부여 
 	@Override
 	public User loadUserByUsername(String username) throws UsernameNotFoundException {		
 		User user = new User();

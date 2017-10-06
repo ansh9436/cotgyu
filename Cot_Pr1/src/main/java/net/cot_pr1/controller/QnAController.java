@@ -74,19 +74,18 @@ public class QnAController {
 	//게시물 작성
 	@RequestMapping(value="insert", method=RequestMethod.POST)
 	public ModelAndView insert(@ModelAttribute QnA vo, HttpSession session) throws Exception{
-		ModelAndView mav = new ModelAndView();
-	    
+		ModelAndView mav = new ModelAndView();  
 		String writer = (String) session.getAttribute("userId");
+		//질문, 답변 설정
 	    vo.setAnswer("q");
 	    vo.setWriter(writer);
 	    
 	    qnaService.create(vo);
-	    
+	    //그룹 설정..
 	    int bnum = vo.getBnum();
-	    System.out.println(bnum);
-	  	qnaService.setgroup(vo);
+	    vo.setBnum(bnum);
+	    qnaService.setgroup(vo);
 	    
-	   
 	    mav.setViewName("redirect:list");
 	    return mav;
 	}
@@ -108,7 +107,7 @@ public class QnAController {
         return mav;
     }
 	
-	//답변작성화면 이동
+	//답변 작성화면 이동
 	@RequestMapping(value="writeanswer/{bnum}", method=RequestMethod.GET)
     public ModelAndView writeanswer(@PathVariable("bnum") int bnum,ModelAndView mav){
 		

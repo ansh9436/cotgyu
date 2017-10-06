@@ -29,10 +29,12 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
-	/* 없어도 되는듯?
+	/* 다른방식 암호화
 	@Autowired
 	private SaltSource saltSource;
 	 */
+	
+	//로그인 인증처리(아이디 , 비밀번호 확인)
 	@Override
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 		String username = authentication.getName();
@@ -52,6 +54,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 			logger.info(
 					"username : " + username + " / password : " + password + " / hash password : " + hashedPassword);
 			logger.info("username : " + user.getUsername() + " / password : " + user.getPassword());
+			
 			//matchs로 비교하기, 비밀번호 틀렸을때 메세지
 			if (!passwordEncoder.matches(hashedPassword ,user.getPassword()))
 				throw new BadCredentialsException("비밀번호가 일치하지 않습니다.");

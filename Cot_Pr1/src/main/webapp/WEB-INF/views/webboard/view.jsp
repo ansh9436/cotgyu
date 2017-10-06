@@ -74,7 +74,7 @@
 		<form name="form2" method="post" action="/webreply/insert.do" method="${method}">
 			<div style="width: 15%;">
 				<br>
-				<!-- **로그인 한 회원에게만 댓글 작성폼이 보이게 처리 -->
+			
 				<c:if test="${sessionScope.userId != null}">
 					${sessionScope.userId}
 					<textarea rows="5" cols="82" name="replytext" placeholder="댓글을 작성해주세요"></textarea>

@@ -41,7 +41,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 
-import net.cot_pr1.domain.Authenticate;
 import net.cot_pr1.domain.Message;
 import net.cot_pr1.domain.User;
 import net.cot_pr1.security.Role;
@@ -104,17 +103,38 @@ public class UserController {
 		return "users/myinfo";
 	}
 	
-	//정보 수정
-	@RequestMapping("/modify")
-	public String modify(Model model, HttpSession session){
+	//정보 수정창으로 이동
+	@RequestMapping("/myinfo/infomodify")
+	public String infomodify(Model model, HttpSession session){
 		if(session ==null){
 			throw new IllegalArgumentException("사용자 아이디가 필요합니다.");
 		}
+		
 		String userId = (String) session.getAttribute("userId");
 		User user = userService.findByID(userId);		
 		model.addAttribute("user", user);
 		return "users/infomodify";
 	}
+		
+	//정보 수정
+	@RequestMapping("/modify")
+	public String modify(Model model, HttpSession session,User user){
+		if(session ==null){
+			throw new IllegalArgumentException("사용자 아이디가 필요합니다.");
+		}
+		
+		String userId = (String) session.getAttribute("userId");
+		userService.update(user);		
+		
+		return "users/myinfo";
+	}
+	
+	//로그아웃
+	@RequestMapping("/logout")		  
+  	public String logout(HttpSession session){		  	 		
+ 		session.invalidate();		 		
+ 		return "redirect:/";		 	
+ 	}
 	
 	//프로필 변경
 		@RequestMapping(value="imgmodify", method=RequestMethod.POST)
@@ -142,68 +162,6 @@ public class UserController {
 	        return mav;
 
 		}
-		/*
-	@RequestMapping(value="" , method=RequestMethod.POST)
-	public String updatecreate(@Valid User user, BindingResult bindingResult, HttpSession session){
-		log.debug("User : {}", user);
-		if(bindingResult.hasErrors()){
-			System.out.println("유효성검사");
-			
-			log.debug("Binding Result has error");
-			List<ObjectError> errors = bindingResult.getAllErrors();
-			for(ObjectError error: errors){
-				log.debug("error: {}", error.getDefaultMessage());
-			}
-			return "users/form";
-		}
-		
-		Object temp = session.getAttribute("userId");
-		if(temp==null){
-			throw new NullPointerException();
-		}		
-	
-		userService.update(user);
-		log.debug("Database: {}", userService.findByID(user.getUserId()));
-		return "redirect:/";
-	}
-	*/
-	@RequestMapping("/login/form")
-	public String loginform(Model model){
-		model.addAttribute("authenticate", new Authenticate());
-		return "users/login";
-	}
-	/*  옛날 로그인 
-	@RequestMapping("/login")
-	public String login(@Valid Authenticate authenticate, BindingResult bindingResult, HttpSession session, Model model){
-		if(bindingResult.hasErrors()){
-			return "users/login";
-		}
-		
-		User user = userService.findByID(authenticate.getUserId());
-		
-		if(user ==null){
-			model.addAttribute("errorMessage", "존재하지 않는 사용자입니다.");
-			return "users/login";
-		}
-		
-		if(!user.matchPassword(authenticate)){
-			model.addAttribute("errorMessage", "비밀번호가 틀립니다.");
-			return "users/login";
-		}
-		session.setAttribute("userId", user.getUserId());
-		session.setAttribute("profileimg", user.getProfileimg());
-		// 세션 사용자 정보 저장 
-		return "redirect:/";
-	}
-	*/
-	
-	@RequestMapping("/logout")
-	public String logout(HttpSession session){
-		
-		session.invalidate();
-		return "redirect:/";
-	}
-	
 	
 	//아이디 중복체크 
 	 @RequestMapping(value = "/checkId.do")
@@ -229,8 +187,7 @@ public class UserController {
 	 }
 	 
 	 
-//security 
-	 
+//security로그인	 
 	//실패했을때?? 
 	@RequestMapping(value = "/signin", method = RequestMethod.GET)
 	public ModelAndView signin(@RequestParam(value = "error", required = false) String error, Model model) {
@@ -245,48 +202,47 @@ public class UserController {
 
 	//성공했을때 
 	@PreAuthorize("authenticated")
-		@RequestMapping(value = "/mypage", method = RequestMethod.GET)
-		public String mypage(Model model,HttpSession session) {
-			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	@RequestMapping(value = "/mypage", method = RequestMethod.GET)
+	public String mypage(Model model,HttpSession session) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
 			
-			//유저 프로필 가져와서 세션에 적용하기 
-			String userId = auth.getName(); 
-			String userimg = userService.findprofile(userId);	
-
-			session.setAttribute("userimg", userimg);
-			session.setAttribute("userId", auth.getName()); //세션 추가 !
-			return "redirect:/";
+		//유저 프로필 가져와서 세션에 적용하기 
+		String userId = auth.getName(); 
+		String userimg = userService.findprofile(userId);	
+		session.setAttribute("userimg", userimg);
+		session.setAttribute("userId", auth.getName()); 
+		return "redirect:/";
 		}
 	 
-	 	//idpw찾기창으로 이동
-	 	@RequestMapping("/idpwfind")
-		public String idfind(){
-			return "/users/findidpw";
-		}
+	 //idpw찾기창으로 이동
+	 @RequestMapping("/idpwfind")
+	public String idfind(){
+		return "/users/findidpw";
+	}
 	 	
-		//아이디 찾기
-		@RequestMapping("/findid")
-		public ModelAndView findid(@RequestParam String user_email){
-			try{
-			//id찾기시 **~~형태로 주기 위해
-			String userId = userService.finduserId(user_email);
-			String Id1 = userId.substring(0,2);
-			Id1 = "**";
-			String Id2 = userId.substring(2);
+	//아이디 찾기
+	@RequestMapping("/findid")
+	public ModelAndView findid(@RequestParam String user_email){
+		try{
+		//id찾기시 **~~형태로 주기 위해
+		String userId = userService.finduserId(user_email);
+		String Id1 = userId.substring(0,2);
+		Id1 = "**";
+		String Id2 = userId.substring(2);
 		
-			userId = Id1 + Id2;
+		userId = Id1 + Id2;
 			
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("userId",userId);
+		mav.setViewName("users/findresult");
+		return mav;
+		}catch (Exception e){
 			ModelAndView mav = new ModelAndView();
-			mav.addObject("userId",userId);
-			mav.setViewName("users/findresult");
+			mav.setViewName("users/finderror");
 			return mav;
-			}catch (Exception e){
-				ModelAndView mav = new ModelAndView();
-				mav.setViewName("users/finderror");
-				return mav;
-			}
 		}
+	}
 		
 		//비밀번호 찾기  
 		@RequestMapping("/findpw")

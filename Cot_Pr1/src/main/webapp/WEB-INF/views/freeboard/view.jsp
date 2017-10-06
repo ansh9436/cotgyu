@@ -88,7 +88,7 @@
 		</div>
 	</form>
 	<br>
-	<!-- **댓글 목록 출력할 위치 -->
+	<!-- 댓글 목록  위치 -->
 		<div id="listReply"></div>
 		
 	</div>

@@ -37,7 +37,7 @@
 						<input type="submit" value="프로필 바꾸기" class="btn btn-default">				          
 					</form>	
 				</div>
-				
+				<!-- 유저 정보를 모델 형태로 전달받음 -->
 				<form:form modelAttribute="user" cssClass="form-horizontal" action="/users" method="${method}">
 					<div class="control-group">
 						<label class="control-label" for="userId">사용자 아이디</label>
@@ -78,7 +78,7 @@
 					
 					<div class="control-group">
 						<div class="controls">
-							<input type="button" value="정보 수정" class="btn btn-default" onClick="location.href='/users/modify'">
+							<input type="button" value="정보 수정" class="btn btn-default" onClick="location.href='/users/myinfo/infomodify'">
 							<input type="button" value="회원 탈퇴" class="btn btn-default" onClick="location.href='/users/unregisterform'">
 						</div>
 					</div>				

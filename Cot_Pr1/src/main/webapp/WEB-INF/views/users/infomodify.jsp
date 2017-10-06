@@ -18,8 +18,8 @@
 				<div class="page-header">
 					<h3>정보 수정</h3>
 				</div>
-				
-				<form:form modelAttribute="user" cssClass="form-horizontal" action="/users" method="post">
+				<!-- 유저 정보를 모델형태로 전달받음 -->
+				<form:form modelAttribute="user" cssClass="form-horizontal" action="/users/modify" method="post">
 					<div class="control-group">
 						<label class="control-label" for="userId">사용자 아이디</label>
 						<div class="controls">
