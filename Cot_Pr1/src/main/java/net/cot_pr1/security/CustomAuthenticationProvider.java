@@ -26,10 +26,11 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 
 	@Autowired
 	UserService userService;
-	
+	//시큐리티 암호화 salt값을 내부적으로 자동 생성하는 방식으로 작동...?
 	@Autowired
 	private PasswordEncoder passwordEncoder;
-	/* 다른방식 암호화
+	/* 
+	 다른방식 암호화
 	@Autowired
 	private SaltSource saltSource;
 	 */

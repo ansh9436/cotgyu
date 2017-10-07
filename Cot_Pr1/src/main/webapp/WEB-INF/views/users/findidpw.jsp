@@ -19,6 +19,7 @@
 		<h4>2번째 글자를 제외한 아이디를 알려드립니다.</h4>
 		<br>
 		<form id="idform" action="/users/findid" method="post">
+			<input type="text" id="user_name" name="user_name" placeholder="이름" style="width: 15%;"><br>
 			<input type="text" id="user_email" name="user_email" placeholder="E-MAIL" style="width: 15%;">
 			<button type="submit" class="btn btn-default">ID 찾기</button>
 		</form>

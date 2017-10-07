@@ -223,10 +223,11 @@ public class UserController {
 	 	
 	//아이디 찾기
 	@RequestMapping("/findid")
-	public ModelAndView findid(@RequestParam String user_email){
+	public ModelAndView findid(@RequestParam String user_email, @RequestParam String user_name){
 		try{
 		//id찾기시 **~~형태로 주기 위해
-		String userId = userService.finduserId(user_email);
+		String userId = userService.finduserId(user_email, user_name);
+		
 		String Id1 = userId.substring(0,2);
 		Id1 = "**";
 		String Id2 = userId.substring(2);

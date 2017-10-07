@@ -41,7 +41,7 @@
  	
  	<!-- email로 아이디 찾기 -->
  	<select id="finduserId" resultType="string">
- 		select userid from users where email= #{email}
+ 		select userid from users where email= #{user_email} and name=#{user_name}
  	</select>
  	
  	<!-- 아이디로 이메일 찾기 -->

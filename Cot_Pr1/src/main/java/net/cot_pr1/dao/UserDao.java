@@ -1,6 +1,8 @@
 package net.cot_pr1.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
@@ -64,8 +66,12 @@ import net.cot_pr1.domain.User;
 		return sqlSession.selectOne("UserMapper.checkId", vo);
 	}
 	
-	public String finduserId(String user_email) {		
-		return sqlSession.selectOne("UserMapper.finduserId",user_email);
+	public String finduserId(String user_email, String user_name) {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("user_email", user_email);
+		map.put("user_name", user_name);
+		
+		return sqlSession.selectOne("UserMapper.finduserId",map);
 	}
 	
 	public String finduseremail(String userid) {

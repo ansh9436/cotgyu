@@ -125,7 +125,13 @@ function list(page){
 				
 				<li><a href="javascript:imgclick('/resources/uploads/${map.imgfile}');"><img src="/resources/uploads/${map.imgfile}" width="300" height="300" ></a>
 				<div>&nbsp;${map.imgname}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<fmt:formatDate value="${map.imgdate}" pattern="yyyy-MM-dd a HH:mm" /></div>
+				<c:if test="${empty sessionScope.userId}">
+				<input type="image" src="\resources\images\up.png" width="20" height="20">
+				</c:if>
+				<!-- 회원만 추천할 수 있게 처리 -->
+				<c:if test="${not empty sessionScope.userId}">
 				<input type="image" src="\resources\images\up.png" onClick="location.href='/gallery/up/${map.imgid}'" width="20" height="20">
+				</c:if>
 				&nbsp;&nbsp;${map.imgup} &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
 				
 				작성자: 

@@ -94,8 +94,8 @@ public class UserService implements UserDetailsService{
 	}
 	
 	//이메일로 아이디찾기 
-	public String finduserId(String user_email) {
-		return userDao.finduserId(user_email);
+	public String finduserId(String user_email, String user_name) {
+		return userDao.finduserId(user_email,user_name);
 	}
 
 	public String finduseremail(String userid) {
