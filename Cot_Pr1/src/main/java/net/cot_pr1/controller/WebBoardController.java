@@ -151,7 +151,7 @@ public class WebBoardController {
                 //파일 기본경로 _ 상세경로
                 String path = defaultPath + "resources" + File.separator + "Editors" + File.separator +"uploadimg" + File.separator;             
                 File file = new File(path);
-                System.out.println("path:"+path);
+                
                 //디렉토리 존재하지 않을경우 디렉토리 생성
                 if(!file.exists()) {
                     file.mkdirs();

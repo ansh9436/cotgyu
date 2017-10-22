@@ -2,18 +2,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!-- 탑메뉴, 사이드메뉴 공통부분 -->
 	<script>
-		//로그인 실패시 메시지 
-		function get_msg(message) {
-			var move = '250px';
-			jQuery('#message').text(message);
-			jQuery('#message').animate({
-				top : '+=' + move
-			}, 'slow', 
-			function() {
-				jQuery('#message').delay(1500).animate({top : '-=' + move}, 'slow');
-			});
-		}
-		//물음표뒤에 글자 para에 저장...
+		
+		//로그인 실패 시 메시지 경고창
 		var para = document.location.href.split("?");
 		if(para[1] == 'error=true'){	
 			alert("로그인에 실패하였습니다. \n${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message}");
@@ -35,9 +25,7 @@
 				data : $('form input').serialize(),
 				type : 'POST',
 				dataType : 'json',
-				beforeSend : function(xhr) {
-					xhr.setRequestHeader("Accept", "application/json");
-				}
+				
 			}).done(function(body) {
 				var message = body.response.message;
 				var error = body.response.error;
@@ -50,7 +38,7 @@
 					location.href = url;
 				}
 			});
-					}
+		 }
 		}
 	</script>
 	<!-- 맨위 네비게이션 바  -->

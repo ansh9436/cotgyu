@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>Cot</title>
+<title>Cot 페이지</title>
 <script>
 	//페이지로 이동 (검색조건, 키워드 )
     function list(page){
