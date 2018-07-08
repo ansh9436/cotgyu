@@ -40,7 +40,7 @@ public class AdminController {
 	@Autowired
 	PasswordEncoder passwordEncoder;
 	
-	//°ü¸®ÀÚ ºñ¹Ğ¹øÈ£ È®ÀÎ Ã¢À¸·Î ÀÌµ¿
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ğ¹ï¿½È£ È®ï¿½ï¿½ Ã¢ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
 	@RequestMapping(value="adminform")
     public ModelAndView form() throws Exception{
         ModelAndView mav = new ModelAndView();
@@ -48,19 +48,19 @@ public class AdminController {
         return mav;
     }
 	
-	//ºñ¹Ğ¹øÈ£ ÀÔ·Â ÈÄ °ü¸®ÀÚ È®ÀÎ 
+	//ï¿½ï¿½Ğ¹ï¿½È£ ï¿½Ô·ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½ 
 	@RequestMapping(value="login", method=RequestMethod.POST)
     public ModelAndView login(@RequestParam String password) throws Exception{
-		//°ü¸®ÀÚ À¯Àú Ã£±â 
-		User user = userService.findByID("°ü¸®ÀÚ");
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Ã£ï¿½ï¿½ 
+		User user = userService.findByID("ê´€ë¦¬ì");
 		
-		//ÀÔ·ÂÇÑ ºñ¹Ğ¹øÈ£¿Í °ü¸®ÀÚ À¯Àú ºñ¹Ğ¹øÈ£ ºñ±³ 
+		//ï¿½Ô·ï¿½ï¿½ï¿½ ï¿½ï¿½Ğ¹ï¿½È£ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ğ¹ï¿½È£ ï¿½ï¿½ 
 		if(passwordEncoder.matches(password ,user.getPassword())){
 			ModelAndView mav = new ModelAndView();
 			mav.setViewName("redirect:/admin/list");
 			return mav;
 		}
-		//ºñ¹Ğ¹øÈ£ ¿À·ù½Ã Ã¢ ÀÌµ¿ 
+		//ï¿½ï¿½Ğ¹ï¿½È£ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ã¢ ï¿½Ìµï¿½ 
 		else{
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("/admin/loginfail");
@@ -69,104 +69,104 @@ public class AdminController {
     }
 	
 	
-	//°Ô½Ã¹° ¸ğµÎ º¸¿©ÁÖ±â
+	//ï¿½Ô½Ã¹ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ö±ï¿½
 	@RequestMapping(value="list")
     public ModelAndView list(@RequestParam(defaultValue="title") String searchOption, 
 			@RequestParam(defaultValue="") String keyword,
 			@RequestParam(defaultValue="1") int curPage) throws Exception{
 		
 		
-		//·¹ÄÚµåÀÇ °³¼ö
+		//ï¿½ï¿½ï¿½Úµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		int count = adminService.countboard(searchOption, keyword);
-		//ÆäÀÌÁö
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		BoardPage boardPage = new BoardPage(count, curPage);
 		int start = boardPage.getPageBegin();
 		int end = boardPage.getPageEnd();
 		List<WebBoard> list = adminService.Viewlist(start, end, searchOption, keyword);
 		
 		
-		//µ¥ÀÌÅÍ¸¦ ¸Ê¿¡ ÀúÀå
+		//ï¿½ï¿½ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½Ê¿ï¿½ ï¿½ï¿½ï¿½ï¿½
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("list", list); //list
-		map.put("count", count); //·¹ÄÚµå °³¼ö
-		map.put("searchOption", searchOption); //°Ë»ö ¿É¼Ç
-		map.put("keyword", keyword); //°Ë»ö Å°¿öµå
+		map.put("count", count); //ï¿½ï¿½ï¿½Úµï¿½ ï¿½ï¿½ï¿½ï¿½
+		map.put("searchOption", searchOption); //ï¿½Ë»ï¿½ ï¿½É¼ï¿½
+		map.put("keyword", keyword); //ï¿½Ë»ï¿½ Å°ï¿½ï¿½ï¿½ï¿½
 		map.put("boardPage", boardPage); 
 		
-		//¸ğµ¨°ú ºä
+		//ï¿½ğµ¨°ï¿½ ï¿½ï¿½
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("map", map); // ¸Ê¿¡ ÀúÀåµÈ µ¥ÀÌÅÍ¸¦ mav(¸ğµ¨ ¾Ø ºä)¿¡ ÀúÀå
+		mav.addObject("map", map); // ï¿½Ê¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í¸ï¿½ mav(ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½)ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     			
 		mav.setViewName("/admin/adminmode");
 		return mav;
 	
     }
 	
-	//´ñ±Û ¸ğµÎ º¸¿©ÁÖ±â
+	//ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ö±ï¿½
 		@RequestMapping(value="replylist")
 	    public ModelAndView replylist(@RequestParam(defaultValue="replytext") String searchOption, 
 				@RequestParam(defaultValue="") String keyword,
 				@RequestParam(defaultValue="1") int curPage) throws Exception{
 			
 			
-			//·¹ÄÚµåÀÇ °³¼ö
+			//ï¿½ï¿½ï¿½Úµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 			int countreply = adminService.countreply(searchOption, keyword);
-			//ÆäÀÌÁö
+			//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			BoardPage boardPage = new BoardPage(countreply, curPage);
 			int start = boardPage.getPageBegin();
 			int end = boardPage.getPageEnd();
 			List<WebReply> list = adminService.Viewreplylist(start, end, searchOption, keyword);
 			
-			//µ¥ÀÌÅÍ¸¦ ¸Ê¿¡ ÀúÀå
+			//ï¿½ï¿½ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½Ê¿ï¿½ ï¿½ï¿½ï¿½ï¿½
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("list", list); //list
-			map.put("countreply", countreply); //·¹ÄÚµå °³¼ö
-			map.put("searchOption", searchOption); //°Ë»ö ¿É¼Ç
-			map.put("keyword", keyword); //°Ë»ö Å°¿öµå
+			map.put("countreply", countreply); //ï¿½ï¿½ï¿½Úµï¿½ ï¿½ï¿½ï¿½ï¿½
+			map.put("searchOption", searchOption); //ï¿½Ë»ï¿½ ï¿½É¼ï¿½
+			map.put("keyword", keyword); //ï¿½Ë»ï¿½ Å°ï¿½ï¿½ï¿½ï¿½
 			map.put("boardPage", boardPage); 
 			
-			//¸ğµ¨°ú ºä
+			//ï¿½ğµ¨°ï¿½ ï¿½ï¿½
 			ModelAndView mav = new ModelAndView();
-			mav.addObject("map", map); // ¸Ê¿¡ ÀúÀåµÈ µ¥ÀÌÅÍ¸¦ mav¿¡ ÀúÀå
+			mav.addObject("map", map); // ï¿½Ê¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í¸ï¿½ mavï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	    			
 			mav.setViewName("/admin/adminmode_reply");
 			return mav;
 		
 	    }
 	
-		//À¯Àú ¸®½ºÆ® 
+		//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® 
 		@RequestMapping(value="userlist")
 	    public ModelAndView userlist(@RequestParam(defaultValue="name") String searchOption, 
 				@RequestParam(defaultValue="") String keyword,
 				@RequestParam(defaultValue="1") int curPage) throws Exception{
 			
 			
-			//·¹ÄÚµåÀÇ °³¼ö
+			//ï¿½ï¿½ï¿½Úµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 			int countuser = adminService.countuser(searchOption, keyword);
-			//ÆäÀÌÁö
+			//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			BoardPage boardPage = new BoardPage(countuser, curPage);
 			int start = boardPage.getPageBegin();
 			int end = boardPage.getPageEnd();
 			List<User> list = adminService.Viewuserlist(start, end, searchOption, keyword);
 			
-			//µ¥ÀÌÅÍ¸¦ ¸Ê¿¡ ÀúÀå
+			//ï¿½ï¿½ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½Ê¿ï¿½ ï¿½ï¿½ï¿½ï¿½
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("list", list); //list
-			map.put("countuser", countuser); //·¹ÄÚµå °³¼ö
-			map.put("searchOption", searchOption); //°Ë»ö ¿É¼Ç
-			map.put("keyword", keyword); //°Ë»ö Å°¿öµå
+			map.put("countuser", countuser); //ï¿½ï¿½ï¿½Úµï¿½ ï¿½ï¿½ï¿½ï¿½
+			map.put("searchOption", searchOption); //ï¿½Ë»ï¿½ ï¿½É¼ï¿½
+			map.put("keyword", keyword); //ï¿½Ë»ï¿½ Å°ï¿½ï¿½ï¿½ï¿½
 			map.put("boardPage", boardPage); 
 			
-			//¸ğµ¨°ú ºä
+			//ï¿½ğµ¨°ï¿½ ï¿½ï¿½
 			ModelAndView mav = new ModelAndView();
-			mav.addObject("map", map); // ¸Ê¿¡ ÀúÀåµÈ µ¥ÀÌÅÍ¸¦ mav¿¡ ÀúÀå
+			mav.addObject("map", map); // ï¿½Ê¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í¸ï¿½ mavï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	    			
 			mav.setViewName("/admin/adminmode_users");
 			return mav;
 		
 	    }
 		
-		//°ü¸®ÀÚ È¸¿øÅ»Åğ
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È¸ï¿½ï¿½Å»ï¿½ï¿½
 		@RequestMapping("/userunregister/{username}")
 		public ModelAndView userUnregi(@PathVariable("username") String username){
 			
