@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+<!-- mapper들  -->
+  <mappers>
+    <mapper resource="net/cot_pr1/mapper/UserMapper.xml"/>
+    <mapper resource="net/cot_pr1/mapper/WebBoardMapper.xml"/>
+    <mapper resource="net/cot_pr1/mapper/WebReplyMapper.xml"/>
+   
+ 
+    <mapper resource="net/cot_pr1/mapper/GalleryMapper.xml"/>
+  	
+    <mapper resource="net/cot_pr1/mapper/FreeBoardMapper.xml"/>
+    <mapper resource="net/cot_pr1/mapper/FreeReplyMapper.xml"/>
+ 	
+ 	<mapper resource="net/cot_pr1/mapper/NoticeMapper.xml"/>
+ 	<mapper resource="net/cot_pr1/mapper/NoticeReplyMapper.xml"/>
+ 	
+ 	<mapper resource="net/cot_pr1/mapper/QnAMapper.xml"/>
+ 	<mapper resource="net/cot_pr1/mapper/QnAReplyMapper.xml"/>
+ 	<mapper resource="net/cot_pr1/mapper/AdminMapper.xml"/>
+  </mappers>
+	
+</configuration>

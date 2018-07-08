@@ -1,8 +1,16 @@
-target/
-javalec/
-.metadata
-.settings/
-.project
-.classpath
+
 .target
+.metadata
+bin/
+
+*.class
+./Cot_Pr1/target
+
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
 .springBeans
