@@ -2,6 +2,7 @@
 .metadata
 bin/
 
+*.class
 
 ### STS ###
 .apt_generated
